@@ -1,8 +1,8 @@
 {{range .Items}}
 <tr>
-    <td><a href='{{.HTMLURL}}'>{{.Number}}</a></td>
-    <td>{{.State}}</td>
-    <td><a href='{{.User.HTMLURL}}'>{{.User.Login}}</a></td>
-    <td><a href='{{.HTMLURL}}'>{{.Title}}</a></td>
+    <td><a href='{{.ID}}'>{{.Subject}}</a></td>
+    <td>{{.Keyword}}</td>
+    <td><a href='{{.Subject}}'>{{.Visited}}</a></td>
+    <td><a href='{{.Visited}}'>{{.Visited}}</a></td>
 </tr>
 {{end}}

@@ -8,22 +8,19 @@ import (
 func SearchIssues(terms []string) (*IssuesSearchResult, error) {
 	var result IssuesSearchResult
 	result.TotalCount = 25
-	result.Items = []*Issue{}
+	result.Items = []*Article{}
 
-	db, err := sql.Open("mysql", "root:123456@tcp(192.168.1.188:3306)/iissy?charset=utf8")
+	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.236.131:3306)/asyons?charset=utf8")
 	checkErr(err)
-	rows, err := db.Query("select LastName,FirstName,Address from Persons limit ?", 10)
+	rows, err := db.Query("select ID,Keyword,Subject,NickName,Visited from Article limit ?", 10)
 	checkErr(err)
-	var i = 0
+
 	for rows.Next() {
-		var issue Issue
-		err = rows.Scan(&issue.Title, &issue.HTMLURL, &issue.State)
+		var article Article
+		err = rows.Scan(&article.ID, &article.Keyword, &article.Subject, &article.NickName, &article.Visited)
 		checkErr(err)
-		issue.State = "true"
-		issue.Number = i + 1
-		issue.User = &User{issue.Title, issue.HTMLURL}
-		result.Items = append(result.Items, &issue)
-		i++
+
+		result.Items = append(result.Items, &article)
 	}
 
 	return &result, nil
