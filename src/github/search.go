@@ -19,7 +19,6 @@ func SearchIssues(terms []string) (*IssuesSearchResult, error) {
 		var issue Issue
 		err = rows.Scan(&issue.Title, &issue.HTMLURL, &issue.State)
 		checkErr(err)
-
 		issue.State = "true"
 		issue.Number = i + 1
 		issue.User = &User{issue.Title, issue.HTMLURL}
