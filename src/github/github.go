@@ -24,3 +24,10 @@ type User struct {
 	Login   string
 	HTMLURL string `json:"html_url"`
 }
+
+// Article is hello
+type Article struct {
+	ID      string
+	Subject string
+	Keyword string
+}
