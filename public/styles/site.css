@@ -1,5 +1,23 @@
 body {
-    margin: 15px auto 15px auto;
+    background-color: #f4f4f4;
+    margin: 0;
+    font-size: 14px;
+    color: #333333;
+    font-family: "Microsoft YaHei", "宋体", arial, verdana, sans-serif;
+}
+
+html,
+div,
+h3,
+td,
+p,
+span,
+img,
+a {
+    color: #333333;
+    font-family: "Microsoft YaHei", "宋体", arial, verdana, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 #app {
@@ -7,11 +25,40 @@ body {
     max-width: 1000px;
 }
 
+#header {
+    background-color: #22354c;
+    color: #ffffff;
+    padding: 10px 0 10px 0;
+    text-align: center;
+}
+
+#crumbs {
+    padding: 10px 0 10px 0;
+    margin: 0 auto 10px auto;
+    background-color: #eeeeee;
+    max-width: 1200px;
+}
+
 #main {
-    margin: 5px;
+    margin: 0 auto 0 auto;
+    max-width: 1200px;
+}
+
+#list {
+    background-color: #ffffff;
+    overflow: hidden;
 }
 
 div img {
     float: left;
     margin-left: 10px;
+}
+
+#footer {
+    max-width: 1200px;
+    margin: 20px auto 0 auto;
+    padding: 20px 0 20px 0;
+    text-align: center;
+    background-color: #ffffff;
+    clear: both;
 }

@@ -17,7 +17,7 @@ func main() {
 	router := httprouter.New()
 	router.NotFound = http.FileServer(http.Dir("public"))
 	router.GET("/", index)
-	router.GET("/issue/:id", basicAuth(detail))
+	router.GET("/item/:id", basicAuth(detail))
 	router.GET("/login", login)
 	router.GET("/logout", logout)
 	http.ListenAndServe(":8000", router)
@@ -34,7 +34,7 @@ func basicAuth(h httprouter.Handle) httprouter.Handle {
 }
 
 func index(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	temp, _ := template.ParseFiles("public/views/issue.html", "public/views/_list.html")
+	temp, _ := template.ParseFiles("public/views/index.html", "public/views/_header.html", "public/views/_list.html", "public/views/_footer.html")
 	result, err := github.SearchIssues(os.Args[1:])
 	if err != nil {
 		log.Fatal(err)
