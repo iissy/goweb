@@ -18,13 +18,13 @@
 </div>
 <div style="margin:0;overflow:hidden;border-bottom: 1px solid #f8f8f8;">
     <div style="padding:10px 0 10px 10px;">
-        <a href="{{.ID}}" style="font-size:18px;letter-spacing: 1px;color:#333333;font-weight:bold;font-family: Arial,Lucida,Verdana,Helvetica,sans-serif;">{{.Subject}}</a>
+        <a href="/item/{{.ID}}" style="font-size:18px;letter-spacing: 1px;color:#333333;font-weight:bold;font-family: Arial,Lucida,Verdana,Helvetica,sans-serif;">{{.Subject}}</a>
     </div>
     <div style="color:#888888;height:69px;line-height:23px;overflow:hidden;font-size:12px;margin:0 10px 0 10px;">
         {{.Description}}
     </div>
     <div class="" style="line-height:20px;color:#EECBAD;float:right;margin:10px 10px 10px 10px;letter-spacing: 1px;">
-        <a href="{{.ID}}" style="color:#EECBAD;">编辑</a> Posted by {{.NickName}} on {{.AddDate}}
+        <a href="/edit/{{.ID}}" style="color:#EECBAD;">编辑</a> Posted by {{.NickName}} on {{.AddDate}}
     </div>
 </div>
 {{end}}

@@ -1,5 +1,7 @@
 package github
 
+import "html/template"
+
 // IssuesSearchResult is hello
 type IssuesSearchResult struct {
 	TotalCount int `json:"total_count"`
@@ -18,7 +20,7 @@ type Article struct {
 	Subject     string
 	Keyword     string
 	Description string
-	Body        string
+	Body        template.HTML
 	Picture     string
 	USID        string
 	NickName    string

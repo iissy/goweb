@@ -47,7 +47,16 @@ func index(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func detail(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	fmt.Fprintf(w, "hello, %s!\n", ps.ByName("id"))
+	temp, _ := template.ParseFiles("public/views/detail.html", "public/views/_header.html", "public/views/_footer.html")
+	result, err := github.Detail(ps.ByName("id"))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = temp.Execute(w, result)
+	if err != nil {
+		fmt.Fprintf(w, "%q", err)
+	}
 }
 
 func login(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {

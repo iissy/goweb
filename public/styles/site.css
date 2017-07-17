@@ -49,6 +49,11 @@ a {
     overflow: hidden;
 }
 
+#detail {
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
 div img {
     float: left;
     margin-left: 10px;
