@@ -118,3 +118,19 @@ func User(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	b, _ := json.Marshal(msg)
 	fmt.Fprintf(w, "%s", string(b))
 }
+
+// Mine is yes
+func Mine(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	var article models.Article
+	result, err := services.Post(article)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var msg models.Uploador
+	msg.Message = "asdf"
+	msg.Path = "/images/star.png"
+	msg.Success = result
+	b, _ := json.Marshal(msg)
+	fmt.Fprintf(w, "%s", string(b))
+}

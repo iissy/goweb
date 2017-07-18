@@ -23,6 +23,7 @@ func main() {
 	router.POST("/post", controllers.Post)
 
 	router.GET("/user/:id", controllers.User)
+	router.GET("/mine", controllers.Mine)
 
 	http.ListenAndServe(":8000", router)
 }
