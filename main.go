@@ -1,13 +1,9 @@
 package main
 
 import (
-	"fmt"
-	"github"
-	"html/template"
-	"log"
 	"net/http"
-	"os"
-	"time"
+
+	"asyons.com/controllers"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/julienschmidt/httprouter"
@@ -16,10 +12,10 @@ import (
 func main() {
 	router := httprouter.New()
 	router.NotFound = http.FileServer(http.Dir("public"))
-	router.GET("/", index)
-	router.GET("/item/:id", basicAuth(detail))
-	router.GET("/login", login)
-	router.GET("/logout", logout)
+	router.GET("/", controllers.Index)
+	router.GET("/item/:id", basicAuth(controllers.Detail))
+	router.GET("/login", controllers.Login)
+	router.GET("/logout", controllers.Logout)
 	http.ListenAndServe(":8000", router)
 }
 
@@ -31,46 +27,6 @@ func basicAuth(h httprouter.Handle) httprouter.Handle {
 			http.Error(w, http.StatusText(http.StatusUnauthorized), http.StatusUnauthorized)
 		}
 	}
-}
-
-func index(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	temp, _ := template.ParseFiles("public/views/index.html", "public/views/_header.html", "public/views/_list.html", "public/views/_footer.html")
-	result, err := github.SearchIssues(os.Args[1:])
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = temp.Execute(w, result)
-	if err != nil {
-		fmt.Fprintf(w, "%q", err)
-	}
-}
-
-func detail(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	temp, _ := template.ParseFiles("public/views/detail.html", "public/views/_header.html", "public/views/_footer.html")
-	result, err := github.Detail(ps.ByName("id"))
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = temp.Execute(w, result)
-	if err != nil {
-		fmt.Fprintf(w, "%q", err)
-	}
-}
-
-func login(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	expiration := time.Now()
-	expiration = expiration.AddDate(0, 0, 1)
-	cookie := http.Cookie{Name: "username", Value: "jimmy", Expires: expiration}
-	http.SetCookie(w, &cookie)
-}
-
-func logout(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	expiration := time.Now()
-	expiration = expiration.AddDate(0, 0, -1)
-	cookie := http.Cookie{Name: "username", Value: "jimmy", Expires: expiration}
-	http.SetCookie(w, &cookie)
 }
 
 func check(r *http.Request) bool {

@@ -1,17 +1,11 @@
-package github
+package models
 
 import "html/template"
 
-// IssuesSearchResult is hello
-type IssuesSearchResult struct {
+// ArticleListResult is hello
+type ArticleListResult struct {
 	TotalCount int `json:"total_count"`
 	Items      []*Article
-}
-
-// User is hello
-type User struct {
-	Login   string
-	HTMLURL string `json:"html_url"`
 }
 
 // Article is hello

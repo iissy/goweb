@@ -1,15 +1,17 @@
-package github
+package services
 
 import (
 	"database/sql"
 	"html/template"
+
+	"asyons.com/models"
 )
 
 // SearchIssues queries the GitHub issue tracker.
-func SearchIssues(terms []string) (*IssuesSearchResult, error) {
-	var result IssuesSearchResult
-	result.TotalCount = 25
-	result.Items = []*Article{}
+func SearchIssues(terms []string) (*models.ArticleListResult, error) {
+	var result models.ArticleListResult
+	result.TotalCount = 15
+	result.Items = []*models.Article{}
 
 	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.236.131:3306)/asyons?charset=utf8")
 	checkErr(err)
@@ -17,7 +19,7 @@ func SearchIssues(terms []string) (*IssuesSearchResult, error) {
 	checkErr(err)
 
 	for rows.Next() {
-		var article Article
+		var article models.Article
 		err = rows.Scan(&article.ID, &article.Keyword, &article.Subject, &article.NickName, &article.Visited, &article.Description, &article.AddDate, &article.Picture)
 		checkErr(err)
 
@@ -28,16 +30,16 @@ func SearchIssues(terms []string) (*IssuesSearchResult, error) {
 }
 
 // Detail is for article
-func Detail(id string) (*Article, error) {
-	var result Article
+func Detail(id string) (*models.Article, error) {
+	var result models.Article
 
 	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.236.131:3306)/asyons?charset=utf8")
 	checkErr(err)
-	rows, err := db.Query("select ID,Keyword,Subject,NickName,Visited,Description,AddDate,Body from Article where ID = ?", id)
+	rows, err := db.Query("select ID,Keyword,Subject,NickName,Visited,Description,AddDate,Body from Article where Id = ?", id)
 	checkErr(err)
 
 	for rows.Next() {
-		var article Article
+		var article models.Article
 		var body string
 		err = rows.Scan(&article.ID, &article.Keyword, &article.Subject, &article.NickName, &article.Visited, &article.Description, &article.AddDate, &body)
 		checkErr(err)
