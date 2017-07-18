@@ -22,6 +22,8 @@ func main() {
 	router.POST("/upload", controllers.Upload)
 	router.POST("/post", controllers.Post)
 
+	router.GET("/user/:id", controllers.User)
+
 	http.ListenAndServe(":8000", router)
 }
 
