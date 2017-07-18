@@ -52,6 +52,7 @@ a {
 #detail {
     background-color: #ffffff;
     overflow: hidden;
+    padding: 10px;
 }
 
 #footer {
