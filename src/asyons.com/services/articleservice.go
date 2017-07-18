@@ -13,14 +13,14 @@ func Index(terms []string) (*models.ArticleListResult, error) {
 	result.TotalCount = 15
 	result.Items = []*models.Article{}
 
-	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.236.131:3306)/asyons?charset=utf8")
+	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.1.102:3306)/iPayask?charset=utf8")
 	checkErr(err)
-	rows, err := db.Query("select ID,Keyword,Subject,NickName,Visited,Description,AddDate,Picture from Article limit ?", 10)
+	rows, err := db.Query("select ID,Subject,NickName,Visited,Description,AddDate from Ask limit ?", 10)
 	checkErr(err)
 
 	for rows.Next() {
 		var article models.Article
-		err = rows.Scan(&article.ID, &article.Keyword, &article.Subject, &article.NickName, &article.Visited, &article.Description, &article.AddDate, &article.Picture)
+		err = rows.Scan(&article.ID, &article.Subject, &article.NickName, &article.Visited, &article.Description, &article.AddDate)
 		checkErr(err)
 
 		result.Items = append(result.Items, &article)
@@ -33,15 +33,15 @@ func Index(terms []string) (*models.ArticleListResult, error) {
 func Detail(id string) (*models.Article, error) {
 	var result models.Article
 
-	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.236.131:3306)/asyons?charset=utf8")
+	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.1.102:3306)/iPayask?charset=utf8")
 	checkErr(err)
-	rows, err := db.Query("select ID,Keyword,Subject,NickName,Visited,Description,AddDate,Body from Article where Id = ?", id)
+	rows, err := db.Query("select ID,Subject,NickName,Visited,Description,AddDate,Body from Ask where Id = ?", id)
 	checkErr(err)
 
 	for rows.Next() {
 		var article models.Article
 		var body string
-		err = rows.Scan(&article.ID, &article.Keyword, &article.Subject, &article.NickName, &article.Visited, &article.Description, &article.AddDate, &body)
+		err = rows.Scan(&article.ID, &article.Subject, &article.NickName, &article.Visited, &article.Description, &article.AddDate, &body)
 		checkErr(err)
 
 		article.Body = template.HTML(body)
@@ -95,14 +95,14 @@ func List(terms []string) (*models.ArticleListResult, error) {
 	result.TotalCount = 15
 	result.Items = []*models.Article{}
 
-	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.236.131:3306)/asyons?charset=utf8")
+	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.236.131:3306)/iPayask?charset=utf8")
 	checkErr(err)
-	rows, err := db.Query("select ID,Keyword,Subject,NickName,Visited,Description,AddDate,Picture from Article limit ?", 10)
+	rows, err := db.Query("select Id,Subject,NickName,Visited,Description,AddDate from Ask limit ?", 10)
 	checkErr(err)
 
 	for rows.Next() {
 		var article models.Article
-		err = rows.Scan(&article.ID, &article.Keyword, &article.Subject, &article.NickName, &article.Visited, &article.Description, &article.AddDate, &article.Picture)
+		err = rows.Scan(&article.ID, &article.Subject, &article.NickName, &article.Visited, &article.Description, &article.AddDate)
 		checkErr(err)
 
 		result.Items = append(result.Items, &article)

@@ -6,8 +6,54 @@
 <body>
     {{template "_toper.html"}}
     <div id="main">
+        <div id="console">
+            <div style="color:#ffffff;margin:10px;letter-spacing:1px;padding:10px 0 10px 0;overflow:hidden;">
+                <div style="text-align:center;">
+                    <span style="color:#FFFFFF;padding:5px 20px 5px 20px;font-size:18px;background-color: #6E8B3D;margin-right:10px;">自 动 结 贴</span>
+                    <span style="color:#FFFFFF;padding:5px 20px 5px 20px;font-size:18px;background-color: #6E8B3D;margin-right:10px;">手 动 结 贴</span>
+                </div>
+                <div style="margin-top:10px;overflow:hidden;">
+                    <div style="">
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" style="color:#000000;font-weight:bold;">支付记录</label>
+                        </div>
+                    </div>
+                    <div class="form-body" style="padding:0 0 0 10px;">
+                        <div class="form-group">
+                            <label class="col-md-8 control-label"><a>jimmy</a></label>
+                            <div class="col-md-4">
+                                ￥100.00
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12 control-label">
+                        <i>为了提高回答问题的积极性，不管您的问题是否得到有效回答，您的支付将无法返回；以上支付人员有权选择分配自己的那份支付。</i>
+                    </label>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:10px;overflow:hidden;">
+                    <div style="">
+                        <div class="form-group">
+                            <label class="col-md-12 control-label" style="color:#000000;font-weight:bold;">我要支付</label>
+                        </div>
+                    </div>
+                    <div class="form-group" style="padding:0 0 0 10px;">
+                        <div class="col-md-12">
+                            <input type="text" v-model="UserId" style="padding: 5px;border: 0;background-color: #f4f4f4;" placeholder="10.00">
+                            <span style="color:#ffffff;padding:5px 20px 5px 20px;background-color: #000000;">支 付</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="detail">
-            {{.Body}}
+            <div style="font-size:18px !important;font-weight:bold;border-bottom: 1px solid #C32528;color: #C32528;font-family: 'museo-1', 'museo-2', Verdana;letter-spacing: 1px;text-shadow: #EEE 1px 1px 1px;margin:10px 0 10px 0;padding:10px 0 10px 10px;">
+                {{.Subject}}
+            </div>
+            <div style="word-wrap:break-word;word-break:break-all;letter-spacing:1px;padding:10px 20px 20px 20px;line-height: 180%;">
+                {{.Body}}
+            </div>
         </div>
     </div>
     {{template "_footer.html"}}

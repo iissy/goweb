@@ -48,10 +48,15 @@ a {
     overflow: hidden;
 }
 
+#console {
+    float: right;
+    width: 380px;
+    background-color: #D1EEEE;
+}
+
 #detail {
+    margin-bottom: 20px;
     background-color: #ffffff;
-    overflow: hidden;
-    padding: 10px;
 }
 
 #footer {
