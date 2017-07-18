@@ -25,6 +25,8 @@ func main() {
 	router.GET("/user/:id", controllers.User)
 	router.GET("/mine", controllers.Mine)
 
+	router.POST("/search", controllers.Search)
+
 	http.ListenAndServe(":8000", router)
 }
 

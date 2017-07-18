@@ -155,6 +155,28 @@ func Mine(terms []string) (*models.ArticleListResult, error) {
 	return &result, nil
 }
 
+// Search queries the GitHub issue tracker.
+func Search(terms []string) (*models.ArticleListResult, error) {
+	var result models.ArticleListResult
+	result.TotalCount = 15
+	result.Items = []*models.Article{}
+
+	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.236.131:3306)/iPayask?charset=utf8")
+	checkErr(err)
+	rows, err := db.Query("select Id,Subject,NickName,Visited,Description,AddDate from Ask limit ?", 10)
+	checkErr(err)
+
+	for rows.Next() {
+		var article models.Article
+		err = rows.Scan(&article.ID, &article.Subject, &article.NickName, &article.Visited, &article.Description, &article.AddDate)
+		checkErr(err)
+
+		result.Items = append(result.Items, &article)
+	}
+
+	return &result, nil
+}
+
 func checkErr(err error) {
 	if err != nil {
 		panic(err)
