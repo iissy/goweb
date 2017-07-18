@@ -70,6 +70,47 @@ func Post(article models.Article) (bool, error) {
 	return true, nil
 }
 
+// Login is yes
+func Login(article models.User) (bool, error) {
+	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.236.131:3306)/asyons?charset=utf8")
+	checkErr(err)
+	rows, err := db.Query("select ID,Keyword,Subject,NickName,Visited,Description,AddDate,Body from Article where Id = ?")
+	checkErr(err)
+
+	for rows.Next() {
+		var article models.Article
+		var body string
+		err = rows.Scan(&article.ID, &article.Keyword, &article.Subject, &article.NickName, &article.Visited, &article.Description, &article.AddDate, &body)
+		checkErr(err)
+
+		article.Body = template.HTML(body)
+	}
+
+	return true, nil
+}
+
+// List queries the GitHub issue tracker.
+func List(terms []string) (*models.ArticleListResult, error) {
+	var result models.ArticleListResult
+	result.TotalCount = 15
+	result.Items = []*models.Article{}
+
+	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.236.131:3306)/asyons?charset=utf8")
+	checkErr(err)
+	rows, err := db.Query("select ID,Keyword,Subject,NickName,Visited,Description,AddDate,Picture from Article limit ?", 10)
+	checkErr(err)
+
+	for rows.Next() {
+		var article models.Article
+		err = rows.Scan(&article.ID, &article.Keyword, &article.Subject, &article.NickName, &article.Visited, &article.Description, &article.AddDate, &article.Picture)
+		checkErr(err)
+
+		result.Items = append(result.Items, &article)
+	}
+
+	return &result, nil
+}
+
 func checkErr(err error) {
 	if err != nil {
 		panic(err)
