@@ -7,8 +7,8 @@ import (
 	"asyons.com/models"
 )
 
-// SearchIssues queries the GitHub issue tracker.
-func SearchIssues(terms []string) (*models.ArticleListResult, error) {
+// Index queries the GitHub issue tracker.
+func Index(terms []string) (*models.ArticleListResult, error) {
 	var result models.ArticleListResult
 	result.TotalCount = 15
 	result.Items = []*models.Article{}

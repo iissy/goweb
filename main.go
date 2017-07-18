@@ -16,6 +16,11 @@ func main() {
 	router.GET("/item/:id", basicAuth(controllers.Detail))
 	router.GET("/login", controllers.Login)
 	router.GET("/logout", controllers.Logout)
+
+	router.GET("/add", controllers.Add)
+	router.GET("/list", controllers.List)
+	router.POST("/upload", controllers.Upload)
+
 	http.ListenAndServe(":8000", router)
 }
 

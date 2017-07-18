@@ -8,6 +8,9 @@ import (
 	"os"
 	"time"
 
+	"encoding/json"
+
+	"asyons.com/models"
 	"asyons.com/services"
 	"github.com/julienschmidt/httprouter"
 )
@@ -15,7 +18,7 @@ import (
 // Index is yes
 func Index(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	temp, _ := template.ParseFiles("public/views/index.html", "public/views/_header.html", "public/views/_toper.html", "public/views/_list.html", "public/views/_footer.html")
-	result, err := services.SearchIssues(os.Args[1:])
+	result, err := services.Index(os.Args[1:])
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -54,4 +57,32 @@ func Logout(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	expiration = expiration.AddDate(0, 0, -1)
 	cookie := http.Cookie{Name: "username", Value: "jimmy", Expires: expiration}
 	http.SetCookie(w, &cookie)
+}
+
+// Add is yes
+func Add(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	temp, _ := template.ParseFiles("public/views/add.html", "public/views/_header.html", "public/views/_toper.html", "public/views/_footer.html")
+	err := temp.Execute(w, nil)
+	if err != nil {
+		fmt.Fprintf(w, "%q", err)
+	}
+}
+
+// List is yes
+func List(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	temp, _ := template.ParseFiles("public/views/list.html", "public/views/_header.html", "public/views/_toper.html", "public/views/_footer.html")
+	err := temp.Execute(w, nil)
+	if err != nil {
+		fmt.Fprintf(w, "%q", err)
+	}
+}
+
+// Upload is yes
+func Upload(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	var result models.Uploador
+	result.Message = "asdf"
+	result.Path = "/images/star.png"
+	result.Success = true
+	b, _ := json.Marshal(result)
+	fmt.Fprintf(w, "%s", string(b))
 }
