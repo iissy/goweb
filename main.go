@@ -20,6 +20,7 @@ func main() {
 	router.GET("/add", controllers.Add)
 	router.GET("/list", controllers.List)
 	router.POST("/upload", controllers.Upload)
+	router.POST("/post", controllers.Post)
 
 	http.ListenAndServe(":8000", router)
 }
