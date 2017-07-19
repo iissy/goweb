@@ -3,15 +3,19 @@ package controllers
 import (
 	"fmt"
 	"html/template"
+	"io"
 	"log"
 	"net/http"
 	"os"
+	"regexp"
+	"strings"
 	"time"
 
 	"encoding/json"
 
 	"asyons.com/models"
 	"asyons.com/services"
+	"asyons.com/utils"
 	"github.com/julienschmidt/httprouter"
 )
 
@@ -80,24 +84,71 @@ func List(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 // Upload is yes
 func Upload(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	var result models.Uploador
-	result.Message = "asdf"
-	result.Path = "/images/star.png"
+	r.ParseMultipartForm(32 << 20)
+	file, handler, err := r.FormFile("image")
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer file.Close()
+	ext := utils.ExtensionName(handler.Filename)
+	path := "/upload/" + utils.UniqueID() + ext
+	f, err := os.OpenFile("./public"+path, os.O_WRONLY|os.O_CREATE, 0666)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 	result.Success = true
+	result.Path = path
+	defer f.Close()
+	io.Copy(f, file)
+
 	b, _ := json.Marshal(result)
 	fmt.Fprintf(w, "%s", string(b))
 }
 
 // Post is yes
 func Post(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	var article models.Article
-	result, err := services.Post(article)
+	r.ParseForm()
+	var msg models.Uploador
+	msg.Success = false
+
+	var body = r.PostForm["Body"][0]
+	var ask models.Ask
+	ask.ID = utils.UniqueID()
+	ask.NickName = "jimmy"
+	ask.UserID = 1
+	ask.Subject = r.PostForm["Subject"][0]
+	ask.Body = template.HTML(body)
+
+	src := string(body)
+	//将HTML标签全转换成小写
+	re, _ := regexp.Compile("\\<[\\S\\s]+?\\>")
+	src = re.ReplaceAllStringFunc(src, strings.ToLower)
+
+	//去除STYLE
+	re, _ = regexp.Compile("\\<style[\\S\\s]+?\\</style\\>")
+	src = re.ReplaceAllString(src, "")
+
+	//去除SCRIPT
+	re, _ = regexp.Compile("\\<script[\\S\\s]+?\\</script\\>")
+	src = re.ReplaceAllString(src, "")
+
+	//去除所有尖括号内的HTML代码，并换成换行符
+	re, _ = regexp.Compile("\\<[\\S\\s]+?\\>")
+	src = re.ReplaceAllString(src, "\n")
+
+	//去除连续的换行符
+	re, _ = regexp.Compile("\\s{2,}")
+	src = re.ReplaceAllString(src, "\n")
+
+	ask.Description = utils.Substr2(strings.TrimSpace(src), 0, 200)
+
+	result, err := services.Post(ask)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	var msg models.Uploador
-	msg.Message = "asdf"
-	msg.Path = "/images/star.png"
 	msg.Success = result
 	b, _ := json.Marshal(msg)
 	fmt.Fprintf(w, "%s", string(b))
@@ -105,7 +156,7 @@ func Post(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 // User is yes
 func User(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	var article models.Article
+	var article models.Ask
 	result, err := services.Post(article)
 	if err != nil {
 		log.Fatal(err)
@@ -121,7 +172,7 @@ func User(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 // Mine is yes
 func Mine(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	var article models.Article
+	var article models.Ask
 	result, err := services.Post(article)
 	if err != nil {
 		log.Fatal(err)
@@ -137,7 +188,7 @@ func Mine(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 // Search is yes
 func Search(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	var article models.Article
+	var article models.Ask
 	result, err := services.Post(article)
 	if err != nil {
 		log.Fatal(err)
