@@ -142,7 +142,7 @@ func Post(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	re, _ = regexp.Compile("\\s{2,}")
 	src = re.ReplaceAllString(src, "\n")
 
-	ask.Description = utils.Substr2(strings.TrimSpace(src), 0, 200)
+	ask.Description = utils.Substr2(strings.TrimSpace(src), 0, 150)
 
 	result, err := services.Post(ask)
 	if err != nil {
