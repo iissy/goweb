@@ -8,7 +8,7 @@ import (
 	"asyons.com/utils"
 )
 
-// Index queries the GitHub issue tracker.
+// Index is yes.
 func Index(terms []string) (*models.AskList, error) {
 	var result models.AskList
 	result.TotalCount = 15
@@ -72,7 +72,7 @@ func Login(article models.User) (bool, error) {
 	return true, nil
 }
 
-// List queries the GitHub issue tracker.
+// List is yes.
 func List(terms []string) (*models.AskList, error) {
 	var result models.AskList
 	result.TotalCount = 15
@@ -94,7 +94,7 @@ func List(terms []string) (*models.AskList, error) {
 	return &result, nil
 }
 
-// User queries the GitHub issue tracker.
+// User is yes.
 func User(terms []string) (*models.AskList, error) {
 	var result models.AskList
 	result.TotalCount = 15
@@ -116,29 +116,23 @@ func User(terms []string) (*models.AskList, error) {
 	return &result, nil
 }
 
-// Mine queries the GitHub issue tracker.
-func Mine(terms []string) (*models.AskList, error) {
-	var result models.AskList
-	result.TotalCount = 15
-	result.Items = []*models.Ask{}
-
+// RegPost is yes.
+func RegPost(user models.User) (bool, error) {
 	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.236.131:3306)/iPayask?charset=utf8")
 	utils.CheckErr(err)
-	rows, err := db.Query("select ID,Subject,NickName,Visited,Description,AddDate from Ask limit ?", 10)
+	stmt, err := db.Prepare("insert User set ID=?,Subject=?,Description=?,Body=?,UserID=?,NickName=?")
 	utils.CheckErr(err)
 
-	for rows.Next() {
-		var ask models.Ask
-		err = rows.Scan(&ask.ID, &ask.Subject, &ask.NickName, &ask.Visited, &ask.Description, &ask.AddDate)
-		utils.CheckErr(err)
+	res, err := stmt.Exec(user.Login, user.HTMLURL)
+	utils.CheckErr(err)
 
-		result.Items = append(result.Items, &ask)
-	}
+	result, err := res.RowsAffected()
+	utils.CheckErr(err)
 
-	return &result, nil
+	return result > 0, nil
 }
 
-// Search queries the GitHub issue tracker.
+// Search is yes.
 func Search(terms []string) (*models.AskList, error) {
 	var result models.AskList
 	result.TotalCount = 15
