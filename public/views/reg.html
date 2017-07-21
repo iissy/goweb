@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+{{template "_header.html"}}
+
+<body>
+    {{template "_toper.html"}}
+    <div id="main">
+        <div id="app">
+            <div id="dataform" class="row">
+                <div class="col-md-12">
+                    <div class="portlet light" style="margin-bottom: 0;">
+                        <div class="portlet-body form" style="max-width: 1200px;margin:0 auto;">
+                            <div class="form-horizontal mg0" role="form">
+                                <div class="form-body" style="padding:0 0 0 0;">
+                                    <input type="hidden" id="Id" v-model="Id" />
+                                    <div class="form-group">
+                                        <label class="col-md-1 control-label">账 号</label>
+                                        <div class="col-md-11">
+                                            <input type="text" v-model="UserId" class="form-control" placeholder="请在此填写标题">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-1 control-label">昵 称</label>
+                                        <div class="col-md-11">
+                                            <input type="text" v-model="UserName" class="form-control" placeholder="请在此填写标题">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-1 control-label">密 码</label>
+                                        <div class="col-md-11">
+                                            <input type="text" v-model="Password" class="form-control" placeholder="请在此填写标题">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-1 control-label"></label>
+                                        <div class="col-md-11">
+                                            <button style="color:#ffffff;padding:5px 30px 5px 30px;background-color: #36c6d3;font-size:16px;border-radius:10px;border: 1px solid #2bb8c4;" class="right" v-on:click="post">注 册</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{template "_footer.html"}}
+    <script src="scripts/reg.js"></script>
+</body>
+
+</html>
