@@ -72,13 +72,29 @@ func Add(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	}
 }
 
-// List is yes
-func List(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+// Reg is yes
+func Reg(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	temp, _ := template.ParseFiles("public/views/list.html", "public/views/_header.html", "public/views/_toper.html", "public/views/_footer.html")
 	err := temp.Execute(w, nil)
 	if err != nil {
 		fmt.Fprintf(w, "%q", err)
 	}
+}
+
+// RegPost is yes
+func RegPost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	var user models.User
+	result, err := services.RegPost(user)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var msg models.Uploador
+	msg.Message = "asdf"
+	msg.Path = "/images/star.png"
+	msg.Success = result
+	b, _ := json.Marshal(msg)
+	fmt.Fprintf(w, "%s", string(b))
 }
 
 // Upload is yes
@@ -156,22 +172,6 @@ func Post(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 // User is yes
 func User(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	var article models.Ask
-	result, err := services.Post(article)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	var msg models.Uploador
-	msg.Message = "asdf"
-	msg.Path = "/images/star.png"
-	msg.Success = result
-	b, _ := json.Marshal(msg)
-	fmt.Fprintf(w, "%s", string(b))
-}
-
-// Mine is yes
-func Mine(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	var article models.Ask
 	result, err := services.Post(article)
 	if err != nil {
