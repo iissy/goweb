@@ -68,8 +68,18 @@ func Post(ask models.Ask) (bool, error) {
 }
 
 // Login is yes
-func Login(article models.User) (bool, error) {
-	return true, nil
+func Login(user models.User) (*models.User, error) {
+	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.236.131:3306)/iPayask?charset=utf8")
+	utils.CheckErr(err)
+	rows, err := db.Query("select Id,UserId,UserName from Account where UserId = ? and Password = ?", user.UserID, user.Password)
+	utils.CheckErr(err)
+	for rows.Next() {
+		err = rows.Scan(&user.ID, &user.UserID, &user.UserName)
+		utils.CheckErr(err)
+		break
+	}
+
+	return &user, nil
 }
 
 // List is yes.
@@ -120,10 +130,10 @@ func User(terms []string) (*models.AskList, error) {
 func RegPost(user models.User) (bool, error) {
 	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.236.131:3306)/iPayask?charset=utf8")
 	utils.CheckErr(err)
-	stmt, err := db.Prepare("insert User set ID=?,Subject=?,Description=?,Body=?,UserID=?,NickName=?")
+	stmt, err := db.Prepare("insert Account set UserId=?,UserName=?,Password=?")
 	utils.CheckErr(err)
 
-	res, err := stmt.Exec(user.Login, user.HTMLURL)
+	res, err := stmt.Exec(user.UserID, user.UserName, user.Password)
 	utils.CheckErr(err)
 
 	result, err := res.RowsAffected()

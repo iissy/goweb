@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"regexp"
+	"strconv"
 	"strings"
 	"time"
 
@@ -49,10 +50,41 @@ func Detail(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 // Login is yes
 func Login(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	expiration := time.Now()
-	expiration = expiration.AddDate(0, 0, 1)
-	cookie := http.Cookie{Name: "username", Value: "jimmy", Expires: expiration}
-	http.SetCookie(w, &cookie)
+	r.ParseForm()
+	var user models.User
+	user.UserID = r.PostForm["UID"][0]
+	user.Password = r.PostForm["PWD"][0]
+	result, err := services.Login(user)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if result.ID > 0 {
+		expiration := time.Now()
+		expiration = expiration.AddDate(0, 0, 1)
+		var name string
+		rs := []rune(result.UserName)
+		for _, r := range rs {
+			rint := int(r)
+			if rint < 128 {
+				name += string(r)
+			} else {
+				name += "&#" + strconv.Itoa(rint) + ";"
+			}
+		}
+
+		idCookie := http.Cookie{Name: "id", Value: strconv.Itoa(result.ID), Expires: expiration}
+		uidCookie := http.Cookie{Name: "userid", Value: result.UserID, Expires: expiration}
+		nameCookie := http.Cookie{Name: "username", Value: name, Expires: expiration}
+		http.SetCookie(w, &idCookie)
+		http.SetCookie(w, &uidCookie)
+		http.SetCookie(w, &nameCookie)
+	}
+
+	var msg models.Uploador
+	msg.Success = result.ID > 0
+	b, _ := json.Marshal(msg)
+	fmt.Fprintf(w, "%s", string(b))
 }
 
 // Logout is yes
@@ -61,6 +93,11 @@ func Logout(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	expiration = expiration.AddDate(0, 0, -1)
 	cookie := http.Cookie{Name: "username", Value: "jimmy", Expires: expiration}
 	http.SetCookie(w, &cookie)
+
+	var msg models.Uploador
+	msg.Success = true
+	b, _ := json.Marshal(msg)
+	fmt.Fprintf(w, "%s", string(b))
 }
 
 // Add is yes
@@ -74,7 +111,7 @@ func Add(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 // Reg is yes
 func Reg(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	temp, _ := template.ParseFiles("public/views/list.html", "public/views/_header.html", "public/views/_toper.html", "public/views/_footer.html")
+	temp, _ := template.ParseFiles("public/views/reg.html", "public/views/_header.html", "public/views/_toper.html", "public/views/_footer.html")
 	err := temp.Execute(w, nil)
 	if err != nil {
 		fmt.Fprintf(w, "%q", err)
@@ -83,7 +120,11 @@ func Reg(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 // RegPost is yes
 func RegPost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	r.ParseForm()
 	var user models.User
+	user.UserID = r.PostForm["UserId"][0]
+	user.UserName = r.PostForm["UserName"][0]
+	user.Password = r.PostForm["Password"][0]
 	result, err := services.RegPost(user)
 	if err != nil {
 		log.Fatal(err)
