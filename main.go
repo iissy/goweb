@@ -13,21 +13,21 @@ func main() {
 	router := httprouter.New()
 	router.NotFound = http.FileServer(http.Dir("public"))
 	router.GET("/", controllers.Index)
-	router.GET("/item/:id", basicAuth(controllers.Detail))
+	router.GET("/item/:id", controllers.Detail)
 	router.GET("/login", controllers.Login)
 	router.GET("/logout", controllers.Logout)
 
 	router.GET("/add", controllers.Add)
 	router.GET("/list", controllers.List)
-	router.POST("/upload", controllers.Upload)
-	router.POST("/post", controllers.Post)
+	router.POST("/upload", basicAuth(controllers.Upload))
+	router.POST("/post", basicAuth(controllers.Post))
 
 	router.GET("/user/:id", controllers.User)
 	router.GET("/mine", controllers.Mine)
 
 	router.POST("/search", controllers.Search)
 
-	http.ListenAndServe(":8000", router)
+	http.ListenAndServe(":80", router)
 }
 
 func basicAuth(h httprouter.Handle) httprouter.Handle {
