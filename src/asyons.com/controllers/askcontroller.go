@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"regexp"
 	"strconv"
@@ -62,20 +63,9 @@ func Login(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	if result.ID > 0 {
 		expiration := time.Now()
 		expiration = expiration.AddDate(0, 0, 1)
-		var name string
-		rs := []rune(result.UserName)
-		for _, r := range rs {
-			rint := int(r)
-			if rint < 128 {
-				name += string(r)
-			} else {
-				name += "&#" + strconv.Itoa(rint) + ";"
-			}
-		}
-
 		idCookie := http.Cookie{Name: "id", Value: strconv.Itoa(result.ID), Expires: expiration}
 		uidCookie := http.Cookie{Name: "userid", Value: result.UserID, Expires: expiration}
-		nameCookie := http.Cookie{Name: "username", Value: name, Expires: expiration}
+		nameCookie := http.Cookie{Name: "username", Value: url.QueryEscape(result.UserName), Expires: expiration}
 		http.SetCookie(w, &idCookie)
 		http.SetCookie(w, &uidCookie)
 		http.SetCookie(w, &nameCookie)
