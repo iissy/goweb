@@ -27,7 +27,7 @@ func main() {
 	router.GET("/user/:id", controllers.User)
 	router.POST("/search", controllers.Search)
 
-	http.ListenAndServe(":8000", router)
+	http.ListenAndServe(":80", router)
 }
 
 func basicAuth(h httprouter.Handle) httprouter.Handle {
