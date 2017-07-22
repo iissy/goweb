@@ -81,8 +81,12 @@ func Login(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 func Logout(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	expiration := time.Now()
 	expiration = expiration.AddDate(0, 0, -1)
-	cookie := http.Cookie{Name: "username", Value: "jimmy", Expires: expiration}
-	http.SetCookie(w, &cookie)
+	idCookie := http.Cookie{Name: "id", Value: "", Expires: expiration}
+	uidCookie := http.Cookie{Name: "userid", Value: "", Expires: expiration}
+	nameCookie := http.Cookie{Name: "username", Value: "", Expires: expiration}
+	http.SetCookie(w, &idCookie)
+	http.SetCookie(w, &uidCookie)
+	http.SetCookie(w, &nameCookie)
 
 	var msg models.Uploador
 	msg.Success = true
@@ -203,12 +207,16 @@ func Post(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 // User is yes
 func User(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	var msg models.Uploador
-	msg.Message = "asdf"
-	msg.Path = "/images/star.png"
-	msg.Success = true
-	b, _ := json.Marshal(msg)
-	fmt.Fprintf(w, "%s", string(b))
+	temp, _ := template.ParseFiles("public/views/user.html", "public/views/_header.html", "public/views/_toper.html", "public/views/_footer.html")
+	result, err := services.User(ps.ByName("id"))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = temp.Execute(w, result)
+	if err != nil {
+		fmt.Fprintf(w, "%q", err)
+	}
 }
 
 // Search is yes

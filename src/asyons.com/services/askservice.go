@@ -8,13 +8,17 @@ import (
 	"asyons.com/utils"
 )
 
+const (
+	sqldb = "root:hm3366@tcp(192.168.1.102:3306)/iPayask?charset=utf8"
+)
+
 // Index is yes.
 func Index(terms []string) (*models.AskList, error) {
 	var result models.AskList
 	result.TotalCount = 15
 	result.Items = []*models.Ask{}
 
-	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.236.131:3306)/iPayask?charset=utf8")
+	db, err := sql.Open("mysql", sqldb)
 	utils.CheckErr(err)
 	rows, err := db.Query("select ID,Subject,NickName,Visited,Description,AddDate from Ask order by AddDate desc limit ?", 10)
 	utils.CheckErr(err)
@@ -33,7 +37,7 @@ func Index(terms []string) (*models.AskList, error) {
 // Detail is for article
 func Detail(id string) (*models.Ask, error) {
 	var result models.Ask
-	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.236.131:3306)/iPayask?charset=utf8")
+	db, err := sql.Open("mysql", sqldb)
 	utils.CheckErr(err)
 	rows, err := db.Query("select ID,Subject,NickName,Visited,Description,AddDate,Body from Ask where Id = ?", id)
 	utils.CheckErr(err)
@@ -53,7 +57,7 @@ func Detail(id string) (*models.Ask, error) {
 
 // Post is yes
 func Post(ask models.Ask) (bool, error) {
-	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.236.131:3306)/iPayask?charset=utf8")
+	db, err := sql.Open("mysql", sqldb)
 	utils.CheckErr(err)
 	stmt, err := db.Prepare("insert Ask set ID=?,Subject=?,Description=?,Body=?,UserID=?,NickName=?")
 	utils.CheckErr(err)
@@ -69,7 +73,7 @@ func Post(ask models.Ask) (bool, error) {
 
 // Login is yes
 func Login(user models.User) (*models.User, error) {
-	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.236.131:3306)/iPayask?charset=utf8")
+	db, err := sql.Open("mysql", sqldb)
 	utils.CheckErr(err)
 	rows, err := db.Query("select Id,UserId,UserName from Account where UserId = ? and Password = ?", user.UserID, user.Password)
 	utils.CheckErr(err)
@@ -88,7 +92,7 @@ func List(terms []string) (*models.AskList, error) {
 	result.TotalCount = 15
 	result.Items = []*models.Ask{}
 
-	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.236.131:3306)/iPayask?charset=utf8")
+	db, err := sql.Open("mysql", sqldb)
 	utils.CheckErr(err)
 	rows, err := db.Query("select ID,Subject,NickName,Visited,Description,AddDate from Ask limit ?", 10)
 	utils.CheckErr(err)
@@ -105,22 +109,18 @@ func List(terms []string) (*models.AskList, error) {
 }
 
 // User is yes.
-func User(terms []string) (*models.AskList, error) {
-	var result models.AskList
-	result.TotalCount = 15
-	result.Items = []*models.Ask{}
+func User(id string) (*models.User, error) {
+	var result models.User
 
-	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.236.131:3306)/iPayask?charset=utf8")
+	db, err := sql.Open("mysql", sqldb)
 	utils.CheckErr(err)
-	rows, err := db.Query("select ID,Subject,NickName,Visited,Description,AddDate from Ask limit ?", 10)
+	rows, err := db.Query("select Id,UserId,UserName,RegDate,LastLoginDate,Status from Account where id=?", id)
 	utils.CheckErr(err)
 
 	for rows.Next() {
-		var ask models.Ask
-		err = rows.Scan(&ask.ID, &ask.Subject, &ask.NickName, &ask.Visited, &ask.Description, &ask.AddDate)
+		err = rows.Scan(&result.ID, &result.UserID, &result.UserName, &result.RegDate, &result.LastLoginDate, &result.Status)
 		utils.CheckErr(err)
-
-		result.Items = append(result.Items, &ask)
+		break
 	}
 
 	return &result, nil
@@ -128,7 +128,7 @@ func User(terms []string) (*models.AskList, error) {
 
 // RegPost is yes.
 func RegPost(user models.User) (bool, error) {
-	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.236.131:3306)/iPayask?charset=utf8")
+	db, err := sql.Open("mysql", sqldb)
 	utils.CheckErr(err)
 	stmt, err := db.Prepare("insert Account set UserId=?,UserName=?,Password=?")
 	utils.CheckErr(err)
@@ -148,7 +148,7 @@ func Search(terms []string) (*models.AskList, error) {
 	result.TotalCount = 15
 	result.Items = []*models.Ask{}
 
-	db, err := sql.Open("mysql", "root:hm3366@tcp(192.168.236.131:3306)/iPayask?charset=utf8")
+	db, err := sql.Open("mysql", sqldb)
 	utils.CheckErr(err)
 	rows, err := db.Query("select ID,Subject,NickName,Visited,Description,AddDate from Ask limit ?", 10)
 	utils.CheckErr(err)
