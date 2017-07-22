@@ -1,6 +1,4 @@
 # goweb
 
-一个用Golang写的web服务demo
-http://go.asyons.com
-
-#### docker（nginx，mysql，gowebserver），vue，jquery，bootstrap
+一个用Golang写的web服务demo，使用技术：docker（nginx，mysql，gowebserver），vue，jquery，bootstrap
+#### http://go.asyons.com
