@@ -29,6 +29,9 @@ new Vue({
         },
         login: function() {
             var self = this;
+            if (!$.trim(self.UID) || !$.trim(self.PWD))
+                return;
+
             var url = '/login';
             $.ajax({
                 url: url,

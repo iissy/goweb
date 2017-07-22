@@ -35,6 +35,9 @@ new Vue({
         },
         post: function() {
             var self = this;
+            if (!$.trim(self.Subject) || !$.trim(self.Body))
+                return;
+
             var url = '/post';
             $.ajax({
                 url: url,
@@ -56,6 +59,9 @@ new Vue({
         },
         regpost: function() {
             var self = this;
+            if (!$.trim(self.UserId) || !$.trim(self.UserName) || !$.trim(self.Password))
+                return;
+
             var url = '/regpost';
             $.ajax({
                 url: url,
