@@ -52,15 +52,17 @@ a {
     float: right;
     width: 380px;
     background-color: #D1EEEE;
+    margin-left: 10px;
 }
 
 #detail {
     margin-bottom: 20px;
     background-color: #ffffff;
+    min-height: 400px;
 }
 
 .title {
-    font-size: 18px !important;
+    font-size: 20px !important;
     font-weight: bold;
     border-bottom: 1px solid #C32528;
     color: #C32528;
@@ -68,7 +70,7 @@ a {
     letter-spacing: 1px;
     text-shadow: #EEE 1px 1px 1px;
     margin: 10px 0 10px 0;
-    padding: 10px 0 10px 10px;
+    padding: 15px 0 15px 15px;
 }
 
 .body {
@@ -77,6 +79,7 @@ a {
     letter-spacing: 1px;
     padding: 10px 20px 20px 20px;
     line-height: 180%;
+    font-size: 15px;
 }
 
 #footer {
