@@ -21,6 +21,8 @@ new Vue({
         Password: '',
         Subject: '',
         Body: '',
+        UID: '',
+        PWD: '',
         showModuleName: false
     },
     methods: {
@@ -79,6 +81,32 @@ new Vue({
                 },
                 success: function(result) {
                     location.href = '/';
+                }
+            });
+        },
+        loginpost: function() {
+            var self = this;
+            if (!$.trim(self.UID) || !$.trim(self.PWD))
+                return;
+
+            var url = '/loginpost';
+            $.ajax({
+                url: url,
+                type: 'POST',
+                dataType: 'json',
+                timeout: 60000,
+                data: {
+                    UID: self.UID,
+                    PWD: self.PWD
+                },
+                error: function() { alert('Error loading'); },
+                beforeSend: function() {
+                    //$("#resultTable").html('<img src="/Images/loading.gif" />');
+                },
+                success: function(result) {
+                    if (result.ok) {
+                        location.href = '/';
+                    }
                 }
             });
         }

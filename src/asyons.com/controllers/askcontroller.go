@@ -51,6 +51,15 @@ func Detail(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 // Login is yes
 func Login(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	temp, _ := template.ParseFiles("public/views/login.html", "public/views/_header.html", "public/views/_toper.html", "public/views/_footer.html")
+	err := temp.Execute(w, nil)
+	if err != nil {
+		fmt.Fprintf(w, "%q", err)
+	}
+}
+
+// LoginPost is yes
+func LoginPost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	r.ParseForm()
 	var user models.User
 	user.UserID = r.PostForm["UID"][0]

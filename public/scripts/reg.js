@@ -1,9 +1,6 @@
 new Vue({
     el: "#header",
-    data: {
-        UID: '',
-        PWD: ''
-    },
+    data: {},
     created: function() {
         var id = $.cookie('id');
         var name = $.cookie('username');
@@ -28,30 +25,7 @@ new Vue({
             });
         },
         login: function() {
-            var self = this;
-            if (!$.trim(self.UID) || !$.trim(self.PWD))
-                return;
-
-            var url = '/login';
-            $.ajax({
-                url: url,
-                type: 'POST',
-                dataType: 'json',
-                timeout: 60000,
-                data: {
-                    UID: self.UID,
-                    PWD: self.PWD
-                },
-                error: function() { alert('Error loading'); },
-                beforeSend: function() {
-                    //$("#resultTable").html('<img src="/Images/loading.gif" />');
-                },
-                success: function(result) {
-                    if (result.ok) {
-                        location.href = '/';
-                    }
-                }
-            });
+            location.href = '/login';
         }
     }
 });
