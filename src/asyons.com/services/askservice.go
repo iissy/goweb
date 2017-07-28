@@ -31,6 +31,7 @@ func Index(terms []string) (*models.AskList, error) {
 		result.Items = append(result.Items, &ask)
 	}
 
+	rows.Close()
 	return &result, nil
 }
 
@@ -47,11 +48,11 @@ func Detail(id string) (*models.Ask, error) {
 		var body string
 		err = rows.Scan(&ask.ID, &ask.Subject, &ask.NickName, &ask.Visited, &ask.Description, &ask.AddDate, &body)
 		utils.CheckErr(err)
-
 		ask.Body = template.HTML(body)
 		result = ask
 	}
 
+	rows.Close()
 	return &result, nil
 }
 
@@ -83,6 +84,7 @@ func Login(user models.User) (*models.User, error) {
 		break
 	}
 
+	rows.Close()
 	return &user, nil
 }
 
@@ -105,6 +107,7 @@ func List(terms []string) (*models.AskList, error) {
 		result.Items = append(result.Items, &ask)
 	}
 
+	rows.Close()
 	return &result, nil
 }
 
@@ -123,6 +126,7 @@ func User(id string) (*models.User, error) {
 		break
 	}
 
+	rows.Close()
 	return &result, nil
 }
 
@@ -161,5 +165,6 @@ func Search(terms []string) (*models.AskList, error) {
 		result.Items = append(result.Items, &ask)
 	}
 
+	rows.Close()
 	return &result, nil
 }

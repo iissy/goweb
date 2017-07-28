@@ -138,10 +138,6 @@
         margin-top: 0;
     }
     
-    .x-sidebar .widget {
-        margin-top: 2.25em;
-    }
-    
     p,
     h1,
     h2,
@@ -240,7 +236,7 @@
     }
     
     .textwidget {
-        margin: 10px;
+        text-align: center;
     }
     
     .x-btn:hover,

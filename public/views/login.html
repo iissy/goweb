@@ -7,10 +7,35 @@
     {{template "_toper.html"}}
     <div id="main">
         <div id="app">
-            <div class="body">
-                <div><input type="text" v-model="UID" style="padding: 5px 20px 5px 25px;background: url(/images/usericon.png) no-repeat 7px;border: 0;background-color: #f4f4f4;" placeholder="用户名"></div>
-                <div><input type="password" v-model="PWD" style="padding: 5px 20px 5px 25px;background: url(/images/pwdicon.png) no-repeat 7px;border: 0;background-color: #f4f4f4;" placeholder="密码"></div>
-                <div><span style="color:#ffffff;padding:5px 20px 5px 20px;background-color: #ffd800;margin-right:10px;cursor:pointer;" v-on:click="loginpost">登 陆</span></div>
+            <div id="dataform" class="row">
+                <div class="col-md-12">
+                    <div class="portlet light" style="margin-bottom: 0;">
+                        <div class="portlet-body form" style="max-width: 1200px;margin:0 auto;">
+                            <div class="form-horizontal mg0" role="form">
+                                <div class="form-body" style="padding:0 0 0 0;">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">账 号</label>
+                                        <div class="col-md-4">
+                                            <input type="text" v-model="UID" class="form-control" placeholder="账号">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">密 码</label>
+                                        <div class="col-md-4">
+                                            <input type="password" v-model="PWD" class="form-control" placeholder="密码">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label"></label>
+                                        <div class="col-md-4">
+                                            <button style="color:#ffffff;padding:5px 30px 5px 30px;background-color: #36c6d3;font-size:16px;border-radius:10px;border: 1px solid #2bb8c4;" class="right" v-on:click="loginpost">登 陆</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
