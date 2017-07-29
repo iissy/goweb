@@ -11,21 +11,11 @@
                 <div id="recent-posts-4" class="widget widget_recent_entries">
                     <h4 class="h-widget">Recent Articles</h4>
                     <ul>
+                        {{range .List}}
                         <li>
-                            <a href="https://stackify.com/continuous-delivery-vs-continuous-deployment-vs-continuous-integration/">viralnova.com成立仅8个月的网站月收入几十万美金</a>
+                            <a href="/item/{{.ID}}">{{.Subject}}</a>
                         </li>
-                        <li>
-                            <a href="https://stackify.com/what-is-kestrel-web-server/">传苹果8月发布第二代 iPhone SE 10月发布 iPhone 8</a>
-                        </li>
-                        <li>
-                            <a href="https://stackify.com/what-is-real-user-monitoring/">Android QQ 7.1.5正式版发布 资料卡新增个性标签</a>
-                        </li>
-                        <li>
-                            <a href="https://stackify.com/what-is-azure-cosmos-db/">富人常洗脑，穷人常洗澡—10句马云最厉害的至理名言</a>
-                        </li>
-                        <li>
-                            <a href="https://stackify.com/what-is-load-testing/">为什么你总觉得领导有点Low，讲个故事吧</a>
-                        </li>
+                        {{end}}
                     </ul>
                 </div>
 
