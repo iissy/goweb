@@ -6,6 +6,8 @@ new Vue({
         var name = $.cookie('username');
         if (id && name) {
             $("#logininfo").html("<a href='/user/" + id + "'><span style='color:#ffffff;padding-right:10px;'>" + name + "</span></a><span style='color: #ffffff; padding: 5px 20px 5px 20px; background-color: #ff6a00; cursor: pointer;' v-on:click='logout'>注 销</span>")
+        } else {
+            $("#myask").remove();
         }
     },
     methods: {
