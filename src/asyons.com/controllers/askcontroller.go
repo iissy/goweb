@@ -23,7 +23,7 @@ import (
 
 // Index is yes
 func Index(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	temp, _ := template.ParseFiles("public/views/index.html", "public/views/_header.html", "public/views/_toper.html", "public/views/_list.html", "public/views/_footer.html")
+	temp, _ := template.New("_list.html").Funcs(template.FuncMap{"daysAgo": daysAgo}).ParseFiles("public/views/index.html", "public/views/_header.html", "public/views/_toper.html", "public/views/_list.html", "public/views/_footer.html")
 	result, err := services.Index(os.Args[1:])
 	if err != nil {
 		log.Fatal(err)
@@ -33,6 +33,13 @@ func Index(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	if err != nil {
 		fmt.Fprintf(w, "%q", err)
 	}
+}
+
+func daysAgo(str string) string {
+	layout := "2006-01-02 15:04:05"
+	t, _ := time.Parse(layout, str)
+	day := t.Format("2006-01-02")
+	return day
 }
 
 // Detail is yes

@@ -24,7 +24,7 @@
         {{.Description}}
     </div>
     <div class="" style="line-height:20px;color:#EECBAD;float:right;margin:10px 10px 10px 10px;letter-spacing: 1px;">
-        <a href="/edit/{{.ID}}" style="color:#EECBAD;">编辑</a> Posted by {{.NickName}} on {{.AddDate}}
+        <a href="/edit/{{.ID}}" style="color:#EECBAD;">编辑</a> Posted by {{.NickName}} on {{.AddDate | daysAgo}}
     </div>
 </div>
 {{end}}

@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	sqldb = "root:hm3366@tcp(192.168.1.102:3306)/iPayask?charset=utf8"
+	sqldb = "root:hm3366@tcp(192.168.236.132:3306)/iPayask?charset=utf8"
 )
 
 // Index is yes.
@@ -47,11 +47,11 @@ func Detail(id string) (*models.Ask, error) {
 		var body string
 		err = rows.Scan(&ask.ID, &ask.Subject, &ask.NickName, &ask.Visited, &ask.Description, &ask.AddDate, &body)
 		utils.CheckErr(err)
-
 		ask.Body = template.HTML(body)
 		result = ask
 	}
 
+	rows.Close()
 	return &result, nil
 }
 
