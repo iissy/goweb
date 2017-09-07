@@ -31,21 +31,33 @@ func Index(terms []string) (*models.AskList, error) {
 		result.Items = append(result.Items, &ask)
 	}
 
+	rows.Close()
 	return &result, nil
 }
 
 // Detail is for article
-func Detail(id string) (*models.Ask, error) {
-	var result models.Ask
+func Detail(id string) (*models.AskView, error) {
+	var result models.AskView
 	db, err := sql.Open("mysql", sqldb)
 	utils.CheckErr(err)
-	rows, err := db.Query("select ID,Subject,NickName,Visited,Description,AddDate,Body from Ask where Id = ?", id)
+	rows, err := db.Query("select Subject,AddDate,Body from Ask where Id = ?", id)
 	utils.CheckErr(err)
 
 	for rows.Next() {
-		var ask models.Ask
 		var body string
-		err = rows.Scan(&ask.ID, &ask.Subject, &ask.NickName, &ask.Visited, &ask.Description, &ask.AddDate, &body)
+		err = rows.Scan(&result.Subject, &result.AddDate, &body)
+		utils.CheckErr(err)
+		result.Body = template.HTML(body)
+		break
+	}
+
+	list, err := db.Query("select ID,Subject from Ask where Id <> ? order by AddDate desc limit 10", id)
+	utils.CheckErr(err)
+
+	result.List = []*models.AskSimpleListView{}
+	for list.Next() {
+		var simple models.AskSimpleListView
+		err = list.Scan(&simple.ID, &simple.Subject)
 		utils.CheckErr(err)
 		ask.Body = template.HTML(body)
 		result = ask
@@ -83,6 +95,7 @@ func Login(user models.User) (*models.User, error) {
 		break
 	}
 
+	rows.Close()
 	return &user, nil
 }
 
@@ -105,6 +118,7 @@ func List(terms []string) (*models.AskList, error) {
 		result.Items = append(result.Items, &ask)
 	}
 
+	rows.Close()
 	return &result, nil
 }
 
@@ -123,6 +137,7 @@ func User(id string) (*models.User, error) {
 		break
 	}
 
+	rows.Close()
 	return &result, nil
 }
 
@@ -161,5 +176,6 @@ func Search(terms []string) (*models.AskList, error) {
 		result.Items = append(result.Items, &ask)
 	}
 
+	rows.Close()
 	return &result, nil
 }

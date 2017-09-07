@@ -20,3 +20,17 @@ type Ask struct {
 	Visited     int32
 	Replied     int32
 }
+
+// AskSimpleListView is list for embeded
+type AskSimpleListView struct {
+	ID      string
+	Subject string
+}
+
+// AskView is for view model
+type AskView struct {
+	Subject string
+	Body    template.HTML
+	AddDate string
+	List    []*AskSimpleListView
+}

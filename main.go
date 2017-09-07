@@ -14,11 +14,12 @@ func main() {
 	router.NotFound = http.FileServer(http.Dir("public"))
 	router.GET("/", controllers.Index)
 	router.GET("/item/:id", controllers.Detail)
+
 	router.GET("/logout", controllers.Logout)
 	router.GET("/reg", controllers.Reg)
-
 	router.POST("/regpost", controllers.RegPost)
-	router.POST("/login", controllers.Login)
+	router.GET("/login", controllers.Login)
+	router.POST("/loginpost", controllers.LoginPost)
 
 	router.GET("/add", controllers.Add)
 	router.POST("/upload", basicAuth(controllers.Upload))
