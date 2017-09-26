@@ -6,8 +6,8 @@ Vue.use(VueHtml5Editor, {
             url: '/upload'
         },
         compress: {
-            width: 1000,
-            height: 1000,
+            width: 2000,
+            height: 2000,
             quality: 80
         }
     }

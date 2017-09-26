@@ -22,7 +22,7 @@ func main() {
 	router.POST("/loginpost", controllers.LoginPost)
 
 	router.GET("/add", controllers.Add)
-	router.POST("/upload", basicAuth(controllers.Upload))
+	router.POST("/upload", controllers.Upload)
 	router.POST("/post", basicAuth(controllers.Post))
 
 	router.GET("/user/:id", controllers.User)

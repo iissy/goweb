@@ -59,8 +59,7 @@ func Detail(id string) (*models.AskView, error) {
 		var simple models.AskSimpleListView
 		err = list.Scan(&simple.ID, &simple.Subject)
 		utils.CheckErr(err)
-		ask.Body = template.HTML(body)
-		result = ask
+		result.List = append(result.List, &simple)
 	}
 
 	rows.Close()
