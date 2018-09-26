@@ -1,0 +1,18 @@
+<div id="piclist" class="row show-grid">
+    {{range .}}
+    <div class="pic col-md-4" style="height: 338px;">
+        <div style="overflow: hidden;margin:0 auto 0 auto;padding: 10px 0 10px 0;text-align:center;max-width:400px;">
+            <a href="/course/{{.ID}}"><img class="lazy" src="/images/placeholder.jpg" data-original="{{.URL}}" height="258" width="370"></a>
+        </div>
+        <div style="padding-left:10px;">
+            <a href="/course/{{.ID}}" style="letter-spacing: 1px;color:#999999;font-size:15px;">{{.Subject}}</a>
+        </div>
+    </div>
+    {{end}}
+</div>
+
+<script>
+    $("img.lazy").lazyload({
+        threshold: 200
+    });
+</script>

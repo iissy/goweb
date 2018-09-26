@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+{{template "_header.html" "文章管理 - 爱施缘"}}
+
+<body>
+    <div id="page-container" style="position: relative;">
+        {{template "_menu.html" "userarticle"}}
+        <div class="rightMain">
+            <div style="padding:0 0 0 0;height:60px;margin-bottom:20px;">
+                <div style="background-color: #ffffff;height:60px;padding:10px;"></div>
+            </div>
+            <div id="list">
+                {{template "_list.html" .}}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

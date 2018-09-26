@@ -3,11 +3,11 @@ new Vue({
     data: {},
     created: function() {
         var id = $.cookie('id');
-        var name = $.cookie('username');
-        if (id && name) {
-            $("#logininfo").html("<a href='/user/" + id + "'><span style='color:#ffffff;padding-right:10px;'>" + name + "</span></a><span style='color: #ffffff; padding: 5px 20px 5px 20px; background-color: #ff6a00; cursor: pointer;' v-on:click='logout'>注 销</span>")
-        } else {
-            $("#myask").remove();
+        var userid = $.cookie('userid');
+        var username = $.cookie('username');
+        var token = $.cookie('token');
+        if (id && userid && username && token) {
+            $("#logininfo").html("<a href='/user/index'><span style='color:#ffffff;padding-right:20px;padding-left:20px;'>" + username + "</span></a><span style='color: #ffffff; padding: 5px 20px 5px 20px; background-color: #ff6a00; cursor: pointer;' v-on:click='logout'>注 销</span>")
         }
     },
     methods: {
@@ -31,3 +31,11 @@ new Vue({
         }
     }
 });
+
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?32cee789010835e47ba7585de7418cc5";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();

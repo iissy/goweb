@@ -1,0 +1,14 @@
+<aside class="x-sidebar right" role="complementary">
+    <div id="recent-posts-4" class="widget widget_recent_entries">
+        <h4 class="h-widget">
+            更多相关
+        </h4>
+        <ul>
+            {{range .}}
+            <li>
+                <a href="/course/{{.ID}}">{{.Subject}}</a>
+            </li>
+            {{end}}
+        </ul>
+    </div>
+</aside>

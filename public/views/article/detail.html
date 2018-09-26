@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+{{template "_header.less.html" .Subject}}
+
+<body>
+    {{template "_toper.html"}}
+    <div id="main">
+        <div id="detail">
+            <div class="title">
+                {{.Subject}}
+            </div>
+            <div class="body">
+                {{.Body}}
+            </div>
+            <div class="origin">
+                来源：{{.Origin}}
+            </div>
+        </div>
+        <div id="console">
+            {{template "_aside.html" .List}}
+        </div>
+    </div>
+    {{template "_footer.html"}}
+</body>
+
+</html>
