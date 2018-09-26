@@ -16,4 +16,4 @@
 + 登陆账号
 + 账号：jimmy 密码：123456
 
-# 同时你可以访问本人的程序员网址导航：https://www.hrefs.cn
+# 程序员网址导航：https://www.hrefs.cn
