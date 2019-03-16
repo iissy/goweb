@@ -22,11 +22,14 @@
 ## 首页
 ![markdown](https://github.com/iissy/goweb/blob/master/public/home.png "首页图片")
 
+## 文章
+![markdown](https://github.com/iissy/goweb/blob/master/public/art.png "文章图片")
+
 ## 发布
-![markdown](https://github.com/iissy/goweb/blob/master/public/list.png "发布图片")
+![markdown](https://github.com/iissy/goweb/blob/master/public/add.png "发布图片")
 
 ## 列表
-![markdown](https://github.com/iissy/goweb/blob/master/public/add.png "列表图片")
+![markdown](https://github.com/iissy/goweb/blob/master/public/list.png "列表图片")
 
 2019年3月20日
 
