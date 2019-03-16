@@ -26,8 +26,8 @@
 ![markdown](https://github.com/iissy/goweb/blob/master/public/list.png "列表图片")
 
 
+### 将在几天内发布一个更新的版本，使用iris web框架改造过的，代码基本完成
+
+### 将在一个月内将内容管理部分改造成支持webpack + vue + vue-router + axios单页面
+
 ## 程序员网址导航：https://www.hrefs.cn
-
-# 将在几天内发布一个更新的版本，使用iris web框架改造过的，代码基本完成
-
-# 将在一个月内将内容管理部分改造成支持webpack + vue + vue-router + axios单页面
