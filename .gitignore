@@ -3,3 +3,4 @@ pkg/
 debug
 public/upload/
 server
+.exe
