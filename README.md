@@ -43,4 +43,4 @@
 ## 程序员网址导航：https://www.hrefs.cn
 
 我是一个全职社区贡献者，感谢您的打赏！
-![markdown](https://github.com/iissy/goweb/blob/master/public/pay.jpg "向我支付" =300x)
+<img src="https://github.com/iissy/goweb/blob/master/public/pay.jpg" src="向我支付" width="300" />
