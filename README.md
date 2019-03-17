@@ -11,8 +11,9 @@
 
 ## 组件下载
 1. go get github.com/go-sql-driver/mysql
-2. go get github.com/julienschmidt/httprouter
-3. 运行命令启动# go run main.go
+2. go get github.com/kataras/iris
+3. go get github.com/gorilla/securecookie
+4. 运行命令启动# go build -o main.exe ./ && main.exe
 
 ## 使用说明
 + 请确保80端口没有被别的服务（比如iis）占用，然后在浏览器中输入：http://localhost
@@ -30,10 +31,6 @@
 
 ## 列表
 ![markdown](https://github.com/iissy/goweb/blob/master/public/list.png "列表图片")
-
-2019年3月20日
-
-> 将发布一个更新的版本，使用iris web框架改造过的，代码基本完成
 
 2019年4月7日
 
