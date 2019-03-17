@@ -91,8 +91,8 @@ a {
 }
 
 .title {
-    font-size: 20px !important;
-    font-weight: bold;
+    font-size: 24px !important;
+    font-weight: 400;
     border-bottom: 1px solid #eeeeee;
     color: #C32528;
     font-family: 'museo-1', 'museo-2', Verdana;
@@ -100,7 +100,7 @@ a {
     text-shadow: #EEE 1px 1px 1px;
     margin: 0 0 10px 0;
     padding: 15px 5px 15px 20px;
-    max-width: 1190px;
+    text-align: center;
 }
 
 .body {

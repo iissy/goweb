@@ -107,7 +107,7 @@ func PageChanging(pageArgs models.PageArgs) template.HTML {
 	if page <= 1 || pageCount <= 1 {
 		pages += "<li class='prev disabled'><a href='#' title='Prev'>&laquo;</a></li>"
 	} else {
-		pages += "<li class='prev'><a href='/user/article/1' title='Prev'>&laquo;</a></li>"
+		pages += "<li class='prev'><a href='/article/list/1' title='Prev'>&laquo;</a></li>"
 	}
 	start := 1
 	end := pageCount
@@ -120,14 +120,14 @@ func PageChanging(pageArgs models.PageArgs) template.HTML {
 
 	for i := start; i <= end; i++ {
 		if i == page {
-			pages += "<li class='active'><a href='/user/article/" + strconv.Itoa(i) + "'>" + strconv.Itoa(i) + "</a></li>"
+			pages += "<li class='active'><a href='/article/list/" + strconv.Itoa(i) + "'>" + strconv.Itoa(i) + "</a></li>"
 		} else {
-			pages += "<li><a href='/user/article/" + strconv.Itoa(i) + "'>" + strconv.Itoa(i) + "</a></li>"
+			pages += "<li><a href='/article/list/" + strconv.Itoa(i) + "'>" + strconv.Itoa(i) + "</a></li>"
 		}
 	}
 
 	if page < pageCount && pageCount > 1 {
-		pages += "<li class='next'><a href='/user/article/" + strconv.Itoa(pageCount) + "' title='Next'>&raquo;</a></li>"
+		pages += "<li class='next'><a href='/article/list/" + strconv.Itoa(pageCount) + "' title='Next'>&raquo;</a></li>"
 	} else {
 		pages += "<li class='next disabled'><a href='#' title='Next'>&raquo;</a></li>"
 	}

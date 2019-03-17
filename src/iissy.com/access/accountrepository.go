@@ -1,4 +1,4 @@
-package ado
+package access
 
 import (
 	"database/sql"

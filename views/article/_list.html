@@ -10,7 +10,7 @@
                     <th width="155">操作</th>
                 </tr>
             </thead>
-            {{range .Items}}
+            {{range .body.Items}}
             <tr>
                 <td><a href="/course/{{.ID}}" target="_blank" style="letter-spacing: 1px;color:#333333;font-family: Arial,Lucida,Verdana,Helvetica,sans-serif;">{{.Subject}}</a></td>
                 <td align="center">{{.PostType}}</td>
@@ -30,10 +30,10 @@
     </div>
 
     <div class="clearfix">
-        <div class="datainfo fl">第 <span id="PageNumber">{{.PageArgs.PageNumber}}</span> 页 ( 总共 <span id="PageCount">{{.PageArgs.PageCount}}</span> 页 )</div>
+        <div class="datainfo fl">第 <span id="PageNumber">{{.body.PageArgs.PageNumber}}</span> 页 ( 总共 <span id="PageCount">{{.body.PageArgs.PageCount}}</span> 页 )</div>
         <nav class="fr">
             <ul class="pagination">
-                {{.PageArgs | pageChanging}}
+                {{.body.PageArgs | pageChanging}}
             </ul>
         </nav>
     </div>

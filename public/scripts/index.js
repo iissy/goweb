@@ -38,7 +38,7 @@ new Vue({
             if (!$.trim(self.UID) || !$.trim(self.PWD))
                 return;
 
-            var url = '/loginpost';
+            var url = '/login';
             $.ajax({
                 url: url,
                 type: 'POST',

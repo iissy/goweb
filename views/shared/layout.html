@@ -1,7 +1,9 @@
-<head>
+<!DOCTYPE html>
+<html>
+
+<head>{{ part "title" }}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
-    <title>{{.}}</title>
     <link rel="shortcut icon" href="/images/favicon.png" />
     <script src="/scripts/jquery-2.2.4.min.js"></script>
     <script src="/scripts/jquery.lazyload.min.js"></script>
@@ -9,3 +11,13 @@
     <link href="/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/styles/site.css" rel="stylesheet">
 </head>
+
+<body>
+    {{ render "shared/_toper.html"}}
+    <div id="main">
+        {{ yield }}
+    </div>
+    {{render "shared/_footer.html"}}
+</body>
+
+</html>

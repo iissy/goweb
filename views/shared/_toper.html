@@ -1,0 +1,16 @@
+<div id="header">
+    <div style="max-width:1200px;margin:0 auto 0 auto;text-align:left;">
+        <div style="overflow:hidden;">
+            <div style="float:left;">
+                <a href="/"><img src="/images/logo.png" height="60" /></a>
+            </div>
+            <div id="logininfo" style="float:right;margin-top:18px;">
+                {{ if .islogin }}
+                <a href='/user/index'><span style='color:#ffffff;padding-right:20px;padding-left:20px;'>{{.username}}</span></a>
+                <span style="color: #ffffff; padding: 5px 20px 5px 20px; background-color: #ff6a00; cursor: pointer;" onclick="javascript:location.href ='/logout'">注 销</span> {{ else }}
+                <span style="color:#ffffff;padding:5px 20px 5px 20px;background-color: #ff6a00;margin-right:10px;margin-left:10px;cursor:pointer;" onclick="javascript:location.href ='/login'">登 陆</span>
+                <span style="color:#333333;padding:5px 20px 5px 20px;background-color: #ffd800;cursor:pointer;" onclick="javascript:location.href ='/reg'">注 册</span> {{ end }}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,35 +1,42 @@
 package utils
 
 import (
-	"net/http"
 	"net/url"
 	"strconv"
+
+	"github.com/gorilla/securecookie"
+	"github.com/kataras/iris"
+)
+
+var (
+	hashKey  = []byte("the-big-and-secret-fash-key-here")
+	blockKey = []byte("lot-secret-of-characters-big-too")
+	sc       = securecookie.New(hashKey, blockKey)
 )
 
 // GetUser is yes
-func GetUser(r *http.Request) (int, string) {
-	if Check(r) {
-		idCookie, _ := r.Cookie("id")
-		unmCookie, _ := r.Cookie("username")
-		id, _ := strconv.Atoi(idCookie.Value)
-		nickname, _ := url.QueryUnescape(unmCookie.Value)
+func GetUser(ctx iris.Context) (int, string) {
+	if Check(ctx) {
+		id, _ := strconv.Atoi(ctx.GetCookie("id", iris.CookieDecode(sc.Decode)))
+		nickname, _ := url.QueryUnescape(ctx.GetCookie("username", iris.CookieDecode(sc.Decode)))
 		return id, nickname
 	}
+
 	return -1, ""
 }
 
 // Check is yes
-func Check(r *http.Request) bool {
-	idCookie, _ := r.Cookie("id")
-	uidCookie, _ := r.Cookie("userid")
-	unmCookie, _ := r.Cookie("username")
-	tokenCookie, _ := r.Cookie("token")
-	if idCookie == nil || uidCookie == nil || unmCookie == nil && tokenCookie == nil {
+func Check(ctx iris.Context) bool {
+	id := ctx.GetCookie("id", iris.CookieDecode(sc.Decode))
+	userid := ctx.GetCookie("userid", iris.CookieDecode(sc.Decode))
+	username := ctx.GetCookie("username", iris.CookieDecode(sc.Decode))
+	token := ctx.GetCookie("token", iris.CookieDecode(sc.Decode))
+	if id == "" || userid == "" || username == "" && token == "" {
 		return false
 	}
 
-	token := Encryption(idCookie.Value, uidCookie.Value)
-	if tokenCookie.Value == token {
+	encode := Encryption(id, userid)
+	if encode == token {
 		return true
 	}
 	return false

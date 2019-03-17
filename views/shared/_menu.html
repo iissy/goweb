@@ -9,10 +9,10 @@
         </div>
     </div>
     <ul>
-        <li :class="{active:'userindex' == '{{.}}'}"><a href="/user/index">个人首页</a></li>
-        <li :class="{active:'articleadd' == '{{.}}'}"><a href="/article/add">我要发文</a></li>
+        <li :class="{active:'userindex' == '{{.url}}'}"><a href="/user/index">个人首页</a></li>
+        <li :class="{active:'articleadd' == '{{.url}}'}"><a href="/article/add">我要发文</a></li>
         <li><span></span></li>
-        <li :class="{active:'userarticle' == '{{.}}'}"><a href="/user/article/1">文章管理</a></li>
+        <li :class="{active:'userarticle' == '{{.url}}'}"><a href="/article/list/1">文章管理</a></li>
     </ul>
 </div>
 

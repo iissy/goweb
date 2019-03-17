@@ -1,0 +1,15 @@
+{{ define "article/detail-title"}}
+<title>{{.body.title}}</title>
+{{ end }}
+
+<div id="detail">
+    <div class="title">
+        {{.body.Subject}}
+    </div>
+    <div class="body">
+        {{.body.Body}}
+    </div>
+    <div class="origin">
+        来源：{{.body.Origin}}
+    </div>
+</div>

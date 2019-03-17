@@ -90,7 +90,8 @@ new Vue({
                     //$("#resultTable").html('<img src="/Images/loading.gif" />');
                 },
                 success: function(result) {
-                    location.href = '/user/article/1';
+                    if (result.ok)
+                        location.href = '/article/list/1';
                 }
             });
         }
