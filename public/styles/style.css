@@ -1,0 +1,271 @@
+body {
+    background-color: #eeeeee;
+    margin: 0;
+    font-size: 12px;
+    color: #333333;
+    font-family: "Microsoft YaHei", "宋体", arial, verdana, sans-serif;
+}
+
+body,
+div,
+h3,
+th,
+td,
+p,
+span,
+img,
+a,
+.table td,
+.table th,
+.table thead tr th {
+    font-size: 12px;
+}
+
+a:link {
+    color: #333333;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #333333;
+    text-decoration: none;
+}
+
+a:active {
+    color: #333333;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #e47911;
+    text-decoration: none;
+}
+
+html,
+div,
+h3,
+td,
+p,
+span,
+img,
+a {
+    font-family: "Microsoft YaHei", "宋体", arial, verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#app {
+    margin: 0 auto 0 auto;
+}
+
+#header {
+    background-color: #2B2B2B;
+    color: #ffffff;
+    padding: 0;
+    text-align: center;
+    margin-bottom: 20px;
+    height: 60px;
+    overflow: hidden;
+}
+
+#main {
+    margin: 0 auto 0 auto;
+    max-width: 1200px;
+    background-color: #ffffff;
+    overflow: hidden;
+    min-height: 700px;
+}
+
+#list {
+    overflow: hidden;
+    min-height: 700px;
+    margin-left: 20px;
+    background-color: #ffffff;
+}
+
+#detail {
+    padding-bottom: 20px;
+    background-color: #ffffff;
+}
+
+.title {
+    font-size: 24px !important;
+    font-weight: 400;
+    border-bottom: 1px solid #eeeeee;
+    color: #C32528;
+    font-family: 'museo-1', 'museo-2', Verdana;
+    letter-spacing: 1px;
+    text-shadow: #EEE 1px 1px 1px;
+    margin: 0 0 10px 0;
+    padding: 15px 5px 15px 20px;
+    text-align: center;
+}
+
+.body {
+    word-wrap: break-word;
+    word-break: break-all;
+    letter-spacing: 1px;
+    padding: 10px 20px 10px 20px;
+    line-height: 188%;
+    font-size: 15px;
+}
+
+.body * {
+    font-size: 15px;
+}
+
+.body img {
+    max-width: 100% !important;
+}
+
+#footer {
+    max-width: 1200px;
+    margin: 20px auto 0 auto;
+    padding: 20px 0 20px 0;
+    text-align: center;
+    background-color: #ffffff;
+    clear: both;
+}
+
+#imgfileinput.fileinput {
+    top: 0;
+    position: absolute;
+    right: 0;
+    padding-right: 15px;
+}
+
+#imgfileinput.fileinput {
+    margin-bottom: 0;
+}
+
+.leftBar {
+    position: fixed;
+    left: 0;
+    height: 100%;
+    width: 235px;
+    /* border-right: 1px solid #d2d6e0; */
+    background: #364150;
+}
+
+.rightMain {
+    margin-left: 235px;
+    margin-right: 20px;
+    /* margin-bottom: 20px; */
+    min-height: 100%;
+    /* background-color: #ffffff; */
+}
+
+.leftBar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.leftBar ul li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.leftBar ul li a {
+    position: relative;
+    display: block;
+    padding-left: 20px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 12px;
+    color: #b4bcc8;
+}
+
+.leftBar li.active a {
+    color: #eeeeee;
+    background-color: #17C4BB;
+}
+
+.leftBar li.active a:after {
+    content: "";
+    position: absolute;
+    right: -1px;
+    top: 50%;
+    margin-top: -10px;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    border-style: solid;
+    border-width: 10px;
+    border-color: transparent #eeeeee transparent transparent;
+}
+
+.rightMain:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.leftBar ul li span {
+    display: block;
+    margin: 4px 20px 5px;
+    border-bottom: 1px solid #555555;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "ForoSans-Regular", Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+ul,
+ol {
+    padding: 0;
+    margin: 0;
+}
+
+div.pic:hover {
+    background-color: #FFF5EE;
+}
+
+.table th {
+    text-align: center;
+}
+
+.portlet {
+    margin-bottom: 0;
+}
+
+.origin {
+    padding-right: 20px;
+    float: right;
+    color: #888888;
+    font: 15px/1.5 Microsoft Yahei, Tahoma, Helvetica, Arial, sans-serif;
+    letter-spacing: 2px;
+}
+
+.portlet.light {
+    padding: 5px 20px 5px;
+}
+
+.inputclass {
+    display: inline-block;
+    padding: 3px 10px 3px 10px;
+    line-height: 22px;
+    font-size: 12px;
+    border: 2px solid rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px 0px;
+    border-radius: 2px;
+    color: rgb(95, 95, 95);
+}
+
+#list .hd-button {
+    color: #ffffff;
+    padding: 3px 20px 3px 20px;
+    background-color: #36c6d3;
+    font-size: 14px;
+    border-radius: 10px;
+    border: 1px solid #2bb8c4;
+    float: right;
+}

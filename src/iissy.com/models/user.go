@@ -10,3 +10,9 @@ type User struct {
 	LastLoginDate string
 	Status        int
 }
+
+// Users is struct
+type Users struct {
+	PageArgs PageArgs
+	Items    []*User
+}

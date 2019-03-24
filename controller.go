@@ -7,7 +7,6 @@ import (
 	"log"
 	"net/url"
 	"os"
-	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -91,10 +90,9 @@ func logout(ctx iris.Context) {
 	ctx.Redirect("/")
 }
 
-func user(ctx iris.Context) {
+func webpack(ctx iris.Context) {
 	ctx.ViewLayout("shared/webpack.html")
-	ctx.ViewData("url", "userindex")
-	ctx.View("user/index.html")
+	ctx.View("main.html")
 }
 
 func addarticle(ctx iris.Context) {
@@ -108,24 +106,6 @@ func postarticle(ctx iris.Context) {
 	var msg models.Uploador
 	msg.Success = false
 
-	var body = ctx.FormValue("Body")
-	src := string(body)
-	//将HTML标签全转换成小写
-	re, _ := regexp.Compile("\\<[\\S\\s]+?\\>")
-	src = re.ReplaceAllStringFunc(src, strings.ToLower)
-	//去除STYLE
-	re, _ = regexp.Compile("\\<style[\\S\\s]+?\\</style\\>")
-	src = re.ReplaceAllString(src, "")
-	//去除SCRIPT
-	re, _ = regexp.Compile("\\<script[\\S\\s]+?\\</script\\>")
-	src = re.ReplaceAllString(src, "")
-	//去除所有尖括号内的HTML代码，并换成换行符
-	re, _ = regexp.Compile("\\<[\\S\\s]+?\\>")
-	src = re.ReplaceAllString(src, "\n")
-	//去除连续的换行符
-	re, _ = regexp.Compile("\\s{2,}")
-	src = re.ReplaceAllString(src, "\n")
-
 	id, username := utils.GetUser(ctx)
 	article := models.Article{
 		ID:          ctx.FormValue("Id"),
@@ -135,8 +115,8 @@ func postarticle(ctx iris.Context) {
 		Picture:     ctx.FormValue("Picture"),
 		PostType:    ctx.FormValue("PostType"),
 		Origin:      ctx.FormValue("Origin"),
-		Description: utils.Substr2(strings.TrimSpace(src), 0, 100),
-		Body:        template.HTML(body)}
+		Description: ctx.FormValue("Description"),
+		Body:        template.HTML(ctx.FormValue("Body"))}
 
 	adding, _ := strconv.ParseBool(ctx.FormValue("Adding"))
 	if adding {
@@ -158,16 +138,14 @@ func postarticle(ctx iris.Context) {
 
 func articlelist(ctx iris.Context) {
 	id, _ := utils.GetUser(ctx)
+	size, _ := strconv.Atoi(ctx.Params().Get("size"))
 	page, _ := strconv.Atoi(ctx.Params().Get("page"))
-	result, err := access.UserArticle(id, page, 15)
+	result, err := access.UserArticle(id, page, size)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	ctx.ViewLayout("shared/webpack.html")
-	ctx.ViewData("url", "userarticle")
-	ctx.ViewData("body", result)
-	ctx.View("article/index.html")
+	ctx.JSON(result)
 }
 
 func getarticle(ctx iris.Context) {
@@ -178,6 +156,19 @@ func getarticle(ctx iris.Context) {
 	}
 
 	ctx.JSON(result)
+}
+
+func delarticle(ctx iris.Context) {
+	id := ctx.Params().Get("id")
+	uid, _ := utils.GetUser(ctx)
+	result, err := access.DelArticle(uid, id)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var msg models.Uploador
+	msg.Success = result
+	ctx.JSON(msg)
 }
 
 func upload(ctx iris.Context) {
@@ -235,11 +226,13 @@ func regpost(ctx iris.Context) {
 	ctx.JSON(msg)
 }
 
-func status(ctx iris.Context) {
-	var msg models.Uploador
-	if ok := utils.Check(ctx); ok {
-		msg.Success = true
+func accountlist(ctx iris.Context) {
+	size, _ := strconv.Atoi(ctx.Params().Get("size"))
+	page, _ := strconv.Atoi(ctx.Params().Get("page"))
+	result, err := access.AccountList(page, size)
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	ctx.JSON(msg)
+	ctx.JSON(result)
 }
