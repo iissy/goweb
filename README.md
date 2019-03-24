@@ -11,7 +11,7 @@
 + 改用iris框架
 + cookie登录加密
 + 文件目录结构调整
-+ 引入 webpack + vue + vue-router + axios
++ 管理模块引入 webpack + vue + vue-router + axios
 
 ## 安装说明
 1. 安装mysql
