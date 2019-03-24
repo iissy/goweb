@@ -7,10 +7,11 @@
 + 后台文章管理，用户管理
 + 图片上传
 
-## Asy 1.2 Released 2019年03月17日
+## Asy 1.3 Released 2019年03月24日
 + 改用iris框架
 + cookie登录加密
 + 文件目录结构调整
++ 引入 webpack + vue + vue-router + axios
 
 ## 安装说明
 1. 安装mysql
@@ -42,10 +43,6 @@
 
 ## 列表
 ![markdown](https://github.com/iissy/goweb/blob/master/public/list.png "列表图片")
-
-2019年4月7日
-
-> 将内容管理部分改造成支持 webpack + vue + vue-router + axios
 
 2019年5月下旬
 
