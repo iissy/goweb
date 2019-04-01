@@ -13,9 +13,11 @@
             <li :class="{active: (currentIndex == 1)}"><router-link to="/main/index">个人首页</router-link></li>
             <li><span></span></li>
             <li :class="{active: (currentIndex == 4)}"><router-link to="/main/article/add">添加文章</router-link></li>
-            <li :class="{active: (currentIndex == 5)}"><router-link to="/main/article/14/1">文章管理</router-link></li>
+            <li :class="{active: (currentIndex == 5)}"><router-link to="/main/article/15/1">文章管理</router-link></li>
             <li><span></span></li>
-            <li :class="{active: (currentIndex == 8)}"><router-link to="/main/account/14/1">用户列表</router-link></li>
+            <li :class="{active: (currentIndex == 8)}"><router-link to="/main/account/15/1">用户列表</router-link></li>
+            <li :class="{active: (currentIndex == 9)}"><router-link to="/main/role/15/1">角色管理</router-link></li>
+            <li :class="{active: (currentIndex == 10)}"><router-link to="/main/function/15/1">权限管理</router-link></li>
         </ul>
     </div>
 </template>

@@ -95,13 +95,6 @@ func webpack(ctx iris.Context) {
 	ctx.View("main.html")
 }
 
-func addarticle(ctx iris.Context) {
-	ctx.ViewLayout("shared/webpack.html")
-	ctx.ViewData("id", ctx.Params().Get("id"))
-	ctx.ViewData("url", "articleadd")
-	ctx.View("article/add.html")
-}
-
 func postarticle(ctx iris.Context) {
 	var msg models.Uploador
 	msg.Success = false
@@ -235,4 +228,134 @@ func accountlist(ctx iris.Context) {
 	}
 
 	ctx.JSON(result)
+}
+
+func postrole(ctx iris.Context) {
+	var msg models.Uploador
+	msg.Success = false
+
+	id, err := strconv.Atoi(ctx.FormValue("Id"))
+	status, err := strconv.Atoi(ctx.FormValue("Status"))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	role := models.Role{
+		ID:       id,
+		RoleName: ctx.FormValue("RoleName"),
+		Status:   status}
+
+	result, err := access.PostRole(role)
+	if err != nil {
+		log.Fatal(err)
+	}
+	msg.Success = result
+
+	ctx.JSON(msg)
+}
+
+func rolelist(ctx iris.Context) {
+	id, _ := utils.GetUser(ctx)
+	size, _ := strconv.Atoi(ctx.Params().Get("size"))
+	page, _ := strconv.Atoi(ctx.Params().Get("page"))
+	result, err := access.RoleList(id, page, size)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ctx.JSON(result)
+}
+
+func getrole(ctx iris.Context) {
+	id := ctx.Params().Get("id")
+	result, err := access.GetRole(id)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ctx.JSON(result)
+}
+
+func postfunction(ctx iris.Context) {
+	var msg models.Uploador
+	msg.Success = false
+
+	fun := models.Functionality{
+		Funname:    ctx.FormValue("Funname"),
+		FunType:    ctx.FormValue("FunType"),
+		Controller: ctx.FormValue("Controller")}
+
+	result, err := access.PostFunction(fun)
+	if err != nil {
+		log.Fatal(err)
+	}
+	msg.Success = result
+
+	ctx.JSON(msg)
+}
+
+func functionlist(ctx iris.Context) {
+	id, _ := utils.GetUser(ctx)
+	size, _ := strconv.Atoi(ctx.Params().Get("size"))
+	page, _ := strconv.Atoi(ctx.Params().Get("page"))
+	result, err := access.FunctionList(id, page, size)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ctx.JSON(result)
+}
+
+func getfunction(ctx iris.Context) {
+	id := ctx.Params().Get("id")
+	result, err := access.GetFunction(id)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ctx.JSON(result)
+}
+
+func functiongroup(ctx iris.Context) {
+	id, err := strconv.Atoi(ctx.Params().Get("id"))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	functions, err := access.FunctionGroup()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	selectedids, err := access.GetRoleFunction(id)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ctx.JSON(struct {
+		Functions   map[string][]*models.Functionality `json:"functions"`
+		Selectedids []int                              `json:"selectedids"`
+	}{functions, selectedids})
+}
+
+func mappingpost(ctx iris.Context) {
+	var msg models.Uploador
+	msg.Success = false
+
+	fundid, _ := strconv.Atoi(ctx.FormValue("FunId"))
+	roleid, _ := strconv.Atoi(ctx.FormValue("RoleId"))
+	toggle, _ := strconv.ParseBool(ctx.FormValue("Toggle"))
+
+	mapping := models.RoleFunctionMapping{
+		FunID:  fundid,
+		RoleID: roleid,
+		Toggle: toggle}
+
+	result, err := access.MappingPost(mapping)
+	if err != nil {
+		log.Fatal(err)
+	}
+	msg.Success = result
+
+	ctx.JSON(msg)
 }
