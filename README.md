@@ -7,11 +7,13 @@
 + 后台文章管理，用户管理
 + 图片上传
 
-## Asy 1.3 Released 2019年03月24日
+## Asy 1.4 Released 2019年04月01日
 + 改用iris框架
 + cookie登录加密
 + 文件目录结构调整
 + 管理模块引入 webpack + vue + vue-router + axios
++ 添加角色管理
++ 添加权限管理
 
 ## 安装说明
 1. 安装mysql
@@ -44,9 +46,18 @@
 ## 列表
 ![markdown](https://github.com/iissy/goweb/blob/master/public/list.png "列表图片")
 
-2019年5月下旬
+## 角色
+![markdown](https://github.com/iissy/goweb/blob/master/public/role.png "角色图片")
 
-> 将发布用户分角色权限管理功能
+## 权限
+![markdown](https://github.com/iissy/goweb/blob/master/public/fun.png "权限图片")
+
+## 权限配置
+![markdown](https://github.com/iissy/goweb/blob/master/public/map.png "权限配置图片")
+
+2019年4月下旬
+
+> 将完善用户分角色权限管理功能
 
 ## 相关网站
 + 程序员网址导航：https://www.hrefs.cn
