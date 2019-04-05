@@ -1,20 +1,18 @@
-这是一个由Go语言写的，简单的内容管理系统CMS，2017年06月30日启动项目，至今仍在更新维护，见下面版本发布时间。
+这是一个由Go语言写的，简单的内容管理系统CMS，目前仍在更新维护，见下面版本发布时间。
 
 ### 功能点
-+ 包括前端显示，SEO支持
++ 包括内容列表显示，详情显示，并支持SEO
 + 前端图片懒加载
 + 登录，注册
-+ 后台文章管理，用户管理
++ 后台内容管理，用户管理，角色权限管理
 + 图片上传
-+ 角色权限管理
 
-## Asy 1.4 Released 2019年04月01日
+#### Asy 1.5 Released 2019年04月06日
 + 改用iris框架
 + cookie登录加密
 + 文件目录结构调整
 + 管理模块引入 webpack + vue + vue-router + axios
-+ 添加角色管理
-+ 添加权限管理
++ 添加角色权限管理
 
 ## 安装说明
 1. 安装mysql
@@ -28,12 +26,13 @@
 1. go get github.com/go-sql-driver/mysql
 2. go get github.com/kataras/iris
 3. go get github.com/gorilla/securecookie
-4. 运行命令启动# go build -o main.exe ./ && main.exe
+4. 运行命令启动# go run main.go
 
 ## 使用说明
 + 请确保80端口没有被别的服务（比如iis）占用，然后在浏览器中输入：http://localhost
 + 登陆账号
-+ 账号：jimmy 密码：123456
++ 管理员账号：jimmy 密码：123456
++ 普通账号：pinbor 秘密：123456
 
 ## 首页
 ![markdown](https://github.com/iissy/goweb/blob/master/public/home.png "首页图片")
@@ -58,7 +57,7 @@
 
 2019年4月下旬
 
-> 将完善用户分角色权限管理功能
+> 将继续完善用户分角色权限管理功能
 
 ## 相关网站
 + 程序员网址导航：https://www.hrefs.cn
