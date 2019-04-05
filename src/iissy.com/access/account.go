@@ -9,7 +9,7 @@ import (
 
 // Login is yes
 func Login(user models.User) (*models.User, error) {
-	err := db.QueryRow("select Id,UserId,UserName from Account where UserId = ? and Password = ? and Status = 1", user.UserID, user.Password).Scan(&user.ID, &user.UserID, &user.UserName)
+	err := db.QueryRow("select Id,UserId,UserName,RoleId from Account where UserId = ? and Password = ? and Status = 1", user.UserID, user.Password).Scan(&user.ID, &user.UserID, &user.UserName, &user.RoleID)
 	utils.CheckErr(err)
 	return &user, nil
 }

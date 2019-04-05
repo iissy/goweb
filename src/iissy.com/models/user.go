@@ -3,6 +3,7 @@ package models
 // User is hello
 type User struct {
 	ID            int
+	RoleID        int
 	UserID        string
 	UserName      string
 	Password      string

@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/kataras/iris"
+	"iissy.com/controller"
 	"iissy.com/utils"
 )
 
@@ -15,36 +16,46 @@ func main() {
 	tmpl.AddFunc("pageChanging", utils.PageChanging)
 	app.RegisterView(tmpl)
 
-	app.UseGlobal(before)
+	app.UseGlobal(controller.Before)
 
-	app.Get("/", index)
-	app.Get("/course/{id}", detail)
+	app.Get("/", controller.Index)
+	app.Get("/course/{id}", controller.Detail)
 
-	app.Get("/logout", logout)
-	app.Post("/account/list/{size}/{page}", basicAuth(accountlist))
+	app.Get("/logout", controller.Logout)
+	app.Post("/account/list/{size}/{page}", controller.BasicAuth(controller.Accountlist))
 
-	app.Post("/upload", basicAuth(upload))
+	app.Post("/upload", controller.BasicAuth(controller.Upload))
 
-	app.Get("/login", webpack)
-	app.Get("/reg", webpack)
-	app.Post("/loginpost", loginpost)
-	app.Post("/regpost", regpost)
+	app.Get("/login", controller.Webpack)
+	app.Get("/reg", controller.Webpack)
+	app.Post("/loginpost", controller.Loginpost)
+	app.Post("/regpost", controller.Regpost)
 
-	app.Get("/main/{action:path}", basicAuth(webpack))
-	app.Post("/article/post", basicAuth(postarticle))
-	app.Post("/article/list/{size}/{page}", basicAuth(articlelist))
-	app.Get("/article/get/{id}", basicAuth(getarticle))
-	app.Get("/article/delete/{id}", basicAuth(delarticle))
+	app.Get("/main/{action:path}", controller.BasicAuth(controller.Webpack))
 
-	app.Post("/role/post", basicAuth(postrole))
-	app.Post("/role/list/{size}/{page}", basicAuth(rolelist))
-	app.Get("/role/get/{id}", basicAuth(getrole))
+	article := app.Party("article")
+	{
+		article.Post("/post", controller.BasicAuth(controller.Postarticle))
+		article.Post("/list/{size}/{page}", controller.BasicAuth(controller.Articlelist))
+		article.Get("/get/{id}", controller.BasicAuth(controller.Getarticle))
+		article.Get("/delete/{id}", controller.BasicAuth(controller.Delarticle))
+	}
 
-	app.Post("/function/post", basicAuth(postfunction))
-	app.Post("/function/list/{size}/{page}", basicAuth(functionlist))
-	app.Get("/function/get/{id}", basicAuth(getfunction))
-	app.Get("/function/group/{id}", basicAuth(functiongroup))
-	app.Post("/function/mapping/post", basicAuth(mappingpost))
+	role := app.Party("role")
+	{
+		role.Post("/post", controller.BasicAuth(controller.Postrole))
+		role.Post("/list/{size}/{page}", controller.BasicAuth(controller.Rolelist))
+		role.Get("/get/{id}", controller.BasicAuth(controller.Getrole))
+	}
+
+	function := app.Party("function")
+	{
+		function.Post("/post", controller.BasicAuth(controller.Postfunction))
+		function.Post("/list/{size}/{page}", controller.BasicAuth(controller.Functionlist))
+		function.Get("/get/{id}", controller.BasicAuth(controller.Getfunction))
+		function.Get("/group/{id}", controller.BasicAuth(controller.Functiongroup))
+		function.Post("/mapping/post", controller.BasicAuth(controller.Mappingpost))
+	}
 
 	app.Run(iris.Addr(":80"))
 }

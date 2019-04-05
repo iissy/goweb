@@ -95,7 +95,7 @@ func Update(article models.Article) (bool, error) {
 
 // DelArticle is yes
 func DelArticle(uid int, id string) (bool, error) {
-	res, err := db.Exec("delete from Article where id=? and UserId=?", id, uid)
+	res, err := db.Exec("delete from Article where Id=? and UserId=?", id, uid)
 	utils.CheckErr(err)
 
 	result, err := res.RowsAffected()

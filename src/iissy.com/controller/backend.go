@@ -1,105 +1,28 @@
-package main
+package controller
 
 import (
-	"fmt"
 	"html/template"
-	"io"
 	"log"
-	"net/url"
-	"os"
 	"strconv"
-	"strings"
-	"time"
 
-	"github.com/gorilla/securecookie"
 	"github.com/kataras/iris"
 	"iissy.com/access"
 	"iissy.com/models"
 	"iissy.com/utils"
 )
 
-var (
-	hashKey  = []byte("the-big-and-secret-fash-key-here")
-	blockKey = []byte("lot-secret-of-characters-big-too")
-	sc       = securecookie.New(hashKey, blockKey)
-)
-
-func before(ctx iris.Context) {
-	id, username := utils.GetUser(ctx)
-	ctx.ViewData("islogin", id > 0)
-	ctx.ViewData("username", username)
-	ctx.Next()
-}
-
-func index(ctx iris.Context) {
-	result, err := access.Index()
-	if err != nil {
-		log.Fatal(err)
-	}
-	ctx.ViewData("title", "Home page")
-	ctx.ViewData("body", result)
-	ctx.View("index.html")
-}
-
-func detail(ctx iris.Context) {
-	id := ctx.Params().Get("id")
-
-	result, err := access.Detail(id)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	ctx.ViewData("body", result)
-	ctx.View("article/detail.html")
-}
-
-func login(ctx iris.Context) {
-	ctx.View("user/login.html")
-}
-
-func loginpost(ctx iris.Context) {
-	user := models.User{}
-	user.UserID = ctx.FormValue("UID")
-	user.Password = utils.GetMd5String(ctx.FormValue("PWD"))
-	result, err := access.Login(user)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	if result.ID > 0 {
-		id := strconv.Itoa(result.ID)
-		// expiration := time.Now()
-		// expiration = expiration.AddDate(0, 0, 1)
-		ctx.SetCookieKV("id", id, iris.CookieEncode(sc.Encode))
-		ctx.SetCookieKV("userid", result.UserID, iris.CookieEncode(sc.Encode))
-		ctx.SetCookieKV("username", url.QueryEscape(result.UserName), iris.CookieEncode(sc.Encode))
-		ctx.SetCookieKV("token", utils.Encryption(id, result.UserID), iris.CookieEncode(sc.Encode))
-	}
-
-	var msg models.Uploador
-	msg.Success = result.ID > 0
-	ctx.JSON(msg)
-}
-
-func logout(ctx iris.Context) {
-	ctx.RemoveCookie("id")
-	ctx.RemoveCookie("userid")
-	ctx.RemoveCookie("username")
-	ctx.RemoveCookie("token")
-
-	ctx.Redirect("/")
-}
-
-func webpack(ctx iris.Context) {
+// Webpack 授权基础页面
+func Webpack(ctx iris.Context) {
 	ctx.ViewLayout("shared/webpack.html")
 	ctx.View("main.html")
 }
 
-func postarticle(ctx iris.Context) {
+// Postarticle 发布文章
+func Postarticle(ctx iris.Context) {
 	var msg models.Uploador
 	msg.Success = false
 
-	id, username := utils.GetUser(ctx)
+	id, _, username := utils.GetUser(ctx)
 	article := models.Article{
 		ID:          ctx.FormValue("Id"),
 		NickName:    username,
@@ -129,8 +52,9 @@ func postarticle(ctx iris.Context) {
 	ctx.JSON(msg)
 }
 
-func articlelist(ctx iris.Context) {
-	id, _ := utils.GetUser(ctx)
+// Articlelist 文章列表
+func Articlelist(ctx iris.Context) {
+	id, _, _ := utils.GetUser(ctx)
 	size, _ := strconv.Atoi(ctx.Params().Get("size"))
 	page, _ := strconv.Atoi(ctx.Params().Get("page"))
 	result, err := access.UserArticle(id, page, size)
@@ -141,7 +65,8 @@ func articlelist(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func getarticle(ctx iris.Context) {
+// Getarticle 获取文章
+func Getarticle(ctx iris.Context) {
 	id := ctx.Params().Get("id")
 	result, err := access.GetArticle(id)
 	if err != nil {
@@ -151,9 +76,10 @@ func getarticle(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func delarticle(ctx iris.Context) {
+// Delarticle 删除文章
+func Delarticle(ctx iris.Context) {
 	id := ctx.Params().Get("id")
-	uid, _ := utils.GetUser(ctx)
+	uid, _, _ := utils.GetUser(ctx)
 	result, err := access.DelArticle(uid, id)
 	if err != nil {
 		log.Fatal(err)
@@ -164,62 +90,8 @@ func delarticle(ctx iris.Context) {
 	ctx.JSON(msg)
 }
 
-func upload(ctx iris.Context) {
-	t := time.Now()
-	dir := t.Format("20060102")
-	var result models.Uploador
-	file, info, err := ctx.FormFile("image")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	defer file.Close()
-	ext := utils.ExtensionName(info.Filename)
-	path := "/upload/" + dir + "/"
-	err = os.MkdirAll("./public"+path, os.ModePerm)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	path += utils.UniqueID() + strings.ToLower(ext)
-	out, err := os.OpenFile("./public/"+path, os.O_WRONLY|os.O_CREATE, 0666)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	defer out.Close()
-	io.Copy(out, file)
-
-	result.Success = true
-	result.Path = path
-	ctx.JSON(result)
-}
-
-func reg(ctx iris.Context) {
-	ctx.View("user/reg.html")
-}
-
-func regpost(ctx iris.Context) {
-	var user models.User
-	var msg models.Uploador
-	user.UserID = ctx.FormValue("UserId")
-	user.UserName = ctx.FormValue("UserName")
-	user.Password = ctx.FormValue("Password")
-	if strings.TrimSpace(user.UserID) == "" || strings.TrimSpace(user.UserName) == "" || strings.TrimSpace(user.Password) == "" {
-		msg.Success = false
-	} else {
-		user.Password = utils.GetMd5String(user.Password)
-		result, err := access.RegPost(user)
-		utils.CheckErr(err)
-		msg.Success = result
-	}
-
-	ctx.JSON(msg)
-}
-
-func accountlist(ctx iris.Context) {
+// Accountlist 用户列表
+func Accountlist(ctx iris.Context) {
 	size, _ := strconv.Atoi(ctx.Params().Get("size"))
 	page, _ := strconv.Atoi(ctx.Params().Get("page"))
 	result, err := access.AccountList(page, size)
@@ -230,7 +102,8 @@ func accountlist(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func postrole(ctx iris.Context) {
+// Postrole 添加角色
+func Postrole(ctx iris.Context) {
 	var msg models.Uploador
 	msg.Success = false
 
@@ -254,8 +127,9 @@ func postrole(ctx iris.Context) {
 	ctx.JSON(msg)
 }
 
-func rolelist(ctx iris.Context) {
-	id, _ := utils.GetUser(ctx)
+// Rolelist 角色类别
+func Rolelist(ctx iris.Context) {
+	id, _, _ := utils.GetUser(ctx)
 	size, _ := strconv.Atoi(ctx.Params().Get("size"))
 	page, _ := strconv.Atoi(ctx.Params().Get("page"))
 	result, err := access.RoleList(id, page, size)
@@ -266,7 +140,8 @@ func rolelist(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func getrole(ctx iris.Context) {
+// Getrole 获取角色
+func Getrole(ctx iris.Context) {
 	id := ctx.Params().Get("id")
 	result, err := access.GetRole(id)
 	if err != nil {
@@ -276,11 +151,14 @@ func getrole(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func postfunction(ctx iris.Context) {
+// Postfunction 添加权限
+func Postfunction(ctx iris.Context) {
 	var msg models.Uploador
 	msg.Success = false
 
+	id, _ := strconv.Atoi(ctx.FormValue("Id"))
 	fun := models.Functionality{
+		ID:         id,
 		Funname:    ctx.FormValue("Funname"),
 		FunType:    ctx.FormValue("FunType"),
 		Controller: ctx.FormValue("Controller")}
@@ -294,8 +172,9 @@ func postfunction(ctx iris.Context) {
 	ctx.JSON(msg)
 }
 
-func functionlist(ctx iris.Context) {
-	id, _ := utils.GetUser(ctx)
+// Functionlist 权限列表
+func Functionlist(ctx iris.Context) {
+	id, _, _ := utils.GetUser(ctx)
 	size, _ := strconv.Atoi(ctx.Params().Get("size"))
 	page, _ := strconv.Atoi(ctx.Params().Get("page"))
 	result, err := access.FunctionList(id, page, size)
@@ -306,7 +185,8 @@ func functionlist(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func getfunction(ctx iris.Context) {
+// Getfunction 获取权限
+func Getfunction(ctx iris.Context) {
 	id := ctx.Params().Get("id")
 	result, err := access.GetFunction(id)
 	if err != nil {
@@ -316,7 +196,8 @@ func getfunction(ctx iris.Context) {
 	ctx.JSON(result)
 }
 
-func functiongroup(ctx iris.Context) {
+// Functiongroup 角色权限表
+func Functiongroup(ctx iris.Context) {
 	id, err := strconv.Atoi(ctx.Params().Get("id"))
 	if err != nil {
 		log.Fatal(err)
@@ -338,7 +219,8 @@ func functiongroup(ctx iris.Context) {
 	}{functions, selectedids})
 }
 
-func mappingpost(ctx iris.Context) {
+// Mappingpost 权限配置
+func Mappingpost(ctx iris.Context) {
 	var msg models.Uploador
 	msg.Success = false
 

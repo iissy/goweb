@@ -176,3 +176,21 @@ func GetRoleFunction(roleid int) ([]int, error) {
 
 	return result, nil
 }
+
+// GetFunctionNames is yes.
+func GetFunctionNames(roleid int) ([]string, error) {
+	result := make([]string, 50)
+
+	rows, err := db.Query("SELECT Controller FROM Functionality fun join RoleFunctionMapping map on fun.Id = map.FunID where RoleID = ?", roleid)
+	utils.CheckErr(err)
+	defer rows.Close()
+	for rows.Next() {
+		controller := ""
+		err = rows.Scan(&controller)
+		utils.CheckErr(err)
+
+		result = append(result, controller)
+	}
+
+	return result, nil
+}
