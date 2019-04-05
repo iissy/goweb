@@ -2,7 +2,7 @@
 
 #### Asy 1.5 Released 2019年04月06日
 + 改用iris框架
-+ cookie登录加密
++ cookie认证，双重加密
 + 文件目录结构调整
 + 管理模块引入 webpack + vue + vue-router + axios
 + 添加角色权限管理
