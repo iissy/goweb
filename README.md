@@ -33,7 +33,7 @@
 ## 使用说明
 + 请确保80端口没有被别的服务（比如iis）占用，然后在浏览器中输入：http://localhost
 + 管理员账号：jimmy 密码：123456
-+ 普通账号：pinbor 秘密：123456
++ 普通账号：pinbor 密码：123456
 
 ## 首页
 ![markdown](https://github.com/iissy/goweb/blob/master/public/home.png "首页图片")
