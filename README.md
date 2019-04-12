@@ -4,7 +4,7 @@
 + 改用iris框架
 + cookie认证，双重加密
 + 文件目录结构调整
-+ 管理模块引入 webpack + vue-router + axios
++ 引入 webpack + vue-router + axios
 + 添加角色权限管理
 + 前端路由，后端路径路由与分组路由
 + 缓存模块
