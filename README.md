@@ -1,14 +1,15 @@
-这是一个由Go语言写的，简单的CMS（内容管理系统），目前仍在更新维护中。
+这是一个由Go语言写的，简单的CMS（内容管理系统），已经更新到 Go 1.13 版本。
 
-#### Asy 1.5 Released 2019年04月06日
-+ 改用iris框架
-+ cookie认证，双重加密
+#### Asy 1.8 Released 2019年09月07日
++ 改用 iris 框架
++ cookie 认证，双重加密
 + 文件目录结构调整
 + 引入 webpack + vue-router + axios
 + 添加角色权限管理
 + 前端路由，后端路径路由与分组路由
 + 注入缓存模块
 + 中间件实现授权访问
++ 使用 Go Module 方式开发
 
 ### 功能点
 + 包括内容列表显示，详情显示，并支持SEO
@@ -23,8 +24,9 @@
 2. 使用iissy.com.sql初始化数据库以及数据
 3. 修改数据库连接（src/iissy.com/utils/config.go）
 
-## 环境变量设置
-如果你将代码下载到了D:\github.com\goweb，添加D:\github.com\goweb到GOPATH环境变量，如果有多个GOPATH目录，请确保最后没有分号
+## 使用代码
+由于大陆网络无法下载google的包，使用七牛公司的代理，下载包前执行命令
+1. go env -w GOPROXY=https://goproxy.cn,direct
 
 ## 组件下载
 1. go get github.com/go-sql-driver/mysql
@@ -58,9 +60,6 @@
 ## 权限配置
 ![markdown](https://github.com/iissy/goweb/blob/master/public/map.png "权限配置图片")
 
-2019年4月下旬
-
-> 将继续完善用户分角色权限管理功能
 
 ## 相关网站
 + 程序员网址导航：https://www.hrefs.cn
