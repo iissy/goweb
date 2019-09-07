@@ -3,8 +3,8 @@ package access
 import (
 	"math"
 
-	"iissy.com/models"
-	"iissy.com/utils"
+	"iissy.com/src/models"
+	"iissy.com/src/utils"
 )
 
 // Login is yes

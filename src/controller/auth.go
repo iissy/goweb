@@ -9,10 +9,10 @@ import (
 
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/context"
-	"iissy.com/access"
-	"iissy.com/cache"
-	"iissy.com/models"
-	"iissy.com/utils"
+	"iissy.com/src/access"
+	"iissy.com/src/cache"
+	"iissy.com/src/models"
+	"iissy.com/src/utils"
 )
 
 var memo *cache.Memo

@@ -89,7 +89,7 @@
             pagechange: function (currentPage) {
                 var self = this;
                 self.current = currentPage;
-                router.push({ name: 'function', params: { size: self.display, pageno: self.current } });
+                router.push({ name: 'FunctionList', params: { size: self.display, pageno: self.current } });
                 self.load();
             },
             load: function () {

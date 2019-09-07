@@ -6,9 +6,9 @@ import (
 	"strconv"
 
 	"github.com/kataras/iris"
-	"iissy.com/access"
-	"iissy.com/models"
-	"iissy.com/utils"
+	"iissy.com/src/access"
+	"iissy.com/src/models"
+	"iissy.com/src/utils"
 )
 
 // Webpack 授权基础页面

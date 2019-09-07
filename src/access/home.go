@@ -1,8 +1,8 @@
 package access
 
 import (
-	"iissy.com/models"
-	"iissy.com/utils"
+	"iissy.com/src/models"
+	"iissy.com/src/utils"
 )
 
 // Index is yes.

@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/kataras/iris"
-	"iissy.com/controller"
-	"iissy.com/utils"
+	"iissy.com/src/controller"
+	"iissy.com/src/utils"
 )
 
 func main() {

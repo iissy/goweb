@@ -10,8 +10,8 @@ import (
 
 	"github.com/gorilla/securecookie"
 	"github.com/kataras/iris"
-	"iissy.com/models"
-	"iissy.com/utils"
+	"iissy.com/src/models"
+	"iissy.com/src/utils"
 )
 
 var (

@@ -5,7 +5,7 @@ import (
 
 	// mysql driver
 	_ "github.com/go-sql-driver/mysql"
-	"iissy.com/utils"
+	"iissy.com/src/utils"
 )
 
 var db *sql.DB
