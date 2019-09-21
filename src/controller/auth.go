@@ -6,6 +6,7 @@ import (
 	"reflect"
 	"runtime"
 	"strings"
+	"time"
 
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/context"
@@ -31,12 +32,12 @@ func roleGetFunction(roleid int) ([]string, error) {
 // BasicAuth 是登录认证，用户分权限管理
 func BasicAuth(h context.Handler) context.Handler {
 	return func(ctx iris.Context) {
+		t := time.Now()
 		if ok := utils.Check(ctx); ok {
 			name := runtime.FuncForPC(reflect.ValueOf(h).Pointer()).Name()
 			index := strings.LastIndex(name, ".")
 			name = strings.ToLower(name[index+1:])
 
-			log.Print(name)
 			_, roleid, _ := utils.GetUser(ctx)
 			funclist, err := memo.Get(roleid)
 			if err != nil {
@@ -53,6 +54,8 @@ func BasicAuth(h context.Handler) context.Handler {
 
 			if flag {
 				h(ctx)
+				elapsed := time.Since(t)
+				log.Printf("%s - %s",name,elapsed)
 			} else {
 				ctx.JSON(models.Author{Success: false, Message: "没有权限"})
 			}
