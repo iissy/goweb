@@ -55,7 +55,7 @@ func BasicAuth(h context.Handler) context.Handler {
 			if flag {
 				h(ctx)
 				elapsed := time.Since(t)
-				log.Printf("%s - %s",name,elapsed)
+				log.Printf("%s - %s", name, elapsed)
 			} else {
 				ctx.JSON(models.Author{Success: false, Message: "没有权限"})
 			}
