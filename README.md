@@ -63,6 +63,8 @@
 ## 权限配置
 ![markdown](https://github.com/iissy/goweb/blob/master/public/map.png "权限配置图片")
 
+## 星星增长趋势
+[![Stargazers over time](https://starchart.cc/iissy/goweb.svg)](https://starchart.cc/iissy/goweb)
 
 ## 相关网站
 + 程序员网址导航：https://www.hrefs.cn
