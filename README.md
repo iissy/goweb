@@ -1,5 +1,8 @@
 这是一个由Go语言写的，简单的CMS（内容管理系统），已经更新到 Go 1.13 版本。
 
+## 星星增长趋势
+[![Stargazers over time](https://starchart.cc/iissy/goweb.svg)](https://starchart.cc/iissy/goweb)
+
 #### Asy 1.8 Released 2019年11月19日
 + 解决图片上传问题
 
@@ -63,9 +66,7 @@
 ## 权限配置
 ![markdown](https://github.com/iissy/goweb/blob/master/public/map.png "权限配置图片")
 
-## 星星增长趋势
-[![Stargazers over time](https://starchart.cc/iissy/goweb.svg)](https://starchart.cc/iissy/goweb)
 
 ## 相关网站
 + 程序员网址导航：https://www.hrefs.cn
-+ Go iris与webpack + vue-router + axios开发CMS：https://www.hrefs.cn/article/Go-iris-webpack-vue-router-axios-CMS
++ 技术文档：https://www.hrefs.cn/article/Go-iris-webpack-vue-router-axios-CMS
