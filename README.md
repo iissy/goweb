@@ -54,5 +54,8 @@
 + 请确保80端口没有被别的服务（比如iis）占用，然后在浏览器中输入：http://localhost
 + 如果需要添加修改数据，必须使用后台代码，见安装说明
 
+## 打赏站长
+![markdown](https://www.hrefs.cn/payme.jpg)
+
 ## 官方网站
 + 程序员网址导航：https://www.hrefs.cn
