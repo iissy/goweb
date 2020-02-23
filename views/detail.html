@@ -1,0 +1,15 @@
+{{ define "detail-title"}}
+    <title>{{.title}}</title>
+{{ end }}
+
+<div class="cke_contents_ltr cke_show_borders" id="detail">
+    <div class="title">
+        <h3>{{.body.Title}}</h3>
+    </div>
+    <div class="body">
+        {{.body.Body}}
+    </div>
+    <div class="origin">
+        Posted by 何敏 on {{.body.CreateTime}}
+    </div>
+</div>

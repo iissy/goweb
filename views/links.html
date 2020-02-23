@@ -1,0 +1,56 @@
+{{ define "links-title"}}
+    <title>{{.title}}</title>
+{{ end }}
+
+<div class="row" style="background-color:#ffffff;">
+    <div class="col-8" style="background-color:#ffffff;padding-left:10px;padding-right:10px;">
+        {{range .links}}
+            <div style="padding-top:5px;padding-bottom:5px;border-bottom: 1px solid #dee3eb;">
+                <a target="_blank" href="/link/{{.Id}}" style="margin:10px 0 0 20px;font-size:18px;font-weight:bold;letter-spacing: 2px;color:#444444;">{{.Title}}</a>
+            </div>
+            <div style="background-color:#ffffff;padding-top:5px;background-color: #fbfbfb;height:85px;overflow:hidden;">
+                <div style="color:#000;word-wrap: break-word; word-break: normal;white-space:initial; font-size:15px;letter-spacing: 1px;line-height:25px;padding-left:20px;padding-right:20px;" title="{{.Brief}}">
+                    {{.Brief}}
+                </div>
+            </div>
+        {{end}}
+    </div>
+    <div class="col-4" style="background-color:#ffffff;padding-left:10px;padding-right:10px;">
+        <div style="padding:20px 0 10px 40px;" class="container">
+            <div class="row">
+                <div class="col-4" style="padding:0;">
+                    <div style="margin-bottom: 10px;"><a href="/links/ae45bd20-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">前端框架</a></div>
+                    <div style="margin-bottom: 10px;"><a href="/links/ae45bd82-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">Vue</a></div>
+                    <div style="margin-bottom: 10px;"><a href="/links/ae45bdf7-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">Charts</a></div>
+                    <div style="margin-bottom: 10px;"><a href="/links/ae45baa0-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">JQuery</a></div>
+                    <div style="margin-bottom: 10px;"><a href="/links/ae45be91-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">打包构建</a></div>
+                    <div style="margin-bottom: 10px;"><a href="/links/ae45bea6-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">CSS</a></div>
+                    <div style="margin-bottom: 10px;"><a href="/links/ae45be3e-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">富文本编辑器</a></div>
+                </div>
+                <div class="col-4" style="padding:0;">
+                    <div style="margin-bottom: 10px;"><a href="/links/ae45beba-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">Golang</a></div>
+                    <div style="margin-bottom: 10px;"><a href="/links/ae45be7c-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">DotNet</a></div>
+                    <div style="margin-bottom: 10px;"><a href="/links/ae45be67-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">Java</a></div>
+                    <div style="margin-bottom: 10px;"><a href="/links/ae45be5d-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">Python</a></div>
+                    <div style="margin-bottom: 10px;"><a href="/links/ae45bae8-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">NodeJS</a></div>
+                    <div style="margin-bottom: 10px;"><a href="/links/ae45bd16-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">PHP</a></div>
+                    <div style="margin-bottom: 10px;"><a href="/links/ae45bcb1-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">其他</a></div>
+                </div>
+                <div class="col-4" style="padding:0;">
+                    <div style="margin-bottom: 10px;"><a href="/links/ae45bd8d-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">数据库</a></div>
+                    <div style="margin-bottom: 10px;"><a href="/links/ae45becf-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">架构师</a></div>
+                    <div style="margin-bottom: 10px;"><a href="/links/ae45bdd8-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">区块链</a></div>
+                    <div style="margin-bottom: 10px;"><a href="/links/ae45bd3e-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">运维工具</a></div>
+                    <div style="margin-bottom: 10px;"><a href="/links/ae45bdac-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">大数据</a></div>
+                    <div style="margin-bottom: 10px;"><a href="/links/ae45b8c6-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">人工智能</a></div>
+                    <div style="margin-bottom: 10px;"><a href="/links/ae45bd97-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">协同工具</a></div>
+                </div>
+            </div>
+        </div>
+        <div>
+            {{range .cuslinks}}
+                <div style="margin:0 0 10px 20px;"><img src="/list.png" style="height:20px;margin-right:10px;" /><a href="/cuslink/{{.Id}}" target="_blank" style="color:#CD661D;">{{.Title}}</a></div>
+            {{end}}
+        </div>
+    </div>
+</div>

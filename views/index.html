@@ -1,7 +1,78 @@
-{{ define "index-title"}}
-<title>{{.title}}</title>
-{{ end }}
-
-<div>
-    {{ render "shared/_list.article.html"}}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <meta name="keywords" content="上网导航，hrefs.cn，科技网址，网址导航，程序员自学教程网站，www.hrefs.cn，前端开发，Golang网址，程序员常去的网站，Docker实战网址，程序员网址导航">
+    <meta name="description" content="程序员日常使用的网址，Golang网址，Golang最全框架，程序员在线小工具，Vue组件网址，程序员学习网站，Docker实战网址，Asp.Net Core框架，Python网址，微服务大全，NodeJS框架">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/styles/site.css?202002201259" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>爱斯园 - 中国程序员常用的网址大全，高频使用的程序员网址导航</title>
+</head>
+<body>
+{{ render "shared/_toper.html"}}
+<div id="main">
+    <div style="">
+        {{template "shared/_common.html" .body.Common}}
+        {{template "shared/_info.html" .body.Info}}
+        <div id="article" style="margin-top:10px;">
+            <div style="max-width:1300px;padding:10px 20px 10px 30px;" class="container">
+                <div class="row">
+                    {{template "shared/_articles.html" .body.Articles}}
+                    {{template "shared/_cuslinks.html" .body.CusLinks}}
+                </div>
+            </div>
+        </div>
+        <div id="other">{{template "shared/_group.html" .body.Other}}</div>
+        <div id="backend">{{template "shared/_group.html" .body.Backend}}</div>
+        <div id="frontend">{{template "shared/_group.html" .body.Frontend}}</div>
+        <div id="hot">{{template "shared/_group.html" .body.Hot}}</div>
+    </div>
 </div>
+<div id="footer" style="position: relative;">
+    <div style="position: absolute;top: 0px;left: 0px;background-color: #ff5500;padding: 0 5px 0 20px;border-bottom-right-radius:10px;">
+        <a href="/payme" style="color:#ffffff;font-weight: bolder;">打赏站长</a>
+    </div>
+    <div style="padding:0 20px 10px 30px;border-bottom: 1px solid #eeeeee;" class="container">
+        <div class="row">
+            <div class="col-3" style="padding:0;">
+                <div><img src="/payme.jpg" width="200" /></div>
+            </div>
+            <div class="col-3" style="padding:0;">
+                <div style="margin-bottom: 10px;"><a href="/links/ae45bd20-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">前端框架</a></div>
+                <div style="margin-bottom: 10px;"><a href="/links/ae45bd82-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">Vue</a></div>
+                <div style="margin-bottom: 10px;"><a href="/links/ae45bdf7-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">Charts</a></div>
+                <div style="margin-bottom: 10px;"><a href="/links/ae45baa0-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">JQuery</a></div>
+                <div style="margin-bottom: 10px;"><a href="/links/ae45be91-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">打包构建</a></div>
+                <div style="margin-bottom: 10px;"><a href="/links/ae45bea6-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">CSS</a></div>
+                <div style="margin-bottom: 10px;"><a href="/links/ae45be3e-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">富文本编辑器</a></div>
+            </div>
+            <div class="col-3" style="padding:0;">
+                <div style="margin-bottom: 10px;"><a href="/links/ae45beba-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">Golang</a></div>
+                <div style="margin-bottom: 10px;"><a href="/links/ae45be7c-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">DotNet</a></div>
+                <div style="margin-bottom: 10px;"><a href="/links/ae45be67-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">Java</a></div>
+                <div style="margin-bottom: 10px;"><a href="/links/ae45be5d-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">Python</a></div>
+                <div style="margin-bottom: 10px;"><a href="/links/ae45bae8-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">NodeJS</a></div>
+                <div style="margin-bottom: 10px;"><a href="/links/ae45bd16-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">PHP</a></div>
+                <div style="margin-bottom: 10px;"><a href="/links/ae45bcb1-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">其他</a></div>
+            </div>
+            <div class="col-3" style="padding:0;">
+                <div style="margin-bottom: 10px;"><a href="/links/ae45bd8d-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">数据库</a></div>
+                <div style="margin-bottom: 10px;"><a href="/links/ae45becf-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">架构师</a></div>
+                <div style="margin-bottom: 10px;"><a href="/links/ae45bdd8-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">区块链</a></div>
+                <div style="margin-bottom: 10px;"><a href="/links/ae45bd3e-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">运维工具</a></div>
+                <div style="margin-bottom: 10px;"><a href="/links/ae45bdac-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">大数据</a></div>
+                <div style="margin-bottom: 10px;"><a href="/links/ae45b8c6-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">人工智能</a></div>
+                <div style="margin-bottom: 10px;"><a href="/links/ae45bd97-f0ed-11e9-81b7-0242ac120004" style="font-weight:300;">协同工具</a></div>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 10px;">
+        {{render "shared/_footer.html"}}
+    </div>
+</div>
+</body>
+</html>

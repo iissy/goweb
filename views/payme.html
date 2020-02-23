@@ -1,0 +1,66 @@
+{{ define "payme-title"}}
+    <title>{{.title}}</title>
+{{ end }}
+
+<div id="pay">
+    <div style="text-align:center;padding-top:20px;padding-bottom:30px;">
+        <img src="/payme.jpg" width="295" />
+    </div>
+
+    <div class="container" style="border: 1px solid #dee3eb;">
+        <div class="row" style="background-color:#e0e0e0;">
+            <div class="site-item col-4" style="padding-left:10px;font-weight: bolder;">
+                打赏人
+            </div>
+            <div class="site-item col-4" style="padding-left:10px;font-weight: bolder;">
+                日期
+            </div>
+            <div class="site-item col-4" style="padding-left:10px;font-weight: bolder;">
+                金额（￥）
+            </div>
+        </div>
+        <div class="row">
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">老铁。</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">2019-04-19</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">￥0.01元</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">M*r</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">2019-05-13</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">￥1.00元</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">*</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">2019-06-13</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">￥0.10元</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">*珩</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">2019-06-18</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">￥10.00元</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">*友</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">2019-07-30</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">￥1.00元</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">蒲春平</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">2019-08-01</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">￥0.10元</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">毕苗苗</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">2019-08-11</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">￥10.00元</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">曾义胜</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">2019-09-16</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">￥5.00元</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">*子</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">2019-12-01</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">￥0.50元</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">贺丹丹</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">2020-02-03</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">￥10.00元</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">小酒窝</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">2020-02-17</div></div>
+            <div class="site-item col-4" style="padding-left:10px;"><div class="pay-item">￥1.00元</div></div>
+        </div>
+    </div>
+
+    <div style="padding:30px 20px 30px 20px;">
+        <div>爱斯园创立与2014年，前期基于 .Net Core 技术开发，2020年01月更新成 Go iris 框架，使用 mysql 数据库，redis 管理登陆会话，CentOS 7、Docker-compose 单机部署。</div>
+        <div style="margin-top: 30px;">网站主要提供程序员常用的网址，以及一些技术文章分享。目前已为程序员们提供 <font color="#ff0000">{{.body}}</font> 次网址导航服务。</div>
+        <div style="margin-top:30px;">站长github：<a href="https://github.com/iissy" target="_blank">https://github.com/iissy</a></div>
+        <div style="margin-top:10px;">本站源码 .Net Core 版.：<a href="https://github.com/iissy/hrefs.cn" target="_blank">https://github.com/iissy/hrefs.cn</a></div>
+        <div style="margin-top:30px;color: #ff0000;font-weight: bolder;">后续将公布 Go iris 版本的全部源码</div>
+    </div>
+</div>

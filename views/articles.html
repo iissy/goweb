@@ -1,0 +1,31 @@
+{{ define "articles-title"}}
+    <title>{{.title}}</title>
+{{ end }}
+
+<div style="background-color:#ffffff;">
+    {{range .body}}
+        <div style="overflow: hidden;padding: 0;margin-left:3%;margin-right:3%;border-bottom: 1px solid #eeeeee;">
+            <div style="float:left;display: table;margin: 20px 30px 20px 0;">
+                <img class="lazy" src="/placeholder.jpg" data-original="{{.Icon}}" width="180" height="110">
+            </div>
+            <div style="overflow: visible;margin: 20px 0 0 0;display: table;">
+                <div style="overflow:visible;">
+                    <a href="/article/{{.Id}}" style="font-size:18px;font-weight:bold;letter-spacing: 1px;">{{.Title}}</a>
+                </div>
+                <div style="margin-top:10px;margin-bottom:10px;">
+                    <div style="max-height:44px;color:#999;overflow:hidden;font-size:14px;line-height:22px;letter-spacing: 1px;">
+                        {{.Brief}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{end}}
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+<script>
+    $("img.lazy").lazyload({
+        threshold: 100
+    });
+</script>
