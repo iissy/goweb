@@ -39,7 +39,7 @@
 1. go env -w GOPROXY=https://goproxy.cn,direct
 
 ## 组件下载
-```go
+```
 go get github.com/go-sql-driver/mysql
 go get github.com/kataras/iris
 go get github.com/gorilla/securecookie
