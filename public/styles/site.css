@@ -195,3 +195,5 @@ a {
     padding: 10px 10px 10px 40px;
     color: rgb(106, 115, 125);
 }
+
+.cke_contents_ltr .body a { color: #0782C1 }
