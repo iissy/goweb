@@ -74,12 +74,22 @@ a {
     max-width: 100% !important;
 }
 
-.body pre {
-    padding: 5px 10px 5px 10px;
+/*.body pre {*/
+/*    padding: 5px 10px 5px 10px;*/
+/*}*/
+.cke_contents_ltr .body figure.table {
+    background-color: #ffffff;
+    width: inherit;
+    margin: 10px;
+    padding: 0;
+    border: none;
 }
 
-.body table {
-    margin: 0 20px 0 20px;
+.cke_contents_ltr .body table,
+.cke_contents_ltr .body th,
+.cke_contents_ltr .body td {
+    border-collapse:collapse;
+    border:1px solid #cccccc;
 }
 
 .body dl, ol, ul {
@@ -196,4 +206,69 @@ a {
     color: rgb(106, 115, 125);
 }
 
+.cke_contents_ltr .body .todo-list {
+    list-style: none;
+    padding: 10px 10px 10px 20px;
+}
+
+.cke_contents_ltr .body .todo-list span { margin-left: 5px; }
 .cke_contents_ltr .body a { color: #0782C1 }
+
+/*.cke_contents_ltr .body pre {*/
+/*    background-color: #f9f9f9;*/
+/*    border: 1px solid #eeeeee;*/
+/*}*/
+/*.cke_contents_ltr .body pre {*/
+/*    position: relative;*/
+/*}*/
+.cke_contents_ltr .body pre {
+    margin: 10px 0 10px 0;
+    position: relative;
+    box-sizing: border-box;
+    font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 14px;
+    overflow-wrap: normal;
+    padding: 10px 15px 10px 15px;
+    overflow: auto;
+    line-height: 1.45;
+    background-color: rgb(246, 248, 250);
+    border-radius: 3px;
+    word-break: normal;
+    color: rgb(36, 41, 46);
+    font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-weight: 400;
+    letter-spacing: normal;
+    orphans: 2;
+    text-align: start;
+    text-indent: 0px;
+    text-transform: none;
+    widows: 2;
+    word-spacing: 0px;
+    -webkit-text-stroke-width: 0px;
+    text-decoration-style: initial;
+    text-decoration-color: initial;
+}
+
+.cke_contents_ltr .body pre code {
+    box-sizing: border-box;
+    color: rgb(106, 115, 125);
+}
+.cke_contents_ltr .body pre[data-language]:after {
+    top: -1px;
+    right: 10px;
+    background: #757575;
+    font-size: 10px;
+    line-height: 16px;
+    padding: 1px 4px 1px 4px;
+    color: #fff;
+    white-space: nowrap;
+    content: attr(data-language);
+    position: absolute;
+    font-family: Helvetica,Arial,Tahoma,Verdana,Sans-Serif;
+}
+
+.cke_contents_ltr .body hr {
+    margin-top: 5px;
+}

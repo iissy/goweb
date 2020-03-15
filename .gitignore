@@ -1,8 +1,19 @@
-pkg/
-.vscode/
-debug
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+.idea/
+public/images/
 public/upload/
 server
-.exe
-node_modules/
-.idea/
+logs/
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
