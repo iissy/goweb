@@ -3,7 +3,6 @@ package utils
 import (
 	"github.com/juju/errors"
 	"github.com/kataras/golog"
-	"github.com/kataras/iris"
 	"log"
 )
 
@@ -13,9 +12,9 @@ func checkErr(err error, msg string) {
 	}
 }
 
-func WriteErrorLog(ctx iris.Context, err error) bool {
+func WriteErrorLog(path string, err error) bool {
 	if err != nil {
-		golog.Errorf("%s, url = %s", errors.ErrorStack(err), ctx.Path())
+		golog.Errorf("%s, url = %s", errors.ErrorStack(err), path)
 		return true
 	} else {
 		return false

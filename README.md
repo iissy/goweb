@@ -3,7 +3,7 @@
 ## 星星增长趋势
 [![Stargazers over time](https://starchart.cc/iissy/goweb.svg)](https://starchart.cc/iissy/goweb)
 
-#### asy 2.0 Released 2020年02月23日
+#### asy 2.0.1 Released 2020年03月20日
 + 技术架构较之前版本有大更新
 + 内容展示与管理分离，内容管理项目移入另一个仓库
 + 内容管理仓库(https://github.com/iissy/hrefs.cn)
@@ -12,8 +12,9 @@
 + 旧代码见 old 分支
 
 ### 技术栈
-+ go iris 框架
-+ cookie 认证，双重加密
++ go iris 网页 / go gin 接口
++ go-micro （内置gRPC）微服务框架
++ consul 服务注册发现
 + 分组路由
 + 中间件实现授权访问
 + redis 管理登陆会话
@@ -42,12 +43,15 @@
 ```
 go get github.com/go-sql-driver/mysql
 go get github.com/kataras/iris
-go get github.com/gorilla/securecookie
 go get github.com/go-gorp/gorp
 go get github.com/gomodule/redigo
 go get github.com/google/uuid
 go get github.com/juju/errors
 go get github.com/kataras/golog
+go get github.com/micro/go-micro/v2
+go get github.com/micro/go-micro/v2/config
+go get github.com/micro/go-micro/v2/registry
+go get github.com/micro/go-plugins/registry/consul/v2
 ```
 
 ## 使用说明

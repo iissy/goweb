@@ -1,7 +1,8 @@
 package controller
 
 import (
-	"github.com/kataras/iris"
+	"fmt"
+	"github.com/gin-gonic/gin"
 	"hrefs.cn/src/domain"
 	"hrefs.cn/src/model"
 	"hrefs.cn/src/utils"
@@ -11,48 +12,48 @@ import (
 	"time"
 )
 
-func GetArticle(ctx iris.Context) {
-	id := ctx.Params().Get("id")
+func GetArticle(ctx *gin.Context) {
+	id := ctx.Param("id")
 	result, err := domain.GetArticle(id)
-	utils.WriteErrorLog(ctx, err)
+	utils.WriteErrorLog(ctx.FullPath(), err)
 
-	ctx.JSON(result)
+	ctx.JSON(200, result)
 }
 
-func GetArticleList(ctx iris.Context) {
-	size, err := strconv.Atoi(ctx.Params().Get("size"))
+func GetArticleList(ctx *gin.Context) {
+	size, err := strconv.Atoi(ctx.Param("size"))
 	if err != nil {
 		size = 10
 	}
 
-	page, err := strconv.Atoi(ctx.Params().Get("page"))
+	page, err := strconv.Atoi(ctx.Param("page"))
 	if err != nil {
 		page = 1
 	}
 
 	search := new(model.Search)
-	err = ctx.ReadJSON(&search)
-	utils.WriteErrorLog(ctx, err)
+	err = ctx.BindJSON(&search)
+	utils.WriteErrorLog(ctx.FullPath(), err)
 
 	result, err := domain.GetArticleList(page, size, search)
-	utils.WriteErrorLog(ctx, err)
+	utils.WriteErrorLog(ctx.FullPath(), err)
 
-	ctx.JSON(result)
+	ctx.JSON(200, result)
 }
 
-func DeleteArticle(ctx iris.Context) {
-	id := ctx.Params().Get("id")
+func DeleteArticle(ctx *gin.Context) {
+	id := ctx.Param("id")
 	result, err := domain.DeleteArticle(id)
-	utils.WriteErrorLog(ctx, err)
+	utils.WriteErrorLog(ctx.FullPath(), err)
 
-	ctx.JSON(result)
+	ctx.JSON(200, result)
 }
 
-func SaveArticle(ctx iris.Context) {
+func SaveArticle(ctx *gin.Context) {
 	article := new(model.Article)
-	err := ctx.ReadJSON(&article)
-	if ok := utils.WriteErrorLog(ctx, err); ok {
-		ctx.JSON(0)
+	err := ctx.BindJSON(&article)
+	if ok := utils.WriteErrorLog(ctx.FullPath(), err); ok {
+		fmt.Print(0)
 	}
 
 	//将HTML标签全转换成小写
@@ -75,7 +76,7 @@ func SaveArticle(ctx iris.Context) {
 
 	article.CreateTime = time.Now().Format("2006-01-02 15:04:05")
 	result, err := domain.SaveArticle(article)
-	utils.WriteErrorLog(ctx, err)
+	utils.WriteErrorLog(ctx.FullPath(), err)
 
-	ctx.JSON(result)
+	ctx.JSON(200, result)
 }

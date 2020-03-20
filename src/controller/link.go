@@ -1,8 +1,9 @@
 package controller
 
 import (
+	"fmt"
+	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	"github.com/kataras/iris"
 	"hrefs.cn/src/domain"
 	"hrefs.cn/src/model"
 	"hrefs.cn/src/utils"
@@ -10,52 +11,52 @@ import (
 	"time"
 )
 
-func GetLink(ctx iris.Context) {
-	id := ctx.Params().Get("id")
+func GetLink(ctx *gin.Context) {
+	id := ctx.Param("id")
 	result, err := domain.GetLink(id)
-	utils.WriteErrorLog(ctx, err)
+	utils.WriteErrorLog(ctx.FullPath(), err)
 
-	ctx.JSON(result)
+	ctx.JSON(200, result)
 }
 
-func GetLinkList(ctx iris.Context) {
-	size, err := strconv.Atoi(ctx.Params().Get("size"))
+func GetLinkList(ctx *gin.Context) {
+	size, err := strconv.Atoi(ctx.Param("size"))
 	if err != nil {
 		size = 10
 	}
 
-	page, err := strconv.Atoi(ctx.Params().Get("page"))
+	page, err := strconv.Atoi(ctx.Param("page"))
 	if err != nil {
 		page = 1
 	}
 
 	search := new(model.Search)
-	err = ctx.ReadJSON(&search)
-	utils.WriteErrorLog(ctx, err)
+	err = ctx.BindJSON(&search)
+	utils.WriteErrorLog(ctx.FullPath(), err)
 
 	result, err := domain.GetLinkList(page, size, search)
-	utils.WriteErrorLog(ctx, err)
+	utils.WriteErrorLog(ctx.FullPath(), err)
 
-	ctx.JSON(result)
+	ctx.JSON(200, result)
 }
 
-func DeleteLink(ctx iris.Context) {
-	id := ctx.Params().Get("id")
+func DeleteLink(ctx *gin.Context) {
+	id := ctx.Param("id")
 	result, err := domain.DeleteLink(id)
-	utils.WriteErrorLog(ctx, err)
+	utils.WriteErrorLog(ctx.FullPath(), err)
 
-	ctx.JSON(result)
+	ctx.JSON(200, result)
 }
 
-func SaveLink(ctx iris.Context) {
+func SaveLink(ctx *gin.Context) {
 	link := new(model.Link)
-	err := ctx.ReadJSON(&link)
-	if ok := utils.WriteErrorLog(ctx, err); ok {
-		ctx.JSON(0)
+	err := ctx.BindJSON(&link)
+	if ok := utils.WriteErrorLog(ctx.FullPath(), err); ok {
+		fmt.Print(0)
 	}
 
 	cat, err := domain.GetLinkCat(link.Catid)
-	utils.WriteErrorLog(ctx, err)
+	utils.WriteErrorLog(ctx.FullPath(), err)
 
 	if len(link.Id) < 10 {
 		link.Id = uuid.New().String()
@@ -63,7 +64,7 @@ func SaveLink(ctx iris.Context) {
 	link.LinkType = cat.CatName
 	link.CreateTime = time.Now().Format("2006-01-02 15:04:05")
 	result, err := domain.SaveLink(link)
-	utils.WriteErrorLog(ctx, err)
+	utils.WriteErrorLog(ctx.FullPath(), err)
 
-	ctx.JSON(result)
+	ctx.JSON(200, result)
 }

@@ -1,14 +1,14 @@
 package middleware
 
 import (
+	"github.com/gin-gonic/gin"
 	"github.com/juju/errors"
-	"github.com/kataras/iris"
 	"hrefs.cn/src/redis"
 	"hrefs.cn/src/utils"
 	"log"
 )
 
-func CheckLogin(ctx iris.Context) {
+func CheckLogin(ctx *gin.Context) {
 	id := ParseHeadOrCookie(ctx, utils.ASYUSERID)
 	token := ParseHeadOrCookie(ctx, utils.ASYTOKEN)
 
@@ -28,10 +28,10 @@ func CheckLogin(ctx iris.Context) {
 	}
 }
 
-func ParseHeadOrCookie(ctx iris.Context, k string) string {
+func ParseHeadOrCookie(ctx *gin.Context, k string) string {
 	v := ctx.GetHeader(k)
 	if len(v) == 0 {
-		v = ctx.GetCookie(k, iris.CookieDecode(utils.SC.Decode))
+		v, _ = ctx.Cookie(k)
 	}
 	return v
 }

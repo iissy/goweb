@@ -110,3 +110,7 @@ type OneGroups []*OneGroup
 func (s OneGroups) Len() int           { return len(s) }
 func (s OneGroups) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
 func (s OneGroups) Less(i, j int) bool { return s[i].Size > s[j].Size }
+
+type LinkItems struct{ Items []*Link }
+type ArticleItems struct{ Items []*Article }
+type CusLinkItems struct{ Items []*CusLink }

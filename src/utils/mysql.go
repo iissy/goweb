@@ -5,19 +5,19 @@ import (
 	"errors"
 	"github.com/go-gorp/gorp"
 	_ "github.com/go-sql-driver/mysql"
-	"hrefs.cn/src/config"
+	"github.com/micro/go-micro/v2/config"
 	"log"
 	"os"
 )
 
 func InitDb() *gorp.DbMap {
-	db, err := sql.Open("mysql", config.String("mysql:hrefs", ""))
+	db, err := sql.Open("mysql", config.Get("mysql", "hrefs").String(""))
 	checkErr(err, "sql.Open failed")
 
-	db.SetMaxIdleConns(config.Int("mysql:MaxIdleConns", 5))
-	db.SetMaxOpenConns(config.Int("mysql:MaxOpenConns", 50))
+	db.SetMaxIdleConns(config.Get("mysql", "MaxIdleConns").Int(5))
+	db.SetMaxOpenConns(config.Get("mysql", "MaxOpenConns").Int(50))
 	dbMap := &gorp.DbMap{Db: db, Dialect: gorp.MySQLDialect{}}
-	if config.Bool("mysql:gorp:trace-on", false) {
+	if config.Get("mysql", "gorp", "trace-on").Bool(false) {
 		dbMap.TraceOn("[gorp]", log.New(os.Stdout, "[SQL]:", log.Lmicroseconds))
 	}
 

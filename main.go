@@ -2,9 +2,13 @@ package main
 
 import (
 	_ "hrefs.cn/src"
-	"hrefs.cn/src/router"
+	"hrefs.cn/src/api"
+	"hrefs.cn/src/srv"
+	"hrefs.cn/src/web"
 )
 
 func main() {
-	router.Start()
+	go api.Start()
+	go web.Start()
+	srv.Start()
 }

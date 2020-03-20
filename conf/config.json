@@ -1,14 +1,19 @@
 {
-    "mysql": {
-        "hrefs": "root:123456@tcp(192.168.111.151:3306)/hrefsdb?charset=utf8",
-        "MaxIdleConns": 5,
-        "MaxOpenConns": 20,
-        "gorp": {
-            "trace-on": false
-        }
-    },
-    "redis": {
-        "host": "192.168.111.151",
-        "port": 6379
+  "mysql": {
+    "hrefs": "root:123456@tcp(192.168.111.151:3306)/hrefsdb?charset=utf8",
+    "MaxIdleConns": 5,
+    "MaxOpenConns": 50,
+    "gorp": {
+      "trace-on": false
     }
+  },
+  "redis": {
+    "host": "192.168.111.151",
+    "port": 6379
+  },
+  "consul": [{
+    "host": "192.168.111.151",
+    "port": 8500
+  }],
+  "srv": "micro.hrefs.srv"
 }

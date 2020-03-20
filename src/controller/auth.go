@@ -1,7 +1,8 @@
 package controller
 
 import (
-	"github.com/kataras/iris"
+	"fmt"
+	"github.com/gin-gonic/gin"
 	"hrefs.cn/src/domain"
 	"hrefs.cn/src/model"
 	"hrefs.cn/src/redis"
@@ -9,29 +10,29 @@ import (
 	"time"
 )
 
-func Login(ctx iris.Context) {
+func Login(ctx *gin.Context) {
 	user := new(model.Account)
-	err := ctx.ReadJSON(&user)
-	if ok := utils.WriteErrorLog(ctx, err); ok {
-		ctx.JSON(0)
+	err := ctx.BindJSON(&user)
+	if ok := utils.WriteErrorLog(ctx.FullPath(), err); ok {
+		fmt.Print(0)
 	}
 
 	user.Password = utils.GetMd5String(user.Password)
 	user.LastLoginDate = time.Now().Format("2006-01-02 15:04:05")
 	result, err := domain.Login(user)
-	if ok := utils.WriteErrorLog(ctx, err); ok {
-		ctx.JSON(0)
+	if ok := utils.WriteErrorLog(ctx.FullPath(), err); ok {
+		fmt.Print(0)
 	}
 
 	if result.ID > 0 {
 		token := utils.Random62String(64)
 		ctx.Header(utils.ASYUSERID, result.UserId)
 		ctx.Header(utils.ASYTOKEN, token)
-		ctx.SetCookieKV(utils.ASYUSERID, result.UserId, iris.CookieEncode(utils.SC.Encode))
-		ctx.SetCookieKV(utils.ASYTOKEN, token, iris.CookieEncode(utils.SC.Encode))
+		ctx.SetCookie(utils.ASYUSERID, result.UserId, 3600, "/", "localhost", false, true)
+		ctx.SetCookie(utils.ASYTOKEN, token, 3600, "/", "localhost", false, true)
 		err = redis.Set(result.UserId, token)
-		utils.WriteErrorLog(ctx, err)
+		utils.WriteErrorLog(ctx.FullPath(), err)
 	}
 
-	ctx.JSON(result)
+	ctx.JSON(200, result)
 }
