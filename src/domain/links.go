@@ -118,7 +118,12 @@ func SaveLink(link *model.Link) (int64, error) {
 	return result.RowsAffected()
 }
 
-func UpdateLinkVisited(id string) {
+func UpdateLinkVisited(id string) error {
 	sql := "update link set visited = visited + 1 where id = ?"
-	dbMap.Exec(sql, id)
+	_, err := dbMap.Exec(sql, id)
+	if err != nil {
+		return errors.Trace(err)
+	}
+
+	return nil
 }

@@ -15,5 +15,6 @@
     "host": "192.168.111.151",
     "port": 8500
   }],
-  "srv": "micro.hrefs.srv"
+  "srv": "micro.hrefs.srv",
+  "domain": "localhost"
 }

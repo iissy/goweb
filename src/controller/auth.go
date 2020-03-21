@@ -3,6 +3,7 @@ package controller
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/micro/go-micro/v2/config"
 	"hrefs.cn/src/domain"
 	"hrefs.cn/src/model"
 	"hrefs.cn/src/redis"
@@ -28,8 +29,8 @@ func Login(ctx *gin.Context) {
 		token := utils.Random62String(64)
 		ctx.Header(utils.ASYUSERID, result.UserId)
 		ctx.Header(utils.ASYTOKEN, token)
-		ctx.SetCookie(utils.ASYUSERID, result.UserId, 3600, "/", "localhost", false, true)
-		ctx.SetCookie(utils.ASYTOKEN, token, 3600, "/", "localhost", false, true)
+		ctx.SetCookie(utils.ASYUSERID, result.UserId, 3600, "/", config.Get("domain").String("localhost"), false, true)
+		ctx.SetCookie(utils.ASYTOKEN, token, 3600, "/", config.Get("domain").String("localhost"), false, true)
 		err = redis.Set(result.UserId, token)
 		utils.WriteErrorLog(ctx.FullPath(), err)
 	}

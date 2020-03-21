@@ -3,7 +3,6 @@ package controller
 import (
 	"github.com/kataras/iris"
 	"hrefs.cn/src/cli"
-	"hrefs.cn/src/domain"
 	"hrefs.cn/src/model"
 	"hrefs.cn/src/utils"
 	"sort"
@@ -17,21 +16,21 @@ func Index(ctx iris.Context) {
 
 	go func() {
 		rsp := new(model.LinkItems)
-		err := cli.Call("IndexLinks", 0, rsp)
+		err := cli.Call("IndexLinks", true, rsp)
 		utils.WriteErrorLog(ctx.Path(), err)
 		l <- rsp.Items
 	}()
 
 	go func() {
 		rsp := new(model.ArticleItems)
-		err := cli.Call("TopArticles", 0, rsp)
+		err := cli.Call("TopArticles", true, rsp)
 		utils.WriteErrorLog(ctx.Path(), err)
 		a <- rsp.Items
 	}()
 
 	go func() {
 		rsp := new(model.CusLinkItems)
-		err := cli.Call("TopCusLinks", 0, rsp)
+		err := cli.Call("TopCusLinks", true, rsp)
 		utils.WriteErrorLog(ctx.Path(), err)
 		c <- rsp.Items
 	}()
@@ -96,11 +95,15 @@ func setter(list []string, groups model.OneGroups) *model.LinkGroup {
 
 func ListLinks(ctx iris.Context) {
 	id := ctx.Params().Get("id")
-	links, err := domain.ListLinks(id)
+	rspl := new(model.LinkItems)
+	err := cli.Call("ListLinks", id, rspl)
 	utils.WriteErrorLog(ctx.Path(), err)
+	links := rspl.Items
 
-	cuslinks, err := domain.ListCusLinksByCatId(id)
+	rspc := new(model.CusLinkItems)
+	err = cli.Call("ListCusLinksByCatId", id, rspc)
 	utils.WriteErrorLog(ctx.Path(), err)
+	cuslinks := rspc.Items
 
 	if links == nil || len(links) == 0 {
 		ctx.NotFound()
@@ -113,8 +116,10 @@ func ListLinks(ctx iris.Context) {
 }
 
 func ListCusLinks(ctx iris.Context) {
-	result, err := domain.ListCusLinks()
+	rsp := new(model.CusLinkItems)
+	err := cli.Call("ListCusLinks", true, rsp)
 	utils.WriteErrorLog(ctx.Path(), err)
+	result := rsp.Items
 
 	ctx.ViewData("title", "网络文摘")
 	ctx.ViewData("body", result)
@@ -122,8 +127,10 @@ func ListCusLinks(ctx iris.Context) {
 }
 
 func ListArticles(ctx iris.Context) {
-	result, err := domain.ListArticles()
+	rsp := new(model.ArticleItems)
+	err := cli.Call("ListArticles", true, rsp)
 	utils.WriteErrorLog(ctx.Path(), err)
+	result := rsp.Items
 
 	ctx.ViewData("title", "文章列表")
 	ctx.ViewData("body", result)
@@ -132,7 +139,8 @@ func ListArticles(ctx iris.Context) {
 
 func Detail(ctx iris.Context) {
 	id := ctx.Params().Get("id")
-	result, err := domain.GetArticle(id)
+	result := new(model.Article)
+	err := cli.Call("GetArticle", id, result)
 	if ok := utils.WriteErrorLog(ctx.Path(), err); ok {
 		ctx.NotFound()
 		return
@@ -143,14 +151,15 @@ func Detail(ctx iris.Context) {
 		return
 	}
 
-	go domain.UpdateArticleVisited(id)
+	go cli.Call("UpdateArticleVisited", id, true)
 	ctx.ViewData("title", result.Title)
 	ctx.ViewData("body", result)
 	ctx.View("detail.html")
 }
 
 func Payme(ctx iris.Context) {
-	result, err := domain.LinkVisitedCount()
+	result := new(int64)
+	err := cli.Call("LinkVisitedCount", true, result)
 	utils.WriteErrorLog(ctx.Path(), err)
 
 	ctx.ViewData("title", "打赏站长")
@@ -160,12 +169,13 @@ func Payme(ctx iris.Context) {
 
 func GetLinkUrl(ctx iris.Context) {
 	id := ctx.Params().Get("id")
-	url, err := domain.GetLinkUrl(id)
+	url := new(string)
+	err := cli.Call("GetLinkUrl", id, url)
 	utils.WriteErrorLog(ctx.Path(), err)
 
-	if len(url) > 0 {
-		go domain.UpdateLinkVisited(id)
-		ctx.Redirect(url)
+	if len(*url) > 0 {
+		go cli.Call("UpdateLinkVisited", id, true)
+		ctx.Redirect(*url)
 	} else {
 		ctx.NotFound()
 	}
@@ -175,12 +185,13 @@ func GetCusLinkUrl(ctx iris.Context) {
 	id, err := strconv.Atoi(ctx.Params().Get("id"))
 	utils.WriteErrorLog(ctx.Path(), err)
 
-	url, err := domain.GetCusLinkUrl(id)
+	url := new(string)
+	err = cli.Call("GetCusLinkUrl", id, url)
 	utils.WriteErrorLog(ctx.Path(), err)
 
-	if len(url) > 0 {
-		go domain.UpdateCusLinkVisited(id)
-		ctx.Redirect(url)
+	if len(*url) > 0 {
+		go cli.Call("UpdateCusLinkVisited", id, true)
+		ctx.Redirect(*url)
 	} else {
 		ctx.NotFound()
 	}

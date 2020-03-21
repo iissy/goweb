@@ -120,7 +120,12 @@ func SaveCusLink(cuslink *model.CusLink) (int64, error) {
 	return result.RowsAffected()
 }
 
-func UpdateCusLinkVisited(id int) {
+func UpdateCusLinkVisited(id int) error {
 	sql := "update cuslink set visited = visited + 1 where id = ?"
-	dbMap.Exec(sql, id)
+	_, err := dbMap.Exec(sql, id)
+	if err != nil {
+		return errors.Trace(err)
+	}
+
+	return nil
 }

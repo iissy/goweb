@@ -95,7 +95,12 @@ func SaveArticle(article *model.Article) (int64, error) {
 	return result.RowsAffected()
 }
 
-func UpdateArticleVisited(id string) {
+func UpdateArticleVisited(id string) error {
 	sql := "update article set visited = visited + 1 where id = ?"
-	dbMap.Exec(sql, id)
+	_, err := dbMap.Exec(sql, id)
+	if err != nil {
+		return errors.Trace(err)
+	}
+
+	return nil
 }
