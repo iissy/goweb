@@ -3,9 +3,11 @@
 ## 星星增长趋势
 [![Stargazers over time](https://starchart.cc/iissy/goweb.svg)](https://starchart.cc/iissy/goweb)
 
-#### asy 2.0.1 Released 2020年03月20日
-+ 技术架构较之前版本有大更新
-+ 内容展示与管理分离，内容管理项目移入另一个仓库
+#### asy 2.0.2 Released 2020年04月05日
++ 完成 iris、gin、go-micro 技术大升级
++ iris 显示内容渲染，gin 实现接口，go-micro 微服务
++ 一个应用启用三个端口，web、api、srv各占一个
++ 内容管理项目移入另一个独立仓库
 + 内容管理仓库(https://github.com/iissy/hrefs.cn)
 + 内容管理项目用到的接口在此项目
 + 内容展示这个项目可以独立跑
