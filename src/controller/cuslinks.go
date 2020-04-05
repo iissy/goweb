@@ -3,7 +3,7 @@ package controller
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"hrefs.cn/src/domain"
+	"hrefs.cn/src/cli"
 	"hrefs.cn/src/model"
 	"hrefs.cn/src/utils"
 	"strconv"
@@ -16,7 +16,8 @@ func GetCusLink(ctx *gin.Context) {
 		fmt.Print(0)
 	}
 
-	result, err := domain.GetCusLink(id)
+	result := new(model.CusLink)
+	err = cli.Call("GetCusLink", id, result)
 	utils.WriteErrorLog(ctx.FullPath(), err)
 
 	ctx.JSON(200, result)
@@ -37,7 +38,9 @@ func GetCusLinkList(ctx *gin.Context) {
 	err = ctx.BindJSON(&search)
 	utils.WriteErrorLog(ctx.FullPath(), err)
 
-	result, err := domain.GetCusLinkList(page, size, search)
+	result := new(model.CusLinkList)
+	req := model.SearchPager{Pager: model.Pager{Page: page, Size: size}, Search: search}
+	err = cli.Call("GetCusLinkList", req, result)
 	utils.WriteErrorLog(ctx.FullPath(), err)
 
 	ctx.JSON(200, result)
@@ -47,7 +50,8 @@ func DeleteCusLink(ctx *gin.Context) {
 	id, err := strconv.Atoi(ctx.Param("id"))
 	utils.WriteErrorLog(ctx.FullPath(), err)
 
-	result, err := domain.DeleteCusLink(id)
+	result := new(int64)
+	err = cli.Call("DeleteCusLink", id, result)
 	utils.WriteErrorLog(ctx.FullPath(), err)
 
 	ctx.JSON(200, result)
@@ -60,13 +64,16 @@ func SaveCusLink(ctx *gin.Context) {
 		fmt.Print(0)
 	}
 
-	cat, err := domain.GetLinkCat(cuslink.Catid)
+	cat := new(model.LinkCat)
+	err = cli.Call("GetLinkCat", cuslink.Catid, cat)
 	utils.WriteErrorLog(ctx.FullPath(), err)
 
 	cuslink.LinkType = cat.CatName
 	cuslink.Adddate = time.Now().Format("2006-01-02 15:04:05")
 	cuslink.Updatedate = time.Now().Format("2006-01-02 15:04:05")
-	result, err := domain.SaveCusLink(cuslink)
+
+	result := new(int64)
+	err = cli.Call("SaveCusLink", cuslink, result)
 	utils.WriteErrorLog(ctx.FullPath(), err)
 
 	ctx.JSON(200, result)

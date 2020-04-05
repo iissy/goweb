@@ -15,24 +15,24 @@ func Index(ctx iris.Context) {
 	c := make(chan []*model.CusLink)
 
 	go func() {
-		rsp := new(model.LinkItems)
+		rsp := new(model.LinkList)
 		err := cli.Call("IndexLinks", true, rsp)
 		utils.WriteErrorLog(ctx.Path(), err)
-		l <- rsp.Items
+		l <- rsp.List
 	}()
 
 	go func() {
-		rsp := new(model.ArticleItems)
+		rsp := new(model.ArticleList)
 		err := cli.Call("TopArticles", true, rsp)
 		utils.WriteErrorLog(ctx.Path(), err)
-		a <- rsp.Items
+		a <- rsp.List
 	}()
 
 	go func() {
-		rsp := new(model.CusLinkItems)
+		rsp := new(model.CusLinkList)
 		err := cli.Call("TopCusLinks", true, rsp)
 		utils.WriteErrorLog(ctx.Path(), err)
-		c <- rsp.Items
+		c <- rsp.List
 	}()
 
 	result := new(model.Index)
@@ -95,15 +95,15 @@ func setter(list []string, groups model.OneGroups) *model.LinkGroup {
 
 func ListLinks(ctx iris.Context) {
 	id := ctx.Params().Get("id")
-	rspl := new(model.LinkItems)
+	rspl := new(model.LinkList)
 	err := cli.Call("ListLinks", id, rspl)
 	utils.WriteErrorLog(ctx.Path(), err)
-	links := rspl.Items
+	links := rspl.List
 
-	rspc := new(model.CusLinkItems)
+	rspc := new(model.CusLinkList)
 	err = cli.Call("ListCusLinksByCatId", id, rspc)
 	utils.WriteErrorLog(ctx.Path(), err)
-	cuslinks := rspc.Items
+	cuslinks := rspc.List
 
 	if links == nil || len(links) == 0 {
 		ctx.NotFound()
@@ -116,10 +116,10 @@ func ListLinks(ctx iris.Context) {
 }
 
 func ListCusLinks(ctx iris.Context) {
-	rsp := new(model.CusLinkItems)
+	rsp := new(model.CusLinkList)
 	err := cli.Call("ListCusLinks", true, rsp)
 	utils.WriteErrorLog(ctx.Path(), err)
-	result := rsp.Items
+	result := rsp.List
 
 	ctx.ViewData("title", "网络文摘")
 	ctx.ViewData("body", result)
@@ -127,10 +127,10 @@ func ListCusLinks(ctx iris.Context) {
 }
 
 func ListArticles(ctx iris.Context) {
-	rsp := new(model.ArticleItems)
+	rsp := new(model.ArticleList)
 	err := cli.Call("ListArticles", true, rsp)
 	utils.WriteErrorLog(ctx.Path(), err)
-	result := rsp.Items
+	result := rsp.List
 
 	ctx.ViewData("title", "文章列表")
 	ctx.ViewData("body", result)

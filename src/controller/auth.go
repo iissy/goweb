@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/micro/go-micro/v2/config"
-	"hrefs.cn/src/domain"
+	"hrefs.cn/src/cli"
 	"hrefs.cn/src/model"
 	"hrefs.cn/src/redis"
 	"hrefs.cn/src/utils"
@@ -20,7 +20,8 @@ func Login(ctx *gin.Context) {
 
 	user.Password = utils.GetMd5String(user.Password)
 	user.LastLoginDate = time.Now().Format("2006-01-02 15:04:05")
-	result, err := domain.Login(user)
+	result := new(model.Account)
+	err = cli.Call("Login", user, result)
 	if ok := utils.WriteErrorLog(ctx.FullPath(), err); ok {
 		fmt.Print(0)
 	}

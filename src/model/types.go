@@ -21,13 +21,13 @@ type Article struct {
 	Catalog    string        `json:"catalog"`
 }
 
-type ArticleList struct {
-	List  []*Article `json:"list"`
+type AccountList struct {
+	List  []*Account `json:"list"`
 	Total int64      `json:"total"`
 }
 
-type AccountList struct {
-	List  []*Account `json:"list"`
+type ArticleList struct {
+	List  []*Article `json:"list"`
 	Total int64      `json:"total"`
 }
 
@@ -40,6 +40,8 @@ type CusLinkList struct {
 	List  []*CusLink `json:"list"`
 	Total int64      `json:"total"`
 }
+
+type LinkCatList struct{ List []*LinkCat }
 
 type CusLink struct {
 	Id         int    `json:"id"`
@@ -105,12 +107,18 @@ type Search struct {
 	Url   string `json:"url"`
 }
 
+type Pager struct {
+	Page int
+	Size int
+}
+
+type SearchPager struct {
+	Pager
+	*Search
+}
+
 type OneGroups []*OneGroup
 
 func (s OneGroups) Len() int           { return len(s) }
 func (s OneGroups) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
 func (s OneGroups) Less(i, j int) bool { return s[i].Size > s[j].Size }
-
-type LinkItems struct{ Items []*Link }
-type ArticleItems struct{ Items []*Article }
-type CusLinkItems struct{ Items []*CusLink }

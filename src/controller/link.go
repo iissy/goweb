@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	"hrefs.cn/src/domain"
+	"hrefs.cn/src/cli"
 	"hrefs.cn/src/model"
 	"hrefs.cn/src/utils"
 	"strconv"
@@ -13,7 +13,9 @@ import (
 
 func GetLink(ctx *gin.Context) {
 	id := ctx.Param("id")
-	result, err := domain.GetLink(id)
+
+	result := new(model.Link)
+	err := cli.Call("GetLink", id, result)
 	utils.WriteErrorLog(ctx.FullPath(), err)
 
 	ctx.JSON(200, result)
@@ -34,7 +36,9 @@ func GetLinkList(ctx *gin.Context) {
 	err = ctx.BindJSON(&search)
 	utils.WriteErrorLog(ctx.FullPath(), err)
 
-	result, err := domain.GetLinkList(page, size, search)
+	result := new(model.LinkList)
+	req := model.SearchPager{Pager: model.Pager{Page: page, Size: size}, Search: search}
+	err = cli.Call("GetLinkList", req, result)
 	utils.WriteErrorLog(ctx.FullPath(), err)
 
 	ctx.JSON(200, result)
@@ -42,7 +46,9 @@ func GetLinkList(ctx *gin.Context) {
 
 func DeleteLink(ctx *gin.Context) {
 	id := ctx.Param("id")
-	result, err := domain.DeleteLink(id)
+
+	result := new(int64)
+	err := cli.Call("DeleteLink", id, result)
 	utils.WriteErrorLog(ctx.FullPath(), err)
 
 	ctx.JSON(200, result)
@@ -55,7 +61,8 @@ func SaveLink(ctx *gin.Context) {
 		fmt.Print(0)
 	}
 
-	cat, err := domain.GetLinkCat(link.Catid)
+	cat := new(model.LinkCat)
+	err = cli.Call("GetLinkCat", link.Catid, cat)
 	utils.WriteErrorLog(ctx.FullPath(), err)
 
 	if len(link.Id) < 10 {
@@ -63,7 +70,9 @@ func SaveLink(ctx *gin.Context) {
 	}
 	link.LinkType = cat.CatName
 	link.CreateTime = time.Now().Format("2006-01-02 15:04:05")
-	result, err := domain.SaveLink(link)
+
+	result := new(int64)
+	err = cli.Call("SaveLink", link, result)
 	utils.WriteErrorLog(ctx.FullPath(), err)
 
 	ctx.JSON(200, result)

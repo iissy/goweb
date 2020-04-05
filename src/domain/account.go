@@ -30,7 +30,7 @@ func GetAccount(id int) (*model.Account, error) {
 	return result, err
 }
 
-func GetrAccountList(page int, size int) (*model.AccountList, error) {
+func GetAccountList(page int, size int) (*model.AccountList, error) {
 	result := new(model.AccountList)
 	list := make([]*model.Account, 0)
 	sql := "select id,userid,username,regdate,lastlogindate from account order by regdate desc limit ?, ?"

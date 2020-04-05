@@ -3,7 +3,7 @@ package controller
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"hrefs.cn/src/domain"
+	"hrefs.cn/src/cli"
 	"hrefs.cn/src/model"
 	"hrefs.cn/src/utils"
 	"regexp"
@@ -14,7 +14,8 @@ import (
 
 func GetArticle(ctx *gin.Context) {
 	id := ctx.Param("id")
-	result, err := domain.GetArticle(id)
+	result := new(model.Article)
+	err := cli.Call("GetArticle", id, result)
 	utils.WriteErrorLog(ctx.FullPath(), err)
 
 	ctx.JSON(200, result)
@@ -35,7 +36,9 @@ func GetArticleList(ctx *gin.Context) {
 	err = ctx.BindJSON(&search)
 	utils.WriteErrorLog(ctx.FullPath(), err)
 
-	result, err := domain.GetArticleList(page, size, search)
+	req := model.SearchPager{Pager: model.Pager{Page: page, Size: size}, Search: search}
+	result := new(model.ArticleList)
+	err = cli.Call("GetArticleList", req, result)
 	utils.WriteErrorLog(ctx.FullPath(), err)
 
 	ctx.JSON(200, result)
@@ -43,7 +46,9 @@ func GetArticleList(ctx *gin.Context) {
 
 func DeleteArticle(ctx *gin.Context) {
 	id := ctx.Param("id")
-	result, err := domain.DeleteArticle(id)
+
+	result := new(int64)
+	err := cli.Call("DeleteArticle", id, result)
 	utils.WriteErrorLog(ctx.FullPath(), err)
 
 	ctx.JSON(200, result)
@@ -75,7 +80,9 @@ func SaveArticle(ctx *gin.Context) {
 	article.Brief = brief
 
 	article.CreateTime = time.Now().Format("2006-01-02 15:04:05")
-	result, err := domain.SaveArticle(article)
+
+	result := new(int64)
+	err = cli.Call("SaveArticle", article, result)
 	utils.WriteErrorLog(ctx.FullPath(), err)
 
 	ctx.JSON(200, result)

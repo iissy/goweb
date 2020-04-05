@@ -3,7 +3,8 @@ package controller
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"hrefs.cn/src/domain"
+	"hrefs.cn/src/cli"
+	"hrefs.cn/src/model"
 	"hrefs.cn/src/utils"
 	"strconv"
 )
@@ -14,7 +15,8 @@ func GetAccount(ctx *gin.Context) {
 		fmt.Print(0)
 	}
 
-	result, err := domain.GetAccount(id)
+	result := new(model.Account)
+	err = cli.Call("GetAccount", id, result)
 	utils.WriteErrorLog(ctx.FullPath(), err)
 
 	ctx.JSON(200, result)
@@ -31,7 +33,9 @@ func GetAccountList(ctx *gin.Context) {
 		page = 1
 	}
 
-	result, err := domain.GetrAccountList(page, size)
+	result := new(model.AccountList)
+	req := model.Pager{Page: page, Size: size}
+	err = cli.Call("GetAccountList", req, result)
 	utils.WriteErrorLog(ctx.FullPath(), err)
 
 	ctx.JSON(200, result)
