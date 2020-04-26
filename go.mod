@@ -11,7 +11,7 @@ require (
 	github.com/flosch/pongo2 v0.0.0-20190707114632-bbf5a6c351f4 // indirect
 	github.com/gavv/monotime v0.0.0-20190418164738-30dba4353424 // indirect
 	github.com/gin-gonic/gin v1.6.2
-	github.com/go-gorp/gorp v2.2.0+incompatible
+	github.com/go-gorp/gorp/v3 v3.0.2
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/gomodule/redigo v2.0.0+incompatible
 	github.com/google/uuid v1.1.1
@@ -28,15 +28,12 @@ require (
 	github.com/kataras/golog v0.0.11
 	github.com/kataras/iris v11.1.1+incompatible
 	github.com/klauspost/compress v1.10.5 // indirect
-	github.com/mattn/go-sqlite3 v2.0.3+incompatible // indirect
 	github.com/micro/go-micro/v2 v2.5.0
 	github.com/micro/go-plugins/registry/consul/v2 v2.5.0
 	github.com/microcosm-cc/bluemonday v1.0.2 // indirect
 	github.com/moul/http2curl v1.0.0 // indirect
-	github.com/poy/onpar v0.0.0-20200406201722-06f95a1c68e8 // indirect
 	github.com/yalp/jsonpath v0.0.0-20180802001716-5cc68e5049a0 // indirect
 	github.com/yudai/gojsondiff v1.0.0 // indirect
 	github.com/yudai/golcs v0.0.0-20170316035057-ecda9a501e82 // indirect
 	github.com/yudai/pp v2.0.1+incompatible // indirect
-	github.com/ziutek/mymysql v1.5.4 // indirect
 )

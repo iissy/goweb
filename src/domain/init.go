@@ -1,7 +1,7 @@
 package domain
 
 import (
-	"github.com/go-gorp/gorp"
+	"github.com/go-gorp/gorp/v3"
 	"github.com/iissy/goweb/src/utils"
 )
 
