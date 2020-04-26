@@ -1,10 +1,10 @@
 package src
 
 import (
+	"github.com/iissy/goweb/src/domain"
+	"github.com/iissy/goweb/src/redis"
 	"github.com/micro/go-micro/v2/config"
 	"github.com/micro/go-micro/v2/config/source/file"
-	"hrefs.cn/src/domain"
-	"hrefs.cn/src/redis"
 	"log"
 )
 

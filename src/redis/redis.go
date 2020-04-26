@@ -2,8 +2,8 @@ package redis
 
 import (
 	"github.com/gomodule/redigo/redis"
+	"github.com/iissy/goweb/src/utils"
 	"github.com/juju/errors"
-	"hrefs.cn/src/utils"
 )
 
 var pool *redis.Pool

@@ -3,11 +3,11 @@ package controller
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/iissy/goweb/src/cli"
+	"github.com/iissy/goweb/src/model"
+	"github.com/iissy/goweb/src/redis"
+	"github.com/iissy/goweb/src/utils"
 	"github.com/micro/go-micro/v2/config"
-	"hrefs.cn/src/cli"
-	"hrefs.cn/src/model"
-	"hrefs.cn/src/redis"
-	"hrefs.cn/src/utils"
 	"time"
 )
 

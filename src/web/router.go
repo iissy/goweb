@@ -1,9 +1,9 @@
 package web
 
 import (
+	"github.com/iissy/goweb/src/controller"
+	"github.com/iissy/goweb/src/middleware"
 	"github.com/kataras/iris"
-	"hrefs.cn/src/controller"
-	"hrefs.cn/src/middleware"
 )
 
 func Start() {

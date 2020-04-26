@@ -2,8 +2,8 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
-	"hrefs.cn/src/controller"
-	"hrefs.cn/src/middleware"
+	"github.com/iissy/goweb/src/controller"
+	"github.com/iissy/goweb/src/middleware"
 )
 
 func Start() {

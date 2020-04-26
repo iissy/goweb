@@ -1,10 +1,10 @@
 package main
 
 import (
-	_ "hrefs.cn/src"
-	"hrefs.cn/src/api"
-	"hrefs.cn/src/srv"
-	"hrefs.cn/src/web"
+	_ "github.com/iissy/goweb/src"
+	"github.com/iissy/goweb/src/api"
+	"github.com/iissy/goweb/src/srv"
+	"github.com/iissy/goweb/src/web"
 )
 
 func main() {

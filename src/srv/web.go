@@ -2,8 +2,8 @@ package srv
 
 import (
 	"context"
-	"hrefs.cn/src/domain"
-	"hrefs.cn/src/model"
+	"github.com/iissy/goweb/src/domain"
+	"github.com/iissy/goweb/src/model"
 )
 
 func (s *Hrefs) IndexLinks(ctx context.Context, req bool, rsp *model.LinkList) error {

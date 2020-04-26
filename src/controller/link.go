@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	"hrefs.cn/src/cli"
-	"hrefs.cn/src/model"
-	"hrefs.cn/src/utils"
+	"github.com/iissy/goweb/src/cli"
+	"github.com/iissy/goweb/src/model"
+	"github.com/iissy/goweb/src/utils"
 	"strconv"
 	"time"
 )

@@ -2,9 +2,9 @@ package domain
 
 import (
 	"fmt"
+	"github.com/iissy/goweb/src/model"
+	"github.com/iissy/goweb/src/utils"
 	"github.com/juju/errors"
-	"hrefs.cn/src/model"
-	"hrefs.cn/src/utils"
 )
 
 func ListLinks(cat_id string) ([]*model.Link, error) {

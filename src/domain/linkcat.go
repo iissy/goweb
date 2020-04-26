@@ -1,8 +1,8 @@
 package domain
 
 import (
+	"github.com/iissy/goweb/src/model"
 	"github.com/juju/errors"
-	"hrefs.cn/src/model"
 )
 
 func GetCatOptions() ([]*model.LinkCat, error) {

@@ -2,8 +2,8 @@ package srv
 
 import (
 	"context"
-	"hrefs.cn/src/domain"
-	"hrefs.cn/src/model"
+	"github.com/iissy/goweb/src/domain"
+	"github.com/iissy/goweb/src/model"
 )
 
 func (s *Hrefs) GetAccount(ctx context.Context, req int, rsp *model.Account) error {
