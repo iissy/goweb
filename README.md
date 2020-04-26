@@ -45,7 +45,7 @@
 ```
 go get github.com/go-sql-driver/mysql
 go get github.com/kataras/iris
-go get github.com/go-gorp/gorp
+go get github.com/go-gorp/gorp/v3
 go get github.com/gomodule/redigo
 go get github.com/google/uuid
 go get github.com/juju/errors
