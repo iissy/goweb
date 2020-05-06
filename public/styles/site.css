@@ -74,9 +74,6 @@ a {
     max-width: 100% !important;
 }
 
-/*.body pre {*/
-/*    padding: 5px 10px 5px 10px;*/
-/*}*/
 .cke_contents_ltr .body figure.table {
     background-color: #ffffff;
     width: inherit;
@@ -214,13 +211,6 @@ a {
 .cke_contents_ltr .body .todo-list span { margin-left: 5px; }
 .cke_contents_ltr .body a { color: #0782C1 }
 
-/*.cke_contents_ltr .body pre {*/
-/*    background-color: #f9f9f9;*/
-/*    border: 1px solid #eeeeee;*/
-/*}*/
-/*.cke_contents_ltr .body pre {*/
-/*    position: relative;*/
-/*}*/
 .cke_contents_ltr .body pre {
     margin: 10px 0 10px 0;
     position: relative;
