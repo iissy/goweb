@@ -32,6 +32,8 @@ func Login(ctx *gin.Context) {
 		ctx.SetCookie(utils.ASYUSERID, result.UserId, 3600, "/", config.Get("domain").String("localhost"), false, true)
 		ctx.SetCookie(utils.ASYTOKEN, token, 3600, "/", config.Get("domain").String("localhost"), false, true)
 		req := new(model.Token)
+		req.UserId = result.UserId
+		req.Code = token
 		err = cli.Call("SetToken", req, true)
 		utils.WriteErrorLog(ctx.FullPath(), err)
 	}
