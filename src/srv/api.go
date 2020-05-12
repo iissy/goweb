@@ -4,7 +4,19 @@ import (
 	"context"
 	"github.com/iissy/goweb/src/domain"
 	"github.com/iissy/goweb/src/model"
+	"github.com/iissy/goweb/src/redis"
 )
+
+func (s *Hrefs) GetToken(ctx context.Context, req string, rsp *string) error {
+	result, err := redis.Get(req)
+	*rsp = result
+	return err
+}
+
+func (s *Hrefs) SetToken(ctx context.Context, req *model.Token, rsp *bool) error {
+	err := redis.Set(req.UserId, req.Code)
+	return err
+}
 
 func (s *Hrefs) GetAccount(ctx context.Context, req int, rsp *model.Account) error {
 	result, err := domain.GetAccount(req)

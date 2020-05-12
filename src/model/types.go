@@ -117,6 +117,11 @@ type SearchPager struct {
 	*Search
 }
 
+type Token struct {
+	UserId string
+	Code   string
+}
+
 type OneGroups []*OneGroup
 
 func (s OneGroups) Len() int           { return len(s) }

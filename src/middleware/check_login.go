@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/iissy/goweb/src/redis"
+	"github.com/iissy/goweb/src/cli"
 	"github.com/iissy/goweb/src/utils"
 	"github.com/juju/errors"
 	"log"
@@ -18,14 +18,15 @@ func CheckLogin(ctx *gin.Context) {
 		return
 	}
 
-	v, err := redis.Get(id)
+	v := new(string)
+	err := cli.Call("GetToken", id, v)
 	if err != nil {
 		log.Printf(errors.ErrorStack(err))
 		ctx.Abort()
 		return
 	}
 
-	if v != token {
+	if *v != token {
 		ctx.Abort()
 	}
 }

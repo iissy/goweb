@@ -5,7 +5,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/iissy/goweb/src/cli"
 	"github.com/iissy/goweb/src/model"
-	"github.com/iissy/goweb/src/redis"
 	"github.com/iissy/goweb/src/utils"
 	"github.com/micro/go-micro/v2/config"
 	"time"
@@ -32,7 +31,8 @@ func Login(ctx *gin.Context) {
 		ctx.Header(utils.ASYTOKEN, token)
 		ctx.SetCookie(utils.ASYUSERID, result.UserId, 3600, "/", config.Get("domain").String("localhost"), false, true)
 		ctx.SetCookie(utils.ASYTOKEN, token, 3600, "/", config.Get("domain").String("localhost"), false, true)
-		err = redis.Set(result.UserId, token)
+		req := new(model.Token)
+		err = cli.Call("SetToken", req, true)
 		utils.WriteErrorLog(ctx.FullPath(), err)
 	}
 
