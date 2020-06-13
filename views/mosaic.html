@@ -1,0 +1,21 @@
+{{ define "mosaic-title"}}
+    <title>{{.title}}</title>
+{{ end }}
+
+<div id="pay">
+    <div style="padding: 10px;min-height: 700px;">
+        <div class="col-md-6" style="float: left;margin-right: 5px;">
+            <img src="data:image/jpg;base64,{{ .body.original }}">
+            <div class="lead">Original</div>
+        </div>
+        <div class="col-md-6">
+            <img src="data:image/jpg;base64,{{ .body.mosaic }}">
+            <div class="lead">Mosaic - {{ .body.duration }}</div>
+        </div>
+
+
+        <div class="col-md-12 center">
+            <a class="btn btn-lg btn-info" href="/choose">Go Back</a>
+        </div>
+    </div>
+</div>

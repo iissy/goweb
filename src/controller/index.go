@@ -1,12 +1,20 @@
 package controller
 
 import (
+	"bytes"
+	"encoding/base64"
+	"fmt"
 	"github.com/iissy/goweb/src/cli"
 	"github.com/iissy/goweb/src/model"
+	"github.com/iissy/goweb/src/mosaic"
 	"github.com/iissy/goweb/src/utils"
 	"github.com/kataras/iris"
+	"image"
+	"image/jpeg"
+	"math"
 	"sort"
 	"strconv"
+	"time"
 )
 
 func Index(ctx iris.Context) {
@@ -195,4 +203,41 @@ func GetCusLinkUrl(ctx iris.Context) {
 	} else {
 		ctx.NotFound()
 	}
+}
+
+func Choose(ctx iris.Context) {
+	ctx.ViewData("title", "选择图片")
+	ctx.View("choose.html")
+}
+
+func Mosaic(ctx iris.Context) {
+	t0 := time.Now()
+	file, _, _ := ctx.FormFile("image")
+	defer file.Close()
+
+	original, _, _ := image.Decode(file)
+	bounds := original.Bounds()
+	db := mosaic.CloneTilesDB()
+	tileSize := int(math.Ceil(math.Sqrt(float64(bounds.Max.X) * float64(bounds.Max.Y) / 10500.0)))
+	// fan-out
+	c1 := mosaic.Cut(original, &db, tileSize, bounds.Min.X, bounds.Min.Y, bounds.Max.X/2, bounds.Max.Y/2)
+	c2 := mosaic.Cut(original, &db, tileSize, bounds.Max.X/2, bounds.Min.Y, bounds.Max.X, bounds.Max.Y/2)
+	c3 := mosaic.Cut(original, &db, tileSize, bounds.Min.X, bounds.Max.Y/2, bounds.Max.X/2, bounds.Max.Y)
+	c4 := mosaic.Cut(original, &db, tileSize, bounds.Max.X/2, bounds.Max.Y/2, bounds.Max.X, bounds.Max.Y)
+	// fan-in
+	c := mosaic.Combine(bounds, c1, c2, c3, c4)
+	buf1 := new(bytes.Buffer)
+	jpeg.Encode(buf1, original, nil)
+	originalStr := base64.StdEncoding.EncodeToString(buf1.Bytes())
+
+	t1 := time.Now()
+	images := map[string]string{
+		"original": originalStr,
+		"mosaic":   <-c,
+		"duration": fmt.Sprintf("%v ", t1.Sub(t0)),
+	}
+
+	ctx.ViewData("title", "图片打马赛克")
+	ctx.ViewData("body", images)
+	ctx.View("mosaic.html")
 }

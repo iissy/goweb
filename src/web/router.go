@@ -24,6 +24,8 @@ func Start() {
 	app.Get("/payme", controller.Payme)
 	app.Get("/link/{id}", controller.GetLinkUrl)
 	app.Get("/cuslink/{id}", controller.GetCusLinkUrl)
+	app.Get("/choose", controller.Choose)
+	app.Post("/mosaic", controller.Mosaic)
 
 	app.Run(
 		iris.Addr(":80"),

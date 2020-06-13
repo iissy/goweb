@@ -1,0 +1,17 @@
+{{ define "choose-title"}}
+    <title>{{.title}}</title>
+{{ end }}
+
+<div id="pay">
+    <div style="height: 700px;padding: 10px;">
+        <form class="form form-inline" method="post" action="/mosaic" enctype="multipart/form-data">
+            <div>
+                <input type="file" name="image" class="form-control input-lg" />
+            </div>
+            <div class="help-block"><button class="btn btn-primary btn-lg" type="submit">
+                    Do it!
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

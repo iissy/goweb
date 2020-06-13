@@ -7,6 +7,7 @@
 .idea/
 public/images/
 public/upload/
+public/tiles/
 server
 logs/
 # Test binary, built with `go test -c`
