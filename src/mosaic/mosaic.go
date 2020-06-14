@@ -34,7 +34,7 @@ func (db *DB) nearest(target [3]float64) string {
 			filename, smallest = k, dist
 		}
 	}
-	//delete(db.store, filename)
+	delete(db.store, filename)
 	db.mutex.Unlock()
 	return filename
 }

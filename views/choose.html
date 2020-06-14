@@ -5,12 +5,19 @@
 <div id="pay">
     <div style="height: 700px;padding: 10px;">
         <form class="form form-inline" method="post" action="/mosaic" enctype="multipart/form-data">
-            <div>
-                <input type="file" name="image" class="form-control input-lg" />
-            </div>
-            <div class="help-block"><button class="btn btn-primary btn-lg" type="submit">
-                    Do it!
-                </button>
+            <div class="form-row align-items-center">
+                <div class="col-auto">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">文件</div>
+                        </div>
+                        <input type="file" name="image" class="form-control file" />
+                    </div>
+                </div>
+                <div class="col-auto"><button  class="btn btn-primary mb-2" type="submit">
+                        打马赛克
+                    </button>
+                </div>
             </div>
         </form>
     </div>
