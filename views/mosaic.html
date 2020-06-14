@@ -7,11 +7,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-6">
-                    <img src="data:image/jpg;base64,{{ .body.original }}">
+                    <img src="data:image/jpg;base64,{{ .body.original }}" style="max-width: 500px;">
                     <div class="lead">Original</div>
                 </div>
                 <div class="col-6">
-                    <img src="data:image/jpg;base64,{{ .body.mosaic }}">
+                    <img src="data:image/jpg;base64,{{ .body.mosaic }}" style="max-width: 500px;">
                     <div class="lead">Mosaic - {{ .body.duration }}</div>
                 </div>
             </div>

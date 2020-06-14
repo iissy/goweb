@@ -218,7 +218,7 @@ func Mosaic(ctx iris.Context) {
 	original, _, _ := image.Decode(file)
 	bounds := original.Bounds()
 	db := mosaic.CloneTilesDB()
-	tileSize := int(math.Ceil(math.Sqrt(float64(bounds.Max.X) * float64(bounds.Max.Y) / 10500.0)))
+	tileSize := int(math.Ceil(math.Sqrt(float64(bounds.Max.X) * float64(bounds.Max.Y) / 3333.0)))
 	// fan-out
 	c1 := mosaic.Cut(original, &db, tileSize, bounds.Min.X, bounds.Min.Y, bounds.Max.X/2, bounds.Max.Y/2)
 	c2 := mosaic.Cut(original, &db, tileSize, bounds.Max.X/2, bounds.Min.Y, bounds.Max.X, bounds.Max.Y/2)
