@@ -1,6 +1,9 @@
 package model
 
-import "html/template"
+import (
+	"html/template"
+	"time"
+)
 
 type LinkCat struct {
 	ID      string `json:"id"`
@@ -16,7 +19,7 @@ type Article struct {
 	UserID     int           `json:"user_id"`
 	NickName   string        `json:"nick_name"`
 	Origin     string        `json:"origin"`
-	CreateTime string        `json:"create_time"`
+	CreateTime time.Time     `json:"create_time"`
 	Visited    int           `json:"visited"`
 	Catalog    string        `json:"catalog"`
 }

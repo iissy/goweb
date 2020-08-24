@@ -2,14 +2,15 @@ package controller
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/iissy/goweb/src/cli"
-	"github.com/iissy/goweb/src/model"
-	"github.com/iissy/goweb/src/utils"
 	"regexp"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/iissy/goweb/src/cli"
+	"github.com/iissy/goweb/src/model"
+	"github.com/iissy/goweb/src/utils"
 )
 
 func GetArticle(ctx *gin.Context) {
@@ -79,7 +80,7 @@ func SaveArticle(ctx *gin.Context) {
 	brief = re.ReplaceAllString(brief, "\n")
 	article.Brief = brief
 
-	article.CreateTime = time.Now().Format("2006-01-02 15:04:05")
+	article.CreateTime = time.Now()
 
 	result := new(int64)
 	err = cli.Call("SaveArticle", article, result)

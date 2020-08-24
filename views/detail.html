@@ -1,5 +1,5 @@
 {{ define "detail-title"}}
-    <title>{{.title}}</title>
+<title>{{.title}}</title>
 {{ end }}
 
 <div class="cke_contents_ltr cke_show_borders" id="detail">
@@ -10,6 +10,6 @@
         {{.body.Body}}
     </div>
     <div class="origin">
-        Posted by 何敏 on {{.body.CreateTime}}
+        Posted by 何敏 on {{.body.CreateTime.Format "2006/1/2 15:04:05"}}
     </div>
 </div>
