@@ -3,6 +3,7 @@ package src
 import (
 	"github.com/iissy/goweb/src/domain"
 	"github.com/iissy/goweb/src/redis"
+	"github.com/iissy/goweb/src/utils"
 	"github.com/micro/go-micro/v2/config"
 	"github.com/micro/go-micro/v2/config/source/file"
 	"log"
@@ -14,6 +15,7 @@ const (
 
 func init() {
 	loadConfig()
+	utils.InitLog()
 	domain.InitDb()
 	redis.InitDb()
 }

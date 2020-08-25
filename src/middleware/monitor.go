@@ -2,8 +2,8 @@ package middleware
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/kataras/golog"
 	"github.com/kataras/iris"
+	"github.com/sirupsen/logrus"
 	"time"
 )
 
@@ -20,6 +20,6 @@ func TraceApi(ctx *gin.Context) {
 func trace(path string) func() {
 	start := time.Now()
 	return func() {
-		golog.Infof("%s %s", time.Since(start), path)
+		logrus.Infof("%s %s", time.Since(start), path)
 	}
 }

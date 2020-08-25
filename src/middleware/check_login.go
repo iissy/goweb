@@ -5,7 +5,7 @@ import (
 	"github.com/iissy/goweb/src/cli"
 	"github.com/iissy/goweb/src/utils"
 	"github.com/juju/errors"
-	"log"
+	"github.com/sirupsen/logrus"
 )
 
 func CheckLogin(ctx *gin.Context) {
@@ -13,7 +13,7 @@ func CheckLogin(ctx *gin.Context) {
 	token := ParseHeadOrCookie(ctx, utils.ASYTOKEN)
 
 	if len(id) <= 0 || len(token) <= 0 {
-		log.Printf("miss id or token")
+		logrus.Error("miss id or token")
 		ctx.Abort()
 		return
 	}
@@ -21,7 +21,7 @@ func CheckLogin(ctx *gin.Context) {
 	v := new(string)
 	err := cli.Call("GetToken", id, v)
 	if err != nil {
-		log.Printf(errors.ErrorStack(err))
+		logrus.Error(errors.ErrorStack(err))
 		ctx.Abort()
 		return
 	}

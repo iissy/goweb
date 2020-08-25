@@ -3,12 +3,12 @@ package srv
 import (
 	"context"
 	"github.com/iissy/goweb/src/utils"
-	"github.com/kataras/golog"
 	"github.com/micro/go-micro/v2"
 	"github.com/micro/go-micro/v2/config"
 	"github.com/micro/go-micro/v2/registry"
 	"github.com/micro/go-micro/v2/server"
 	"github.com/micro/go-plugins/registry/consul/v2"
+	"github.com/sirupsen/logrus"
 	"time"
 )
 
@@ -37,7 +37,7 @@ func logWrapper(fn server.HandlerFunc) server.HandlerFunc {
 		err := fn(ctx, req, rsp)
 		utils.WriteErrorLog(req.Endpoint(), err)
 
-		golog.Infof("%s %s", time.Since(start), req.Endpoint())
+		logrus.Infof("%s %s", time.Since(start), req.Endpoint())
 		return err
 	}
 }

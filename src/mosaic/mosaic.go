@@ -15,9 +15,9 @@ import (
 	"sync"
 )
 
-func init() {
-	TILESDB = tilesDB()
-}
+//func init() {
+//	TILESDB = tilesDB()
+//}
 
 type DB struct {
 	mutex *sync.Mutex
