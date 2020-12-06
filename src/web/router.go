@@ -28,7 +28,7 @@ func Start() {
 	//app.Post("/mosaic", controller.Mosaic)
 
 	app.Run(
-		iris.Addr(":80"),
+		iris.Addr(":8000"),
 		iris.WithoutBanner,
 		iris.WithoutServerError(iris.ErrServerClosed),
 	)

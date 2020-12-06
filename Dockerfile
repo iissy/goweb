@@ -1,5 +1,5 @@
-FROM scratch
+FROM alpine
 COPY ./server /server
-EXPOSE 80/tcp
+EXPOSE 8000/tcp
 VOLUME ["/public", "/views"]
 ENTRYPOINT ["/server"]
