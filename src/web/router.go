@@ -16,15 +16,15 @@ func Start() {
 	app.RegisterView(tmpl)
 	app.Use(middleware.TraceWeb)
 
-	app.Get("/", controller.Index)
-	app.Get("/links/{id}", controller.ListLinks)
-	app.Get("/cuslinks", controller.ListCusLinks)
-	app.Get("/articles", controller.ListArticles)
+	//app.Get("/", controller.Index)
+	//app.Get("/links/{id}", controller.ListLinks)
+	//app.Get("/cuslinks", controller.ListCusLinks)
+	app.Get("/", controller.ListArticles)
 	app.Get("/article/{id}", controller.Detail)
 	app.Get("/payme", controller.Payme)
-	app.Get("/link/{id}", controller.GetLinkUrl)
-	app.Get("/cuslink/{id}", controller.GetCusLinkUrl)
-	app.Get("/choose", controller.Choose)
+	//app.Get("/link/{id}", controller.GetLinkUrl)
+	//app.Get("/cuslink/{id}", controller.GetCusLinkUrl)
+	//app.Get("/choose", controller.Choose)
 	//app.Post("/mosaic", controller.Mosaic)
 
 	app.Run(
