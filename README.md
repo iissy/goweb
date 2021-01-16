@@ -1,4 +1,4 @@
-一个由Go语言写的，简单的CMS（内容管理系统），源码经修改应用到爱斯园（程序员网址导航）。
+一个由Go语言写的，简单的CMS（内容管理系统），源码经修改应用到爱斯园（个人博客）。另外我发现go-micro已经更新了，我将在空闲时间更新本仓库代码，将保持与micro同步。
 
 ## 星星增长趋势
 [![Stargazers over time](https://starchart.cc/iissy/goweb.svg)](https://starchart.cc/iissy/goweb)
