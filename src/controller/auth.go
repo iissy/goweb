@@ -6,7 +6,7 @@ import (
 	"github.com/iissy/goweb/src/cli"
 	"github.com/iissy/goweb/src/model"
 	"github.com/iissy/goweb/src/utils"
-	"github.com/micro/go-micro/v2/config"
+	"github.com/asim/go-micro/v3/config"
 	"time"
 )
 

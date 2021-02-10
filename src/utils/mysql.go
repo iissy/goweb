@@ -5,7 +5,7 @@ import (
 	"errors"
 	"github.com/go-gorp/gorp/v3"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/micro/go-micro/v2/config"
+	"github.com/asim/go-micro/v3/config"
 	"log"
 	"os"
 )

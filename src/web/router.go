@@ -3,13 +3,13 @@ package web
 import (
 	"github.com/iissy/goweb/src/controller"
 	"github.com/iissy/goweb/src/middleware"
-	"github.com/kataras/iris"
+	"github.com/kataras/iris/v12"
 )
 
 func Start() {
 	app := iris.New()
 	app.Use(iris.LimitRequestBodySize(1024 * 1024))
-	app.StaticWeb("/", "./public")
+	app.HandleDir("/", "./public")
 	tmpl := iris.HTML("./views", ".html")
 	tmpl.Layout("shared/layout.html")
 	tmpl.Reload(true)

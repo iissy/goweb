@@ -2,7 +2,7 @@ package utils
 
 import (
 	"fmt"
-	"github.com/micro/go-micro/v2/config"
+	"github.com/asim/go-micro/v3/config"
 	"log"
 )
 

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/gomodule/redigo/redis"
 	"github.com/juju/errors"
-	"github.com/micro/go-micro/v2/config"
+	"github.com/asim/go-micro/v3/config"
 	"time"
 )
 

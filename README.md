@@ -1,16 +1,10 @@
 一个由Go语言写的程序员网址导航，由于国内政策不允许个人备案导航相关的网站，目前网站放在海外的阿里云服务器上，所以访问速度稍微有点慢。
 
-## 出售 https://www.hrefs.cn
-```
-价格：1000元
-联系QQ：17660121
-由于本人忙碌，网站最近少更新，低价转让网站，所有资源，包括源码，阿里云海外服务器（1核心1G内存），域名一并转让。
-```
-
 ## 星星增长趋势
 [![Stargazers over time](https://starchart.cc/iissy/goweb.svg)](https://starchart.cc/iissy/goweb)
 
-#### asy 2.0.2 Released 2020年04月05日
+#### asy 2.1.2 Released 2021年02月11日
++ 仓库更新到最新的 go-micro
 + 完成 iris、gin、go-micro 技术大升级
 + iris 显示内容渲染，gin 实现接口，go-micro 微服务
 + 一个应用启用三个端口，web、api、srv各占一个
@@ -52,15 +46,13 @@
 ```
 go get github.com/go-sql-driver/mysql
 go get github.com/kataras/iris
-go get github.com/go-gorp/gorp/v3
+go get github.com/go-gorp/gorp
 go get github.com/gomodule/redigo
 go get github.com/google/uuid
 go get github.com/juju/errors
 go get github.com/kataras/golog
-go get github.com/micro/go-micro/v2
-go get github.com/micro/go-micro/v2/config
-go get github.com/micro/go-micro/v2/registry
-go get github.com/micro/go-plugins/registry/consul/v2
+go github.com/asim/go-micro/v3
+go github.com/asim/go-micro/plugins/registry/consul/v3
 ```
 
 ## 使用说明
@@ -69,3 +61,4 @@ go get github.com/micro/go-plugins/registry/consul/v2
 
 ## 官方网站
 + 程序员网址导航：https://www.hrefs.cn
++ Soul 项目管理系统：https://www.iissy.com

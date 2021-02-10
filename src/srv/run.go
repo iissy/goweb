@@ -3,11 +3,11 @@ package srv
 import (
 	"context"
 	"github.com/iissy/goweb/src/utils"
-	"github.com/micro/go-micro/v2"
-	"github.com/micro/go-micro/v2/config"
-	"github.com/micro/go-micro/v2/registry"
-	"github.com/micro/go-micro/v2/server"
-	"github.com/micro/go-plugins/registry/consul/v2"
+	"github.com/asim/go-micro/v3"
+	"github.com/asim/go-micro/v3/config"
+	"github.com/asim/go-micro/v3/registry"
+	"github.com/asim/go-micro/v3/server"
+	"github.com/asim/go-micro/plugins/registry/consul/v3"
 	"github.com/sirupsen/logrus"
 	"time"
 )
@@ -16,9 +16,7 @@ type Hrefs struct{}
 
 func Start() {
 	urls := utils.GetConsulUrls()
-	reg := consul.NewRegistry(func(op *registry.Options) {
-		op.Addrs = urls
-	})
+	reg := consul.NewRegistry(registry.Addrs(urls...))
 
 	service := micro.NewService(
 		micro.Registry(reg),

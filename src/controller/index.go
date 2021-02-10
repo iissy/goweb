@@ -8,7 +8,7 @@ import (
 	"github.com/iissy/goweb/src/model"
 	"github.com/iissy/goweb/src/mosaic"
 	"github.com/iissy/goweb/src/utils"
-	"github.com/kataras/iris"
+	"github.com/kataras/iris/v12"
 	"image"
 	"image/jpeg"
 	"math"
