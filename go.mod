@@ -27,7 +27,6 @@ require (
 	github.com/kataras/golog v0.0.18 // indirect
 	github.com/kataras/iris/v12 v12.1.8
 	github.com/klauspost/compress v1.10.10 // indirect
-	github.com/micro/go-micro v1.18.0
 	github.com/microcosm-cc/bluemonday v1.0.3 // indirect
 	github.com/moul/http2curl v1.0.0 // indirect
 	github.com/sirupsen/logrus v1.7.0
