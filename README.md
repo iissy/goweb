@@ -5,6 +5,7 @@
 
 #### asy 2.1.2 Released 2021年02月11日
 + 仓库更新到最新的 go-micro
++ 将微服务改成 gRPC
 + 完成 iris、gin、go-micro 技术大升级
 + iris 显示内容渲染，gin 实现接口，go-micro 微服务
 + 一个应用启用三个端口，web、api、srv各占一个

@@ -5,7 +5,9 @@ go 1.14
 require (
 	github.com/ajg/form v1.5.1 // indirect
 	github.com/andybalholm/brotli v1.0.1-0.20200619015827-c3da72aa01ed // indirect
+	github.com/asim/go-micro/plugins/client/grpc/v3 v3.0.0-20210205090925-e8167a8b79ed
 	github.com/asim/go-micro/plugins/registry/consul/v3 v3.0.0-20210208085639-2653e7a977d3
+	github.com/asim/go-micro/plugins/server/grpc/v3 v3.0.0-20210210071449-f9f5e7422d8f
 	github.com/asim/go-micro/v3 v3.5.0
 	github.com/fasthttp-contrib/websocket v0.0.0-20160511215533-1f3b11f56072 // indirect
 	github.com/gin-gonic/gin v1.6.3
@@ -25,6 +27,7 @@ require (
 	github.com/kataras/golog v0.0.18 // indirect
 	github.com/kataras/iris/v12 v12.1.8
 	github.com/klauspost/compress v1.10.10 // indirect
+	github.com/micro/go-micro v1.18.0
 	github.com/microcosm-cc/bluemonday v1.0.3 // indirect
 	github.com/moul/http2curl v1.0.0 // indirect
 	github.com/sirupsen/logrus v1.7.0

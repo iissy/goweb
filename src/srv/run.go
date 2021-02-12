@@ -2,27 +2,44 @@ package srv
 
 import (
 	"context"
-	"github.com/iissy/goweb/src/utils"
+	"time"
+
+	gCli "github.com/asim/go-micro/plugins/client/grpc/v3"
+	"github.com/asim/go-micro/plugins/registry/consul/v3"
+	gSrv "github.com/asim/go-micro/plugins/server/grpc/v3"
 	"github.com/asim/go-micro/v3"
+	"github.com/asim/go-micro/v3/client"
 	"github.com/asim/go-micro/v3/config"
 	"github.com/asim/go-micro/v3/registry"
 	"github.com/asim/go-micro/v3/server"
-	"github.com/asim/go-micro/plugins/registry/consul/v3"
+	"github.com/iissy/goweb/src/utils"
 	"github.com/sirupsen/logrus"
-	"time"
 )
 
 type Hrefs struct{}
 
-func Start() {
+func init() {
 	urls := utils.GetConsulUrls()
 	reg := consul.NewRegistry(registry.Addrs(urls...))
 
+	srv := gSrv.NewServer(
+		server.Registry(reg),
+		server.Name(config.Get("srv").String("micro.hrefs.srv")),
+	)
+
+	cli := gCli.NewClient(
+		client.Registry(reg),
+	)
+
+	client.DefaultClient = cli
+	server.DefaultServer = srv
+}
+
+func Start() {
 	service := micro.NewService(
-		micro.Registry(reg),
-		micro.Name(config.Get("srv").String("micro.hrefs.srv")),
 		micro.WrapHandler(logWrapper),
 	)
+
 	server.Init()
 	service.Server().Init(server.Wait(nil))
 	micro.RegisterHandler(service.Server(), new(Hrefs))
