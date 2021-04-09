@@ -22,17 +22,14 @@ func init() {
 	urls := utils.GetConsulUrls()
 	reg := consul.NewRegistry(registry.Addrs(urls...))
 
-	srv := gSrv.NewServer(
+	server.DefaultServer = gSrv.NewServer(
 		server.Registry(reg),
 		server.Name(config.Get("srv").String("micro.hrefs.srv")),
 	)
 
-	cli := gCli.NewClient(
+	client.DefaultClient = gCli.NewClient(
 		client.Registry(reg),
 	)
-
-	client.DefaultClient = cli
-	server.DefaultServer = srv
 }
 
 func Start() {
