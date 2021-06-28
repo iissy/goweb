@@ -62,4 +62,4 @@ go github.com/asim/go-micro/plugins/registry/consul/v3
 
 ## 官方网站
 + 程序员网址导航：https://www.hrefs.cn
-+ Soul 项目管理系统：https://iissy.com
++ ZERO 项目管理系统：https://iissy.com
