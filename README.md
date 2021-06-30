@@ -61,5 +61,5 @@ go github.com/asim/go-micro/plugins/registry/consul/v3
 + 如果需要添加修改数据，必须搭建内容管理项目，见安装说明
 
 ## 官方网站
-+ 程序员网址导航：https://www.hrefs.cn
++ 程序员网址导航：http://hao.iissy.com
 + ZERO 项目管理系统：https://iissy.com
