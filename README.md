@@ -23,7 +23,7 @@
 + 中间件实现授权访问
 + redis 管理登陆会话
 + 日志错误管理
-+ ORM 框架 gorp 引入
++ ORM 框架引入 gorp
 + 图片上传，google.uuid 生成文件名
 + 使用 Go Module 方式开发
 
@@ -42,19 +42,6 @@
 ## 组件下载配置
 由于大陆网络无法下载google的包，使用七牛公司的代理，下载包前执行命令
 1. go env -w GOPROXY=https://goproxy.cn,direct
-
-## 组件下载
-```
-go get github.com/go-sql-driver/mysql
-go get github.com/kataras/iris
-go get github.com/go-gorp/gorp
-go get github.com/gomodule/redigo
-go get github.com/google/uuid
-go get github.com/juju/errors
-go get github.com/kataras/golog
-go github.com/asim/go-micro/v3
-go github.com/asim/go-micro/plugins/registry/consul/v3
-```
 
 ## 使用说明
 + 请确保 80 端口没有被别的服务（比如iis）占用，然后在浏览器中输入：http://localhost
