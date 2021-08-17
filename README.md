@@ -60,6 +60,5 @@ go github.com/asim/go-micro/plugins/registry/consul/v3
 + 请确保 80 端口没有被别的服务（比如iis）占用，然后在浏览器中输入：http://localhost
 + 如果需要添加修改数据，必须搭建内容管理项目，见安装说明
 
-## 官方网站
-+ 程序员网址导航：http://hao.iissy.com
-+ ZERO 项目管理系统：https://iissy.com
+## 官方产品
++ Jitask 项目管理系统：https://jitask.com
