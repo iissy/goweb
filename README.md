@@ -1,4 +1,4 @@
-一个由Go语言写的程序员网址导航，目的是聚合go生态比较热门的技术栈。
+一个由Go语言写的程序员网址导航，聚合go生态比较热门的技术栈。
 
 ## 星星增长趋势
 [![Stargazers over time](https://starchart.cc/iissy/goweb.svg)](https://starchart.cc/iissy/goweb)
