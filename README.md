@@ -1,3 +1,10 @@
+# 转移仓库
+```
+https://github.com/go-water/go-water
+```
+<div style="color:#ff0000">升级的技术框架，已经转移到以上仓库。</div>
+
+### 简介
 一个由Go语言写的程序员网址导航，聚合go生态比较热门的技术栈。
 
 ## 星星增长趋势
@@ -48,4 +55,5 @@
 + 如果需要添加修改数据，必须搭建内容管理项目，见安装说明
 
 ## 官方产品
-+ Jitask 项目管理系统：https://jitask.com
++ https://jitask.com
++ https://go-water.cn
