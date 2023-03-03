@@ -1,7 +1,6 @@
 # 转移仓库
-```
-https://github.com/go-water/go-water
-```
+[https://github.com/go-water/go-water](https://github.com/go-water/go-water)
+
 <div style="color:#ff0000">升级的技术框架，已经转移到以上仓库。</div>
 
 ### 简介
