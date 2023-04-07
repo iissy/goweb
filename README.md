@@ -1,8 +1,3 @@
-# 转移仓库
-[https://github.com/go-water/go-water](https://github.com/go-water/go-water)
-
-<div style="color:#ff0000">升级的技术框架，已经转移到以上仓库。</div>
-
 ### 简介
 一个由Go语言写的程序员网址导航，聚合go生态比较热门的技术栈。
 
