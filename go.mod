@@ -8,7 +8,7 @@ require (
 	github.com/asim/go-micro/plugins/registry/consul/v3 v3.0.0-20210604091730-a1e9b88495a1
 	github.com/asim/go-micro/plugins/server/grpc/v3 v3.0.0-20210604091730-a1e9b88495a1
 	github.com/asim/go-micro/v3 v3.5.1
-	github.com/gin-gonic/gin v1.7.2
+	github.com/gin-gonic/gin v1.9.0
 	github.com/go-gorp/gorp/v3 v3.0.2
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/gomodule/redigo v1.8.4
