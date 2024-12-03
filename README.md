@@ -50,5 +50,4 @@
 
 ## 官方产品
 + https://iissy.com 爱斯园 - 弘扬中华传统文化
-+ https://jitask.com 吉塔斯 - 任务协同管理系统
-+ https://go-water.cn 爱斯园 - go-water 开源框架文档
++ https://jitask.com 吉塔斯 - Jitask任务管理系统
